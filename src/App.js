@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import NavBar from './components/NavBar';
+import { MuiThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core';
+import Gohome from './components/Gohome';
 
 function App() {
+  const [type, setType] = useState('dark');
+  const theme = createMuiTheme({
+    palette: {
+      type
+    }
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <NavBar onClick={() => setType(prev => prev === 'light' ? 'dark' : 'light')} />
+      <Gohome />
+    </MuiThemeProvider>
   );
 }
 
