@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import { Paper, Button, TextField, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import Stats from "./Stats";
+import React, { useState } from 'react';
+import {
+  Paper, TextField, Box, makeStyles,
+} from '@material-ui/core';
+import Stats from './Stats';
 
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(5),
-    margin: theme.spacing(5)
-  }
+    margin: theme.spacing(5),
+  },
 }));
 const Gohome = () => {
   const classes = useStyles();
 
-  const [startTime, setStartTime] = useState("09:00");
-  const [endTime, setEndTime] = useState("17:00");
+  const [startTime, setStartTime] = useState('09:00');
+  const [endTime, setEndTime] = useState('17:00');
 
   return (
     <Paper className={classes.paper}>
