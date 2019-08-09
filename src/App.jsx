@@ -5,7 +5,11 @@ import NavBar from './components/NavBar';
 import Gohome from './components/Gohome';
 
 function App() {
-  const [type, setType] = useState('light');
+  const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const [type, setType] = useState(prefersDarkTheme.matches ? 'dark' : 'light');
+  prefersDarkTheme.onchange = () => {
+    setType(prefersDarkTheme.matches ? 'dark' : 'light');
+  };
   const theme = createMuiTheme({
     palette: {
       type,
