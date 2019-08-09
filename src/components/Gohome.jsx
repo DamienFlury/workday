@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Paper, TextField, Box, makeStyles,
 } from '@material-ui/core';
-import Stats from './Stats';
+import Stats from './stats/Stats';
 
 const useStyles = makeStyles(theme => ({
   paper: {

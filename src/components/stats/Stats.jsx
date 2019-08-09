@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { LinearProgress, Typography, Box } from '@material-ui/core';
+import calculatePercentage from './calculatePercentage';
+import Infos from './Infos';
 
 const Stats = ({ start, end }) => {
   const [startHours, startMinutes] = start.split(':');
@@ -19,16 +21,8 @@ const Stats = ({ start, end }) => {
 
   const format = time => `${`0${time.hours}`.slice(-2)}:${`0${time.minutes}`.slice(-2)}`;
 
-  const getPercentage = () => {
-    const startAsDecimal = startTime.hours + startTime.minutes / 60;
-    const nowAsDecimal = currentTime.hours + currentTime.minutes / 60 + currentTime.seconds / 3600;
-    const endAsDecimal = endTime.hours + endTime.minutes / 60;
-    if (startAsDecimal > nowAsDecimal) return 0;
-    if (endAsDecimal < nowAsDecimal) return 100;
-    return (
-      ((nowAsDecimal - startAsDecimal) / (endAsDecimal - startAsDecimal)) * 100
-    );
-  };
+  const percentage = useMemo(() => calculatePercentage(startTime, currentTime, endTime),
+    [startTime, currentTime, endTime]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -47,14 +41,15 @@ const Stats = ({ start, end }) => {
         <Typography style={{ flex: 1 }}>{format(startTime)}</Typography>
         <Typography>{format(endTime)}</Typography>
       </Box>
-      <LinearProgress variant="determinate" value={getPercentage()} />
+      <LinearProgress variant="determinate" value={percentage} />
       <p
         style={{
-          marginLeft: `${getPercentage()}%`,
+          marginLeft: `${percentage}%`,
         }}
       >
         {format(currentTime)}
       </p>
+      <Infos startTime={startTime} currentTime={currentTime} endTime={endTime} />
     </div>
   );
 };

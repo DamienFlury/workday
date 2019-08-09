@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import './App.css';
-import NavBar from './components/NavBar';
 import { MuiThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core';
+import NavBar from './components/NavBar';
 import Gohome from './components/Gohome';
 
 function App() {
-  const [type, setType] = useState('dark');
+  const [type, setType] = useState('light');
   const theme = createMuiTheme({
     palette: {
-      type
-    }
+      type,
+    },
   });
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <NavBar onClick={() => setType(prev => prev === 'light' ? 'dark' : 'light')} />
+      <NavBar onClick={() => setType(prev => (prev === 'light' ? 'dark' : 'light'))} />
       <Gohome />
     </MuiThemeProvider>
   );
