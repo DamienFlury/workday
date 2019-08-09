@@ -17,6 +17,7 @@ const Stats = ({ start, end }) => {
   });
 
   const format = time => `${("0" + time.hours).slice(-2)}:${("0" + time.minutes).slice(-2)}`;
+
   const getPercentage = (start, now, end) => {
     console.log(start, now, end);
     const startAsDecimal = start.hours + start.minutes / 60;
