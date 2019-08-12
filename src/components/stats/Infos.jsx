@@ -7,23 +7,34 @@ import {
 
 moment.relativeTimeThreshold('h', 60);
 
-const Infos = ({ startTime, currentTime, endTime }) => (
+const Infos = ({
+  startTime, currentTime, endTime, lunchStartTime, lunchEndTime,
+}) => (
   <>
     <Typography>
-Progress:
+Progress (workday):
       {' '}
       {calculatePercentage(endTime - startTime, currentTime - startTime).toFixed(2)}
 %
     </Typography>
-    <Typography>
-Started working:
+    {/* <Typography>
+      Progress (work only):
       {' '}
-      {humanizeWithMinutes(moment.duration(startTime - currentTime))}
+      {calculatePercentage(endTime - startTime - (lunchEndTime - lunchStartTime), currentTime - startTime).toFixed(2)}
+%
+    </Typography> */}
+    <Typography>
+You started working
+      {' '}
+      {moment.duration(startTime - currentTime).humanize(true)}
     </Typography>
     <Typography>
 You can leave
       {' '}
-      {humanizeWithMinutes(moment.duration(endTime - currentTime))}
+      {moment.duration(endTime - currentTime).humanize(true)}
+    </Typography>
+    <Typography variant="h6">
+      {currentTime > lunchStartTime && currentTime < lunchEndTime ? 'Lunch Time 😄' : 'Working 💼'}
     </Typography>
   </>
 );

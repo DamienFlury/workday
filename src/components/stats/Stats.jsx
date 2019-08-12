@@ -39,7 +39,7 @@ const Stats = ({
       >
         {currentTime.format('HH:mm')}
       </p>
-      <Infos startTime={startTime} endTime={endTime} currentTime={currentTime} />
+      <Infos startTime={startTime} endTime={endTime} currentTime={currentTime} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} />
     </div>
   );
 };
