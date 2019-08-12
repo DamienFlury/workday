@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Paper, TextField, Box, makeStyles,
+  TextField, Box, Typography,
 } from '@material-ui/core';
 import Stats from './stats/Stats';
+import Widget from './Widget';
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    padding: theme.spacing(5),
-    margin: theme.spacing(5),
-  },
-}));
 const Gohome = () => {
-  const classes = useStyles();
-
   const [startTime, setStartTime] = useState(localStorage.getItem('startTime') || '09:00');
   const [endTime, setEndTime] = useState(localStorage.getItem('endTime') || '17:00');
   const [lunchStart, setLunchStart] = useState(localStorage.getItem('lunchStart') || '12:00');
@@ -33,7 +26,8 @@ const Gohome = () => {
   }, [lunchEnd]);
 
   return (
-    <Paper className={classes.paper}>
+    <Widget>
+      <Typography variant="h4" gutterBottom>Workday</Typography>
       <Box margin="20px">
         <TextField
           label="Start"
@@ -73,7 +67,7 @@ const Gohome = () => {
       <Box marginTop="50px">
         <Stats start={startTime} end={endTime} lunchStart={lunchStart} lunchEnd={lunchEnd} />
       </Box>
-    </Paper>
+    </Widget>
   );
 };
 
