@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { LinearProgress, Typography, Box } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 import moment from 'moment';
 import { calculatePercentage } from './time-helpers';
 import Infos from './Infos';
+import WorkProgress from './WorkProgress';
 
 const Stats = ({
   start, end, lunchStart, lunchEnd,
@@ -31,7 +32,7 @@ const Stats = ({
         <Typography style={{ flex: 1 }}>{startTime.format('HH:mm')}</Typography>
         <Typography>{endTime.format('HH:mm')}</Typography>
       </Box>
-      <LinearProgress variant="determinate" value={percentage} />
+      <WorkProgress startTime={startTime} endTime={endTime} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} currentTime={currentTime} />
       <p
         style={{
           marginLeft: `${percentage}%`,

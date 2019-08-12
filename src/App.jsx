@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { MuiThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
 import NavBar from './components/NavBar';
 import Gohome from './components/Gohome';
 
@@ -13,8 +14,10 @@ function App() {
   const theme = createMuiTheme({
     palette: {
       type,
+      primary: blue,
     },
   });
+
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
