@@ -21,5 +21,6 @@ module.exports = {
   rules: {
     'max-len': 'off',
     'react/prop-types': 'off',
+    'no-nested-ternary': 'off'
   },
 };

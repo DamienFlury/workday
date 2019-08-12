@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
 import {
-  calculatePercentage, humanizeWithMinutes,
+  calculatePercentage,
 } from './time-helpers';
 
 moment.relativeTimeThreshold('h', 60);
@@ -34,7 +34,8 @@ You can leave
       {moment.duration(endTime - currentTime).humanize(true)}
     </Typography>
     <Typography variant="h6">
-      {currentTime > lunchStartTime && currentTime < lunchEndTime ? 'Lunch Time 😄' : 'Working 💼'}
+      {currentTime > lunchStartTime && currentTime < lunchEndTime
+        ? 'Lunch Time 😄' : currentTime > endTime ? 'Time to go home 👋' : 'Working 💼'}
     </Typography>
   </>
 );
