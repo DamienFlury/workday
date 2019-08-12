@@ -12,6 +12,8 @@ const useStyles = makeStyles({
   wrapper: {
     display: 'grid',
     gridTemplateColumns: '2fr 1fr',
+    margin: 20,
+    gridGap: 20,
   },
   '@media(max-width: 900px)': {
     wrapper: {
