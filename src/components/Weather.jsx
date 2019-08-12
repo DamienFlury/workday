@@ -7,6 +7,7 @@ import Widget from './Widget';
 const Weather = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [now, setNow] = useState(moment());
 
   useEffect(() => {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=Zurich&units=metric&APPID=64bc522c0dff1a806fad66f6e0069206')
@@ -15,6 +16,15 @@ const Weather = () => {
         setIsLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setNow(moment());
+    }, 10000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [now]);
 
   return (
     <Widget>
@@ -45,12 +55,12 @@ m/s
         <Typography>
           Sunrise was
           {' '}
-          {moment.duration(data.sys.sunrise * 1000 - moment()).humanize(true)}
+          {moment.duration(data.sys.sunrise * 1000 - now).humanize(true)}
         </Typography>
         <Typography>
           Sunset is
           {' '}
-          {moment.duration(data.sys.sunset * 1000 - moment()).humanize(true)}
+          {moment.duration(data.sys.sunset * 1000 - now).humanize(true)}
         </Typography>
       </div>
       )}
