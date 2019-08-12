@@ -3,6 +3,7 @@ import { Typography } from '@material-ui/core';
 import moment from 'moment';
 import Widget from './Widget';
 
+
 const Weather = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
