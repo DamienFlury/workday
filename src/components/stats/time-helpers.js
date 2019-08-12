@@ -31,17 +31,7 @@ export const fromString = (str) => {
 };
 
 
-export const calculatePercentage = (startTime, currentTime, endTime) => {
-  const startAsDecimal = toDecimal(startTime);
-  const nowAsDecimal = toDecimal(currentTime);
-  const endAsDecimal = toDecimal(endTime);
-
-  if (startAsDecimal > nowAsDecimal) return 0;
-  if (endAsDecimal < nowAsDecimal) return 100;
-  return (
-    ((nowAsDecimal - startAsDecimal) / (endAsDecimal - startAsDecimal)) * 100
-  );
-};
+export const calculatePercentage = (fullTimeSpan, partialTimeSpan) => partialTimeSpan / fullTimeSpan * 100;
 
 export const hoursDone = (startTime, currentTime) => toDecimal(currentTime) - toDecimal(startTime);
 

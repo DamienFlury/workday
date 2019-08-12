@@ -15,6 +15,8 @@ const Gohome = () => {
 
   const [startTime, setStartTime] = useState(localStorage.getItem('startTime') || '09:00');
   const [endTime, setEndTime] = useState(localStorage.getItem('endTime') || '17:00');
+  const [lunchStart, setLunchStart] = useState(localStorage.getItem('lunchStart') || '12:00');
+  const [lunchEnd, setLunchEnd] = useState(localStorage.getItem('lunchEnd') || '13:00');
 
 
   useEffect(() => {
@@ -23,6 +25,12 @@ const Gohome = () => {
   useEffect(() => {
     localStorage.setItem('endTime', endTime);
   }, [endTime]);
+  useEffect(() => {
+    localStorage.setItem('lunchStart', lunchStart);
+  }, [lunchStart]);
+  useEffect(() => {
+    localStorage.setItem('lunchEnd', lunchEnd);
+  }, [lunchEnd]);
 
   return (
     <Paper className={classes.paper}>
@@ -44,8 +52,26 @@ const Gohome = () => {
           onChange={e => setEndTime(e.target.value)}
         />
       </Box>
+      <Box margin="20px">
+        <TextField
+          label="Lunch Start"
+          type="time"
+          inputProps={{ step: 300 }}
+          value={lunchStart}
+          onChange={e => setLunchStart(e.target.value)}
+        />
+      </Box>
+      <Box margin="20px">
+        <TextField
+          type="time"
+          label="Lunch End"
+          inputProps={{ step: 300 }}
+          value={lunchEnd}
+          onChange={e => setLunchEnd(e.target.value)}
+        />
+      </Box>
       <Box marginTop="50px">
-        <Stats start={startTime} end={endTime} />
+        <Stats start={startTime} end={endTime} lunchStart={lunchStart} lunchEnd={lunchEnd} />
       </Box>
     </Paper>
   );

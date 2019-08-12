@@ -1,29 +1,26 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { LinearProgress, Typography, Box } from '@material-ui/core';
-import { calculatePercentage, fromString, format } from './time-helpers';
+import moment from 'moment';
+import { calculatePercentage } from './time-helpers';
 import Infos from './Infos';
 
-const Stats = ({ start, end }) => {
-  const startTime = fromString(start);
-  const endTime = fromString(end);
+const Stats = ({
+  start, end, lunchStart, lunchEnd,
+}) => {
+  const startTime = moment(start, 'HH:mm');
+  const endTime = moment(end, 'HH:mm');
+  const lunchStartTime = moment(lunchStart, 'HH:mm');
+  const lunchEndTime = moment(lunchEnd, 'HH:mm');
 
-  const [currentTime, setCurrentTime] = useState({
-    hours: new Date().getHours(),
-    minutes: new Date().getMinutes(),
-    seconds: new Date().getSeconds(),
-  });
+  const [currentTime, setCurrentTime] = useState(moment());
 
 
-  const percentage = useMemo(() => calculatePercentage(startTime, currentTime, endTime),
+  const percentage = useMemo(() => calculatePercentage(endTime - startTime, currentTime - startTime),
     [startTime, currentTime, endTime]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setCurrentTime({
-        hours: new Date().getHours(),
-        minutes: new Date().getMinutes(),
-        seconds: new Date().getSeconds(),
-      });
+      setCurrentTime(moment());
     }, 1000);
     return () => clearTimeout(timeout);
   }, [currentTime]);
@@ -31,8 +28,8 @@ const Stats = ({ start, end }) => {
   return (
     <div>
       <Box display="flex">
-        <Typography style={{ flex: 1 }}>{format(startTime)}</Typography>
-        <Typography>{format(endTime)}</Typography>
+        <Typography style={{ flex: 1 }}>{startTime.format('HH:mm')}</Typography>
+        <Typography>{endTime.format('HH:mm')}</Typography>
       </Box>
       <LinearProgress variant="determinate" value={percentage} />
       <p
@@ -40,9 +37,8 @@ const Stats = ({ start, end }) => {
           marginLeft: `${percentage}%`,
         }}
       >
-        {format(currentTime)}
+        {currentTime.format('HH:mm')}
       </p>
-      <Infos startTime={startTime} currentTime={currentTime} endTime={endTime} />
     </div>
   );
 };
