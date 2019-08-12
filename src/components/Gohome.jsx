@@ -43,6 +43,24 @@ const Gohome = () => {
           onChange={e => setStartTime(e.target.value)}
         />
       </Box>
+        <Box margin="20px">
+            <TextField
+                label="Lunch Start"
+                type="time"
+                inputProps={{ step: 300 }}
+                value={lunchStart}
+                onChange={e => setLunchStart(e.target.value)}
+            />
+        </Box>
+        <Box margin="20px">
+            <TextField
+                type="time"
+                label="Lunch End"
+                inputProps={{ step: 300 }}
+                value={lunchEnd}
+                onChange={e => setLunchEnd(e.target.value)}
+            />
+        </Box>
       <Box margin="20px">
         <TextField
           type="time"
@@ -50,24 +68,6 @@ const Gohome = () => {
           inputProps={{ step: 300 }}
           value={endTime}
           onChange={e => setEndTime(e.target.value)}
-        />
-      </Box>
-      <Box margin="20px">
-        <TextField
-          label="Lunch Start"
-          type="time"
-          inputProps={{ step: 300 }}
-          value={lunchStart}
-          onChange={e => setLunchStart(e.target.value)}
-        />
-      </Box>
-      <Box margin="20px">
-        <TextField
-          type="time"
-          label="Lunch End"
-          inputProps={{ step: 300 }}
-          value={lunchEnd}
-          onChange={e => setLunchEnd(e.target.value)}
         />
       </Box>
       <Box marginTop="50px">
