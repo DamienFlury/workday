@@ -39,6 +39,7 @@ const Stats = ({
       >
         {currentTime.format('HH:mm')}
       </p>
+      <Infos startTime={startTime} endTime={endTime} currentTime={currentTime} />
     </div>
   );
 };

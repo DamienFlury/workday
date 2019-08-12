@@ -1,26 +1,29 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
+import moment from 'moment';
 import {
-  calculatePercentage, format, subtract, toLocalTimeString,
+  calculatePercentage, humanizeWithMinutes,
 } from './time-helpers';
+
+moment.relativeTimeThreshold('h', 60);
 
 const Infos = ({ startTime, currentTime, endTime }) => (
   <>
     <Typography>
 Progress:
       {' '}
-      {calculatePercentage(startTime, currentTime, endTime).toFixed(2)}
+      {calculatePercentage(endTime - startTime, currentTime - startTime).toFixed(2)}
 %
     </Typography>
     <Typography>
-Time worked:
+Started working:
       {' '}
-      {toLocalTimeString(subtract(currentTime, startTime))}
+      {humanizeWithMinutes(moment.duration(startTime - currentTime))}
     </Typography>
     <Typography>
-Time remaining:
+You can leave
       {' '}
-      {format(subtract(endTime, currentTime))}
+      {humanizeWithMinutes(moment.duration(endTime - currentTime))}
     </Typography>
   </>
 );
