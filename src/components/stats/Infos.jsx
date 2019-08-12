@@ -34,7 +34,8 @@ You can leave
       {moment.duration(endTime - currentTime).humanize(true)}
     </Typography>
     <Typography variant="h6">
-      {currentTime > lunchStartTime && currentTime < lunchEndTime ? 'Lunch Time 😄' : 'Working 💼'}
+      {currentTime > lunchStartTime && currentTime < lunchEndTime
+        ? 'Lunch Time 😄' : currentTime > endTime ? 'Time to go home 👋' : 'Working 💼'}
     </Typography>
   </>
 );
