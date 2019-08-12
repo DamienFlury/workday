@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
 import {
-  calculatePercentage, humanizeWithMinutes,
+  calculatePercentage,
 } from './time-helpers';
 
 moment.relativeTimeThreshold('h', 60);
