@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import styled, { ThemeProvider } from 'styled-components';
-import NavBar from './components/NavBar';
+// import NavBar from './components/NavBar';
 import Gohome from './components/Gohome';
 import Weather from './components/Weather';
 import Quote from './components/Quote';
@@ -37,7 +37,6 @@ const StyledTime = styled(Time)`
 const StyledWeather = styled(Weather)`
   grid-area: weather;
 `;
-
 const StyledQuote = styled(Quote)`
   grid-area: quote;
 `;
@@ -60,7 +59,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <>
           <CssBaseline />
-          <NavBar onClick={() => setType(prev => (prev === 'light' ? 'dark' : 'light'))} />
+          {/* <NavBar onClick={() => setType(prev => (prev === 'light' ? 'dark' : 'light'))} /> */}
           <Grid>
             <StyledGohome />
             <StyledTime />

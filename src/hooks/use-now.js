@@ -10,7 +10,7 @@ const useNow = (updateTime) => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [now]);
+  }, [now, updateTime]);
   return now;
 };
 
