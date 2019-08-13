@@ -4,6 +4,7 @@ import moment from 'moment';
 import Widget from './Widget';
 import useWeather from '../hooks/use-weather';
 import useNow from '../hooks/use-now';
+import { humanizeWithMinutes } from './stats/time-helpers';
 
 
 const Weather = ({ className }) => {
@@ -41,12 +42,15 @@ m/s
           <Typography>
             Sunrise was
             {' '}
-            {moment.duration(weather.sys.sunrise * 1000 - now).humanize(true)}
+            {humanizeWithMinutes(moment.duration(now - moment(weather.sys.sunrise, 'X')))}
+            {' '}
+ago.
           </Typography>
           <Typography>
-            Sunset is
+            Sunset is in
             {' '}
-            {moment.duration(weather.sys.sunset * 1000 - now).humanize(true)}
+            {humanizeWithMinutes(moment.duration(moment(weather.sys.sunset, 'X') - now))}
+.
           </Typography>
         </div>
       )}
