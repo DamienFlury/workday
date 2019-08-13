@@ -16,9 +16,10 @@ const Quote = ({ className }) => {
     fetch('https://quotes.rest/qod.json')
       .then(res => res.json())
       .then((data) => {
+        console.log(data);
         setQuote(data.contents.quotes[0]);
         setIsLoading(false);
-      });
+      }).catch(() => console.log('error'));
   }, []);
   return (
     <Widget className={className}>

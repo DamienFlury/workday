@@ -17,10 +17,11 @@ const Grid = styled.div`
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "gohome gohome"
-  "weather weather";
+  "weather weather"
+  "quote quote";
   @media(min-width: 1024px) {
     grid-template-areas: "gohome weather"
-    "gohome lol";
+    "gohome quote";
   }
 `;
 
@@ -32,7 +33,7 @@ const StyledWeather = styled(Weather)`
 `;
 
 const StyledQuote = styled(Quote)`
-  grid-area: lol;
+  grid-area: quote;
 `;
 
 function App() {
