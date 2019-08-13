@@ -1,29 +1,41 @@
 import React, { useState } from 'react';
 import './App.css';
 import {
-  MuiThemeProvider, createMuiTheme, CssBaseline, makeStyles,
+  MuiThemeProvider, createMuiTheme, CssBaseline,
 } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
+import styled, { ThemeProvider } from 'styled-components';
 import NavBar from './components/NavBar';
 import Gohome from './components/Gohome';
 import Weather from './components/Weather';
+import Widget from './components/Widget';
 
-const useStyles = makeStyles({
-  wrapper: {
-    display: 'grid',
-    gridTemplateColumns: '2fr 1fr',
-    margin: 20,
-    gridGap: 20,
-  },
-  '@media(max-width: 900px)': {
-    wrapper: {
-      gridTemplateColumns: '1fr',
-    },
-  },
-});
+const Grid = styled.div`
+  display: grid;
+  margin: 20px;
+  grid-gap: 20px;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "gohome gohome"
+  "weather weather";
+  @media(min-width: 1024px) {
+    grid-template-areas: "gohome weather"
+    "gohome lol";
+  }
+`;
+
+const StyledGohome = styled(Gohome)`
+  grid-area: gohome;
+`;
+const StyledWeather = styled(Weather)`
+  grid-area: weather;
+`;
+
+const Lol = styled(Widget)`
+  grid-area: lol;
+`;
 
 function App() {
-  const classes = useStyles();
   const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
   const [type, setType] = useState(prefersDarkTheme.matches ? 'dark' : 'light');
   prefersDarkTheme.onchange = () => {
@@ -38,12 +50,17 @@ function App() {
 
   return (
     <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <NavBar onClick={() => setType(prev => (prev === 'light' ? 'dark' : 'light'))} />
-      <div className={classes.wrapper}>
-        <Gohome />
-        <Weather />
-      </div>
+      <ThemeProvider theme={theme}>
+        <>
+          <CssBaseline />
+          <NavBar onClick={() => setType(prev => (prev === 'light' ? 'dark' : 'light'))} />
+          <Grid>
+            <StyledGohome />
+            <StyledWeather />
+            <Lol>Lol</Lol>
+          </Grid>
+        </>
+      </ThemeProvider>
     </MuiThemeProvider>
   );
 }

@@ -5,7 +5,7 @@ import {
 import Stats from './stats/Stats';
 import Widget from './Widget';
 
-const Gohome = () => {
+const Gohome = ({ className }) => {
   const [startTime, setStartTime] = useState(localStorage.getItem('startTime') || '09:00');
   const [endTime, setEndTime] = useState(localStorage.getItem('endTime') || '17:00');
   const [lunchStart, setLunchStart] = useState(localStorage.getItem('lunchStart') || '12:00');
@@ -26,7 +26,7 @@ const Gohome = () => {
   }, [lunchEnd]);
 
   return (
-    <Widget>
+    <Widget className={className}>
       <Typography variant="h4" gutterBottom>Workday</Typography>
       <Box margin="20px">
         <TextField

@@ -5,7 +5,7 @@ import Widget from './Widget';
 import useWeather from '../hooks/use-weather';
 
 
-const Weather = () => {
+const Weather = ({ className }) => {
   const [now, setNow] = useState(moment());
   const { weather, isLoading } = useWeather();
 
@@ -19,7 +19,7 @@ const Weather = () => {
   }, [now]);
 
   return (
-    <Widget>
+    <Widget className={className}>
       <Typography variant="h4" gutterBottom>
         Weather
         {' '}
