@@ -9,23 +9,30 @@ import NavBar from './components/NavBar';
 import Gohome from './components/Gohome';
 import Weather from './components/Weather';
 import Quote from './components/Quote';
+import Time from './components/Time';
 
 const Grid = styled.div`
   display: grid;
   margin: 20px;
   grid-gap: 20px;
   grid-template-columns: 2fr 1fr;
-  grid-template-areas: "gohome gohome"
+  grid-template-areas:
+  "time time"
+  "gohome gohome"
   "weather weather"
   "quote quote";
   @media(min-width: 1024px) {
-    grid-template-areas: "gohome weather"
+    grid-template-areas: "gohome time"
+    "gohome weather"
     "gohome quote";
   }
 `;
 
 const StyledGohome = styled(Gohome)`
   grid-area: gohome;
+`;
+const StyledTime = styled(Time)`
+  grid-area: time;
 `;
 const StyledWeather = styled(Weather)`
   grid-area: weather;
@@ -56,6 +63,7 @@ function App() {
           <NavBar onClick={() => setType(prev => (prev === 'light' ? 'dark' : 'light'))} />
           <Grid>
             <StyledGohome />
+            <StyledTime />
             <StyledWeather />
             <StyledQuote />
           </Grid>
