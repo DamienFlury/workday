@@ -8,7 +8,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import NavBar from './components/NavBar';
 import Gohome from './components/Gohome';
 import Weather from './components/Weather';
-import Widget from './components/Widget';
+import Quote from './components/Quote';
 
 const Grid = styled.div`
   display: grid;
@@ -31,7 +31,7 @@ const StyledWeather = styled(Weather)`
   grid-area: weather;
 `;
 
-const Lol = styled(Widget)`
+const StyledQuote = styled(Quote)`
   grid-area: lol;
 `;
 
@@ -57,7 +57,7 @@ function App() {
           <Grid>
             <StyledGohome />
             <StyledWeather />
-            <Lol>Lol</Lol>
+            <StyledQuote />
           </Grid>
         </>
       </ThemeProvider>
