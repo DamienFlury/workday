@@ -15,7 +15,6 @@ const Grid = styled.div`
   margin: 20px;
   grid-gap: 20px;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
   grid-template-areas: "gohome gohome"
   "weather weather"
   "quote quote";
