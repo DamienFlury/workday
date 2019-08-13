@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const zurich = { lat: 47.3769, lon: 8.5417 };
 
 const useWeather = () => {
-  const [data, setData] = useState({});
+  const [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -15,7 +15,7 @@ const useWeather = () => {
     )
       .then(res => res.json())
       .then((res) => {
-        setData(res);
+        setWeather(res);
         setIsLoading(false);
       });
   };
@@ -30,7 +30,7 @@ const useWeather = () => {
     }
   }, []);
 
-  return [data, isLoading];
+  return { weather, isLoading };
 };
 
 export default useWeather;

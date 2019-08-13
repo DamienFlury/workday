@@ -7,7 +7,7 @@ import useWeather from '../hooks/use-weather';
 
 const Weather = () => {
   const [now, setNow] = useState(moment());
-  const [data, isLoading] = useWeather();
+  const { weather, isLoading } = useWeather();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -23,38 +23,38 @@ const Weather = () => {
       <Typography variant="h4" gutterBottom>
         Weather
         {' '}
-        {data.name && `in ${data.name}`}
+        {weather.name && `in ${weather.name}`}
       </Typography>
       {isLoading || (
         <div>
           <Typography>
 Temperature:
             {' '}
-            {data.main.temp}
+            {weather.main.temp}
             {' '}
 &#176;C
           </Typography>
           <Typography>
 Description:
             {' '}
-            {data.weather[0].description}
+            {weather.weather[0].description}
           </Typography>
           <Typography>
 Windspeed:
             {' '}
-            {data.wind.speed}
+            {weather.wind.speed}
             {' '}
 m/s
           </Typography>
           <Typography>
             Sunrise was
             {' '}
-            {moment.duration(data.sys.sunrise * 1000 - now).humanize(true)}
+            {moment.duration(weather.sys.sunrise * 1000 - now).humanize(true)}
           </Typography>
           <Typography>
             Sunset is
             {' '}
-            {moment.duration(data.sys.sunset * 1000 - now).humanize(true)}
+            {moment.duration(weather.sys.sunset * 1000 - now).humanize(true)}
           </Typography>
         </div>
       )}
