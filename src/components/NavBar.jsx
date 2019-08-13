@@ -7,7 +7,7 @@ const NavBar = ({ onClick }) => (
   <AppBar position="sticky">
     <Toolbar>
       <Typography variant="h6" style={{ flex: 1 }}>Go Home</Typography>
-      <Button color="secondary" variant="contained" onClick={onClick}>Change theme</Button>
+      <Button variant="contained" onClick={onClick}>Change theme</Button>
     </Toolbar>
   </AppBar>
 );
