@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Typography, Box } from '@material-ui/core';
 import moment from 'moment';
 import { calculatePercentage } from './time-helpers';
 import Infos from './Infos';
 import WorkProgress from './WorkProgress';
+import useNow from '../../hooks/use-now';
 
 const Stats = ({
   start, end, lunchStart, lunchEnd,
@@ -13,18 +14,10 @@ const Stats = ({
   const lunchStartTime = moment(lunchStart, 'HH:mm');
   const lunchEndTime = moment(lunchEnd, 'HH:mm');
 
-  const [currentTime, setCurrentTime] = useState(moment());
+  const now = useNow(1000);
 
-
-  const percentage = useMemo(() => calculatePercentage(endTime - startTime, currentTime - startTime),
-    [startTime, currentTime, endTime]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setCurrentTime(moment());
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, [currentTime]);
+  const percentage = useMemo(() => calculatePercentage(endTime - startTime, now - startTime),
+    [startTime, now, endTime]);
 
   return (
     <div>
@@ -32,15 +25,15 @@ const Stats = ({
         <Typography style={{ flex: 1 }}>{startTime.format('HH:mm')}</Typography>
         <Typography>{endTime.format('HH:mm')}</Typography>
       </Box>
-      <WorkProgress startTime={startTime} endTime={endTime} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} currentTime={currentTime} />
+      <WorkProgress startTime={startTime} endTime={endTime} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} currentTime={now} />
       <p
         style={{
           marginLeft: `${percentage}%`,
         }}
       >
-        {currentTime.format('HH:mm')}
+        {now.format('HH:mm')}
       </p>
-      <Infos startTime={startTime} endTime={endTime} currentTime={currentTime} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} />
+      <Infos startTime={startTime} endTime={endTime} currentTime={now} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} />
     </div>
   );
 };

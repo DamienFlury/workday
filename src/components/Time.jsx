@@ -1,18 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+import React from 'react';
 import { Typography } from '@material-ui/core';
 import Widget from './Widget';
+import useNow from '../hooks/use-now';
 
 const Time = ({ className }) => {
-  const [now, setNow] = useState(moment());
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setNow(moment());
-    }, 1000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  });
+  const now = useNow(1000);
 
   return (
     <Widget className={className}>

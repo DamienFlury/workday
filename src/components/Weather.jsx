@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
 import Widget from './Widget';
 import useWeather from '../hooks/use-weather';
+import useNow from '../hooks/use-now';
 
 
 const Weather = ({ className }) => {
-  const [now, setNow] = useState(moment());
+  const now = useNow(10000);
   const { weather, isLoading } = useWeather();
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setNow(moment());
-    }, 10000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [now]);
 
   return (
     <Widget className={className}>
