@@ -1,10 +1,20 @@
 import React, { useMemo } from 'react';
 import { Typography, Box } from '@material-ui/core';
 import moment from 'moment';
+import styled from 'styled-components';
 import { calculatePercentage } from './time-helpers';
 import Infos from './Infos';
 import WorkProgress from './WorkProgress';
 import useNow from '../../hooks/use-now';
+
+const BottomText = styled(Typography)`
+  display: inline-block !important;
+  width: auto;
+  margin-left: ${props => props.marginLeft} !important;
+  transform: translateX(-50%);
+  margin-top: 2px !important;
+  margin-bottom: 20px !important;
+`;
 
 const Stats = ({
   start, end, lunchStart, lunchEnd,
@@ -26,13 +36,9 @@ const Stats = ({
         <Typography>{endTime.format('HH:mm')}</Typography>
       </Box>
       <WorkProgress startTime={startTime} endTime={endTime} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} currentTime={now} />
-      <p
-        style={{
-          marginLeft: `${percentage}%`,
-        }}
-      >
+      <BottomText marginLeft={`${percentage}%`}>
         {now.format('HH:mm')}
-      </p>
+      </BottomText>
       <Infos startTime={startTime} endTime={endTime} currentTime={now} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} />
     </div>
   );
