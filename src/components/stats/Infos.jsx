@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
 import {
-  calculatePercentage,
+  calculatePercentage, humanizeWithMinutes,
 } from './time-helpers';
 
 moment.relativeTimeThreshold('h', 60);
@@ -26,12 +26,15 @@ Progress (workday):
     <Typography>
 You started working
       {' '}
-      {moment.duration(startTime - currentTime).humanize(true)}
+      {humanizeWithMinutes(moment.duration(currentTime - startTime))}
+      {' '}
+ago.
     </Typography>
     <Typography>
-You can leave
+You can leave in
       {' '}
-      {moment.duration(endTime - currentTime).humanize(true)}
+      {humanizeWithMinutes(moment.duration(endTime - currentTime))}
+.
     </Typography>
     <Typography variant="h6">
       {currentTime > lunchStartTime && currentTime < lunchEndTime
