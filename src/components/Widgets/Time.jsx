@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import Widget from './Widget';
-import useNow from '../hooks/use-now';
+import useNow from '../../hooks/use-now';
 
 const Time = ({ className }) => {
   const now = useNow(1000);

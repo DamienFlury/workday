@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   TextField, Box, Typography,
 } from '@material-ui/core';
-import Stats from './stats/Stats';
+import Stats from '../stats/Stats';
 import Widget from './Widget';
 
 const Gohome = ({ className }) => {

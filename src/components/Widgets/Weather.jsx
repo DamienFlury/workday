@@ -3,9 +3,9 @@ import { Typography, Button } from '@material-ui/core';
 import moment from 'moment';
 import styled from 'styled-components';
 import Widget from './Widget';
-import useWeather from '../hooks/use-weather';
-import useNow from '../hooks/use-now';
-import { humanizeWithMinutes } from './stats/time-helpers';
+import useWeather from '../../hooks/use-weather';
+import useNow from '../../hooks/use-now';
+import { humanizeWithMinutes } from '../stats/time-helpers';
 
 const StyledButton = styled(Button)`
   margin-top: 20px !important;
