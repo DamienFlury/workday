@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 
-const zurich = { lat: 47.3769, lon: 8.5417 };
+const sanFrancisco = { lat: 37.7749, lon: -122.4194 };
 
 const useWeather = () => {
   const [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [permissionState, setPermissionState] = useState('prompt');
 
 
   const fetchAtPosition = ({ lat, lon }) => {
@@ -21,16 +22,28 @@ const useWeather = () => {
   };
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        fetchAtPosition({ lat: pos.coords.latitude, lon: pos.coords.longitude });
-      }, () => fetchAtPosition(zurich));
-    } else {
-      fetchAtPosition(zurich);
-    }
+    navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
+      setPermissionState(permissionStatus.state);
+      // eslint-disable-next-line no-param-reassign
+      permissionStatus.onchange = () => {
+        setPermissionState(permissionStatus.state);
+      };
+    });
   }, []);
 
-  return { weather, isLoading };
+  useEffect(() => {
+    if (permissionState === 'granted' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        fetchAtPosition({ lat: pos.coords.latitude, lon: pos.coords.longitude });
+      }, () => fetchAtPosition(sanFrancisco));
+    } else {
+      fetchAtPosition(sanFrancisco);
+    }
+  }, [permissionState]);
+
+  return {
+    weather, isLoading, permissionState,
+  };
 };
 
 export default useWeather;
