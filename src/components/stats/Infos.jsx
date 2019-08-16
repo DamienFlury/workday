@@ -26,15 +26,19 @@ Progress (workday):
     <Typography>
 You started working
       {' '}
-      {moment.duration(startTime - currentTime).humanize(true)}
+      {humanizeWithMinutes(moment.duration(currentTime - startTime))}
+      {' '}
+ago.
     </Typography>
     <Typography>
-You can leave
+You can leave in
       {' '}
-      {moment.duration(endTime - currentTime).humanize(true)}
+      {humanizeWithMinutes(moment.duration(endTime - currentTime))}
+.
     </Typography>
     <Typography variant="h6">
-      {currentTime > lunchStartTime && currentTime < lunchEndTime ? 'Lunch Time 😄' : 'Working 💼'}
+      {currentTime > lunchStartTime && currentTime < lunchEndTime
+        ? 'Lunch Time 😄' : currentTime > endTime ? 'Time to go home 👋' : 'Working 💼'}
     </Typography>
   </>
 );
