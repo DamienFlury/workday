@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import Widget from './Widget';
+import { fetchQuote } from '../../store/actions/quote-actions';
 
 const StyledText = styled.span`
   display: block;
@@ -10,20 +12,17 @@ const StyledText = styled.span`
   `;
 
 const Quote = ({ className }) => {
-  const [quote, setQuote] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const quote = useSelector(state => state.quote.data);
+  const status = useSelector(state => state.quote.status);
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetch('https://quotes.rest/qod.json')
-      .then(res => res.json())
-      .then((data) => {
-        setQuote(data.contents ? data.contents.quotes[0] : { quote: 'Don\'t cry because it\'s over, smile because it happened', author: 'Dr. Seuss' });
-        setIsLoading(false);
-      });
+    if (status === 'initial') {
+      dispatch(fetchQuote());
+    }
   }, []);
   return (
     <Widget className={className}>
-      {!isLoading
-      && (
+      {status === 'success' && (
       <>
         <StyledText>
           {quote.quote}
