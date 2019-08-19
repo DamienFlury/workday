@@ -5,18 +5,17 @@ import {
 } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { ThemeProvider } from 'styled-components';
+import { useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
 
 
 function App() {
-  const prefersDarkTheme = window && window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : { matches: false };
-  const [type, setType] = useState(prefersDarkTheme.matches ? 'dark' : 'light');
   const [showSettings, setShowSettings] = useState(false);
-  prefersDarkTheme.onchange = () => {
-    setType(prefersDarkTheme.matches ? 'dark' : 'light');
-  };
+
+  const type = useSelector(state => state.settings.theme.type);
+
   const theme = createMuiTheme({
     palette: {
       type,
