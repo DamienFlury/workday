@@ -19,12 +19,13 @@ const Weather = ({ className }) => {
 
   return (
     <Widget className={className}>
-      <Typography variant="h4" gutterBottom>
+      <>
+        <Typography variant="h4" gutterBottom>
         Weather
-        {' '}
-        {weather.name && `in ${weather.name}`}
-      </Typography>
-      {isLoading || (
+          {' '}
+          {weather.name && `in ${weather.name}`}
+        </Typography>
+        {isLoading || (
         <div>
           <Typography>
 Temperature:
@@ -60,7 +61,8 @@ ago.
           </Typography>
           {permissionState === 'prompt' && <StyledButton onClick={() => { navigator.geolocation.getCurrentPosition(() => {}); }} variant="contained">Use my location</StyledButton>}
         </div>
-      )}
+        )}
+      </>
     </Widget>
   );
 };

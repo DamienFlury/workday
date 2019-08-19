@@ -16,10 +16,8 @@ const Quote = ({ className }) => {
     fetch('https://quotes.rest/qod.json')
       .then(res => res.json())
       .then((data) => {
-        if (data.contents) {
-          setQuote(data.contents.quotes[0]);
-          setIsLoading(false);
-        }
+        setQuote(data.contents ? data.contents.quotes[0] : { quote: 'Don\'t cry because it\'s over, smile because it happened', author: 'Dr. Seuss' });
+        setIsLoading(false);
       });
   }, []);
   return (
