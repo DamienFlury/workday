@@ -1,6 +1,6 @@
 import { FETCH_WEATHER_PENDING, FETCH_WEATHER_FULFILLED, FETCH_WEATHER_REJECTED } from '../actions/weather-actions';
 
-const weather = (state = { status: 'none', data: {} }, action) => {
+const weather = (state = { status: 'initial', data: {} }, action) => {
   switch (action.type) {
     case FETCH_WEATHER_PENDING:
       return { ...state, status: 'pending' };
