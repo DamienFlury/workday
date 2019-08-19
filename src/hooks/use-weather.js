@@ -22,6 +22,9 @@ const useWeather = () => {
   };
 
   useEffect(() => {
+    if (!navigator || !navigator.permissions) {
+      return;
+    }
     navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
       setPermissionState(permissionStatus.state);
       // eslint-disable-next-line no-param-reassign

@@ -11,7 +11,7 @@ import Settings from './components/Settings';
 
 
 function App() {
-  const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const prefersDarkTheme = window && window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : { matches: false };
   const [type, setType] = useState(prefersDarkTheme.matches ? 'dark' : 'light');
   const [showSettings, setShowSettings] = useState(false);
   prefersDarkTheme.onchange = () => {
