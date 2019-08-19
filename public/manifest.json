@@ -1,8 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Workday",
+  "name": "Workday",
   "manifest_version": 2,
-  "description": "This extension is a starting point to create a real Chrome extension",
+  "description": "An extension to track your workday",
   "version": "1.0.0",
   "chrome_url_overrides": {
     "newtab": "index.html"
