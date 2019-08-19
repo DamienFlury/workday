@@ -7,13 +7,13 @@ import Infos from './Infos';
 import WorkProgress from './WorkProgress';
 import useNow from '../../hooks/use-now';
 
-const BottomText = styled(Typography)`
-  display: inline-block !important;
+const BottomText = styled.div`
+  display: inline-block;
   width: auto;
-  margin-left: ${props => props.marginLeft} !important;
+  margin-left: ${props => props.marginLeft};
   transform: translateX(-50%);
-  margin-top: 2px !important;
-  margin-bottom: 20px !important;
+  margin-top: 2px;
+  margin-bottom: 20px;
 `;
 
 const Stats = ({
@@ -37,7 +37,7 @@ const Stats = ({
       </Box>
       <WorkProgress startTime={startTime} endTime={endTime} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} currentTime={now} />
       <BottomText marginLeft={`${percentage}%`}>
-        {now.format('HH:mm')}
+        <Typography>{now.format('HH:mm')}</Typography>
       </BottomText>
       <Infos startTime={startTime} endTime={endTime} currentTime={now} lunchStartTime={lunchStartTime} lunchEndTime={lunchEndTime} />
     </div>

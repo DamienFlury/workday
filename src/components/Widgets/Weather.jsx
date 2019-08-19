@@ -3,9 +3,9 @@ import { Typography, Button } from '@material-ui/core';
 import moment from 'moment';
 import styled from 'styled-components';
 import Widget from './Widget';
-import useWeather from '../hooks/use-weather';
-import useNow from '../hooks/use-now';
-import { humanizeWithMinutes } from './stats/time-helpers';
+import useWeather from '../../hooks/use-weather';
+import useNow from '../../hooks/use-now';
+import { humanizeWithMinutes } from '../stats/time-helpers';
 
 const StyledButton = styled(Button)`
   margin-top: 20px !important;
@@ -19,12 +19,13 @@ const Weather = ({ className }) => {
 
   return (
     <Widget className={className}>
-      <Typography variant="h4" gutterBottom>
+      <>
+        <Typography variant="h4" gutterBottom>
         Weather
-        {' '}
-        {weather.name && `in ${weather.name}`}
-      </Typography>
-      {isLoading || (
+          {' '}
+          {weather.name && `in ${weather.name}`}
+        </Typography>
+        {isLoading || (
         <div>
           <Typography>
 Temperature:
@@ -60,7 +61,8 @@ ago.
           </Typography>
           {permissionState === 'prompt' && <StyledButton onClick={() => { navigator.geolocation.getCurrentPosition(() => {}); }} variant="contained">Use my location</StyledButton>}
         </div>
-      )}
+        )}
+      </>
     </Widget>
   );
 };
