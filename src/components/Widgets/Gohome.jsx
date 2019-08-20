@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import moment from 'moment';
 import {
-  TimePicker,
+  KeyboardTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
@@ -36,14 +36,18 @@ const Gohome = ({ className }) => {
       <Typography variant="h4" gutterBottom>Workday</Typography>
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Box margin="20px">
-          <TimePicker
+          <KeyboardTimePicker
+            ampm={false}
+            variant="inline"
             label="Start"
             value={startTime}
             onChange={setStartTime}
           />
         </Box>
         <Box margin="20px">
-          <TimePicker
+          <KeyboardTimePicker
+            ampm={false}
+            variant="inline"
             label="Lunch Start"
             inputProps={{ step: 300 }}
             value={lunchStart}
@@ -51,7 +55,9 @@ const Gohome = ({ className }) => {
           />
         </Box>
         <Box margin="20px">
-          <TimePicker
+          <KeyboardTimePicker
+            ampm={false}
+            variant="inline"
             label="Lunch End"
             inputProps={{ step: 300 }}
             value={lunchEnd}
@@ -59,7 +65,9 @@ const Gohome = ({ className }) => {
           />
         </Box>
         <Box margin="20px">
-          <TimePicker
+          <KeyboardTimePicker
+            ampm={false}
+            variant="inline"
             label="End"
             inputProps={{ step: 300 }}
             value={endTime}
