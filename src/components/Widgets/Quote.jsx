@@ -19,7 +19,7 @@ const Quote = ({ className }) => {
     if (status === 'initial') {
       dispatch(fetchQuote());
     }
-  }, []);
+  }, [dispatch, status]);
   return (
     <Widget className={className}>
       {status === 'success' && (
