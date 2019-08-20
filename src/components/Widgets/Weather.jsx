@@ -14,7 +14,7 @@ const StyledButton = styled(Button)`
 const Weather = ({ className }) => {
   const now = useNow(10000);
   const {
-    weather, isLoading, permissionState,
+    weather, status, permissionState, onClick,
   } = useWeather();
 
   return (
@@ -25,7 +25,7 @@ const Weather = ({ className }) => {
           {' '}
           {weather.name && `in ${weather.name}`}
         </Typography>
-        {isLoading || (
+        {status === 'success' && (
         <div>
           <Typography>
 Temperature:
@@ -59,7 +59,15 @@ ago.
             {humanizeWithMinutes(moment.duration(moment(weather.sys.sunset, 'X') - now))}
 .
           </Typography>
-          {permissionState === 'prompt' && <StyledButton onClick={() => { navigator.geolocation.getCurrentPosition(() => {}); }} variant="contained">Use my location</StyledButton>}
+          {permissionState === 'prompt' && (
+          <StyledButton
+            onClick={onClick}
+            variant="contained"
+          >
+Use my location
+
+          </StyledButton>
+          )}
         </div>
         )}
       </>
