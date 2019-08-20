@@ -43,7 +43,7 @@ const useWeather = () => {
     } else {
       dispatch(fetchWeather(sanFrancisco));
     }
-  }, [permissionState]);
+  }, [permissionState, dispatch, status]);
   const weather = useSelector(state => state.weather.data);
 
   return {
