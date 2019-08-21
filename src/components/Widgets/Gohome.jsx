@@ -13,9 +13,9 @@ import Stats from '../stats/Stats';
 
 const Gohome = ({ className }) => {
   const [startTime, setStartTime] = useState(moment(localStorage.getItem('startTime') || '09:00', 'HH:mm'));
-  const [endTime, setEndTime] = useState(moment(localStorage.getItem('endTime') || '17:00', 'HH:mm'));
   const [lunchStart, setLunchStart] = useState(moment(localStorage.getItem('lunchStart') || '12:00', 'HH:mm'));
   const [lunchEnd, setLunchEnd] = useState(moment(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm'));
+  const [endTime, setEndTime] = useState(moment(localStorage.getItem('endTime') || '17:00', 'HH:mm'));
 
 
   useEffect(() => {
