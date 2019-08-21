@@ -12,23 +12,23 @@ import Widget from './Widget';
 import Stats from '../stats/Stats';
 
 const Gohome = ({ className }) => {
-  const [startTime, setStartTime] = useState(moment('09:00', 'HH:mm'));
-  const [endTime, setEndTime] = useState(moment('17:00', 'HH:mm'));
-  const [lunchStart, setLunchStart] = useState(moment('12:00', 'HH:mm'));
-  const [lunchEnd, setLunchEnd] = useState(moment('13:00', 'HH:mm'));
+  const [startTime, setStartTime] = useState(moment(localStorage.getItem('startTime') || '09:00', 'HH:mm'));
+  const [endTime, setEndTime] = useState(moment(localStorage.getItem('endTime') || '17:00', 'HH:mm'));
+  const [lunchStart, setLunchStart] = useState(moment(localStorage.getItem('lunchStart') || '12:00', 'HH:mm'));
+  const [lunchEnd, setLunchEnd] = useState(moment(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm'));
 
 
   useEffect(() => {
-    localStorage.setItem('startTime', startTime);
+    localStorage.setItem('startTime', startTime.format('HH:mm'));
   }, [startTime]);
   useEffect(() => {
-    localStorage.setItem('endTime', endTime);
+    localStorage.setItem('endTime', endTime.format('HH:mm'));
   }, [endTime]);
   useEffect(() => {
-    localStorage.setItem('lunchStart', lunchStart);
+    localStorage.setItem('lunchStart', lunchStart.format('HH:mm'));
   }, [lunchStart]);
   useEffect(() => {
-    localStorage.setItem('lunchEnd', lunchEnd);
+    localStorage.setItem('lunchEnd', lunchEnd.format('HH:mm'));
   }, [lunchEnd]);
 
   return (
