@@ -31,6 +31,7 @@ navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => 
     const { latitude, longitude } = sanFrancisco;
     store.dispatch(fetchWeather(latitude, longitude));
   }
+  // eslint-disable-next-line no-param-reassign
   permissionStatus.onchange = (status) => {
     store.dispatch({ type: CHANGE_PERMISSION, permission: status.target.state });
     if (status.target.state === 'granted') {
@@ -38,6 +39,9 @@ navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => 
         const { latitude, longitude } = pos.coords;
         store.dispatch(fetchWeather(latitude, longitude));
       });
+    } else {
+      const { latitude, longitude } = sanFrancisco;
+      store.dispatch(fetchWeather(latitude, longitude));
     }
   };
 });
