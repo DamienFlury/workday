@@ -14,36 +14,51 @@ const StyledForm = styled.form`
   margin-top: 20px;
 `;
 
+const StyledFormControl = styled(FormControl)`
+  width: 200px;
+`;
+
 const Settings = () => {
   const type = useSelector(state => state.settings.theme.type);
-  const [theme, setTheme] = useState({
-    type,
-  });
-
+  const currentTimeFormat = useSelector(state => state.settings.timeFormat);
+  const [themeType, setThemeType] = useState(type);
+  const [timeFormat, setTimeFormat] = useState(currentTimeFormat);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(saveSettings({ theme }));
+    dispatch(saveSettings({ theme: { type: themeType }, timeFormat }));
   };
 
   return (
     <StyledPaper>
       <Typography variant="h4">Settings</Typography>
       <StyledForm onSubmit={handleSubmit}>
-        <FormControl>
+        <StyledFormControl>
           <InputLabel>Theme</InputLabel>
           <Select
-            value={theme.type}
-            onChange={e => setTheme(prev => ({ ...prev, type: e.target.value }))}
+            value={themeType}
+            onChange={e => setThemeType(e.target.value)}
           >
+            <MenuItem value="default">Default</MenuItem>
             <MenuItem value="dark">Dark</MenuItem>
             <MenuItem value="light">Light</MenuItem>
           </Select>
-          <Box marginTop="20px">
-            <Button type="submit" variant="contained">Save</Button>
-          </Box>
-        </FormControl>
+        </StyledFormControl>
+        <StyledFormControl>
+          <InputLabel>Time format</InputLabel>
+          <Select
+            value={timeFormat}
+            onChange={e => setTimeFormat(e.target.value)}
+          >
+            <MenuItem value="default">Default</MenuItem>
+            <MenuItem value="24h">24h</MenuItem>
+            <MenuItem value="ampm">AM/PM</MenuItem>
+          </Select>
+        </StyledFormControl>
+        <Box marginTop="20px">
+          <Button type="submit" variant="contained">Save</Button>
+        </Box>
       </StyledForm>
     </StyledPaper>
   );

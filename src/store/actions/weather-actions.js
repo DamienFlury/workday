@@ -1,8 +1,10 @@
+
 export const FETCH_WEATHER_PENDING = 'FETCH_WEATHER_PENDING';
 export const FETCH_WEATHER_FULFILLED = 'FETCH_WEATHER_FULFILLED';
 export const FETCH_WEATHER_REJECTED = 'FETCH_WEATHER_REJECTED';
+export const CHANGE_PERMISSION = 'CHANGE_PERMISSION';
 
-const fetchWeather = ({ lat, lon }) => async (dispatch) => {
+const fetchWeather = (lat, lon) => async (dispatch) => {
   dispatch({ type: FETCH_WEATHER_PENDING });
   try {
     const response = await fetch(

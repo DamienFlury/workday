@@ -2,8 +2,8 @@ import React from 'react';
 import { Typography, Button } from '@material-ui/core';
 import moment from 'moment';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Widget from './Widget';
-import useWeather from '../../hooks/use-weather';
 import useNow from '../../hooks/use-now';
 import { humanizeWithMinutes } from '../stats/time-helpers';
 
@@ -13,9 +13,9 @@ const StyledButton = styled(Button)`
 
 const Weather = ({ className }) => {
   const now = useNow(10000);
-  const {
-    weather, status, permissionState, onClick,
-  } = useWeather();
+  const weather = useSelector(state => state.weather.data);
+  const status = useSelector(state => state.weather.status);
+  const permission = useSelector(state => state.weather.permission);
 
   return (
     <Widget className={className}>
@@ -59,15 +59,17 @@ ago.
             {humanizeWithMinutes(moment.duration(moment(weather.sys.sunset, 'X') - now))}
 .
           </Typography>
-          {permissionState === 'prompt' && (
+          {permission === 'granted'
+          || (
           <StyledButton
-            onClick={onClick}
+            onClick={() => navigator.geolocation.getCurrentPosition(() => {})}
             variant="contained"
           >
 Use my location
 
           </StyledButton>
-          )}
+          )
+          }
         </div>
         )}
       </>

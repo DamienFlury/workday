@@ -18,7 +18,7 @@ function App() {
 
   const theme = createMuiTheme({
     palette: {
-      type,
+      type: type === 'default' ? window && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' : type,
       primary: blue,
     },
   });

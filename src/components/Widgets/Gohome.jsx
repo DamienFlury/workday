@@ -8,27 +8,33 @@ import {
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
+import { useSelector } from 'react-redux';
 import Widget from './Widget';
 import Stats from '../stats/Stats';
 
 const Gohome = ({ className }) => {
-  const [startTime, setStartTime] = useState(moment('09:00', 'HH:mm'));
-  const [endTime, setEndTime] = useState(moment('17:00', 'HH:mm'));
-  const [lunchStart, setLunchStart] = useState(moment('12:00', 'HH:mm'));
-  const [lunchEnd, setLunchEnd] = useState(moment('13:00', 'HH:mm'));
+  const [startTime, setStartTime] = useState(moment(localStorage.getItem('startTime') || '09:00', 'HH:mm'));
+  const [lunchStart, setLunchStart] = useState(moment(localStorage.getItem('lunchStart') || '12:00', 'HH:mm'));
+  const [lunchEnd, setLunchEnd] = useState(moment(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm'));
+  const [endTime, setEndTime] = useState(moment(localStorage.getItem('endTime') || '17:00', 'HH:mm'));
+
+
+  const timeFormat = useSelector(state => state.settings.timeFormat);
+
+  const ampm = timeFormat === 'ampm' ? true : timeFormat === '24h' ? false : undefined;
 
 
   useEffect(() => {
-    localStorage.setItem('startTime', startTime);
+    localStorage.setItem('startTime', startTime.format('HH:mm'));
   }, [startTime]);
   useEffect(() => {
-    localStorage.setItem('endTime', endTime);
+    localStorage.setItem('endTime', endTime.format('HH:mm'));
   }, [endTime]);
   useEffect(() => {
-    localStorage.setItem('lunchStart', lunchStart);
+    localStorage.setItem('lunchStart', lunchStart.format('HH:mm'));
   }, [lunchStart]);
   useEffect(() => {
-    localStorage.setItem('lunchEnd', lunchEnd);
+    localStorage.setItem('lunchEnd', lunchEnd.format('HH:mm'));
   }, [lunchEnd]);
 
   return (
@@ -37,7 +43,7 @@ const Gohome = ({ className }) => {
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Box margin="20px">
           <KeyboardTimePicker
-            ampm={false}
+            ampm={ampm}
             variant="inline"
             label="Start"
             value={startTime}
@@ -46,7 +52,7 @@ const Gohome = ({ className }) => {
         </Box>
         <Box margin="20px">
           <KeyboardTimePicker
-            ampm={false}
+            ampm={ampm}
             variant="inline"
             label="Lunch Start"
             inputProps={{ step: 300 }}
@@ -56,7 +62,7 @@ const Gohome = ({ className }) => {
         </Box>
         <Box margin="20px">
           <KeyboardTimePicker
-            ampm={false}
+            ampm={ampm}
             variant="inline"
             label="Lunch End"
             inputProps={{ step: 300 }}
@@ -66,7 +72,7 @@ const Gohome = ({ className }) => {
         </Box>
         <Box margin="20px">
           <KeyboardTimePicker
-            ampm={false}
+            ampm={ampm}
             variant="inline"
             label="End"
             inputProps={{ step: 300 }}
