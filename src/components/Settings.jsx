@@ -21,15 +21,13 @@ const StyledFormControl = styled(FormControl)`
 const Settings = () => {
   const type = useSelector(state => state.settings.theme.type);
   const currentTimeFormat = useSelector(state => state.settings.timeFormat);
-  const [theme, setTheme] = useState({
-    type,
-  });
+  const [themeType, setThemeType] = useState(type);
   const [timeFormat, setTimeFormat] = useState(currentTimeFormat);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(saveSettings({ theme, timeFormat }));
+    dispatch(saveSettings({ theme: { type: themeType }, timeFormat }));
   };
 
   return (
@@ -39,9 +37,10 @@ const Settings = () => {
         <StyledFormControl>
           <InputLabel>Theme</InputLabel>
           <Select
-            value={theme.type}
-            onChange={e => setTheme(prev => ({ ...prev, type: e.target.value }))}
+            value={themeType}
+            onChange={e => setThemeType(e.target.value)}
           >
+            <MenuItem value="default">Default</MenuItem>
             <MenuItem value="dark">Dark</MenuItem>
             <MenuItem value="light">Light</MenuItem>
           </Select>
