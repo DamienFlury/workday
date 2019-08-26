@@ -44,7 +44,6 @@ const Gohome = ({ className }) => {
         <Box margin="20px">
           <KeyboardTimePicker
             ampm={ampm}
-            variant="inline"
             label="Start"
             value={startTime}
             onChange={setStartTime}
@@ -53,7 +52,6 @@ const Gohome = ({ className }) => {
         <Box margin="20px">
           <KeyboardTimePicker
             ampm={ampm}
-            variant="inline"
             label="Lunch Start"
             inputProps={{ step: 300 }}
             value={lunchStart}
@@ -63,7 +61,6 @@ const Gohome = ({ className }) => {
         <Box margin="20px">
           <KeyboardTimePicker
             ampm={ampm}
-            variant="inline"
             label="Lunch End"
             inputProps={{ step: 300 }}
             value={lunchEnd}
@@ -73,7 +70,6 @@ const Gohome = ({ className }) => {
         <Box margin="20px">
           <KeyboardTimePicker
             ampm={ampm}
-            variant="inline"
             label="End"
             inputProps={{ step: 300 }}
             value={endTime}
