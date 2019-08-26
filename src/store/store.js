@@ -45,6 +45,9 @@ if (navigator.permissions) {
       }
     };
   });
+} else {
+  const { latitude, longitude } = sanFrancisco;
+  store.dispatch(fetchWeather(latitude, longitude));
 }
 
 export default store;
