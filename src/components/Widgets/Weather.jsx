@@ -8,7 +8,7 @@ import useNow from '../../hooks/use-now';
 import { humanizeWithMinutes } from '../stats/time-helpers';
 
 const StyledButton = styled(Button)`
-  margin-top: 20px !important;
+  margin-top: 20px;
 `;
 
 const Weather = ({ className }) => {
