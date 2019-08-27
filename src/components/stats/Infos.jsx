@@ -24,18 +24,20 @@ Progress (workday):
 %
     </Typography> */}
     <Typography>
-You started working
-      {' '}
-      {humanizeWithMinutes(moment.duration(currentTime - startTime))}
-      {' '}
-ago.
+      {currentTime < startTime
+        ? `You will start working in ${humanizeWithMinutes(moment.duration(currentTime - startTime))}`
+        : `You started working ${humanizeWithMinutes(moment.duration(currentTime - startTime))} ago`}
     </Typography>
+    {currentTime < endTime
+    && (
     <Typography>
 You can leave in
       {' '}
       {humanizeWithMinutes(moment.duration(endTime - currentTime))}
 .
     </Typography>
+    )
+      }
     <Typography variant="h6">
       {currentTime > lunchStartTime && currentTime < lunchEndTime
         ? 'Lunch Time 😄' : currentTime > endTime ? 'Time to go home 👋' : 'Working 💼'}

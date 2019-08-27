@@ -6,6 +6,7 @@ import {
 import { blue } from '@material-ui/core/colors';
 import { ThemeProvider } from 'styled-components';
 import { useSelector } from 'react-redux';
+import { StylesProvider } from '@material-ui/styles';
 import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
@@ -24,16 +25,18 @@ function App() {
   });
 
   return (
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <>
-          <CssBaseline />
-          <NavBar onClick={() => setShowSettings(prev => !prev)} />
-          {showSettings ? <Settings />
-            : <Widgets />}
-        </>
-      </ThemeProvider>
-    </MuiThemeProvider>
+    <StylesProvider injectFirst>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <>
+            <CssBaseline />
+            <NavBar onClick={() => setShowSettings(prev => !prev)} />
+            {showSettings ? <Settings />
+              : <Widgets />}
+          </>
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </StylesProvider>
   );
 }
 
