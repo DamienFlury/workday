@@ -26,7 +26,7 @@ function App() {
         setThemeType(prefersDarkTheme.matches ? 'dark' : 'light');
       };
     }
-  }, []);
+  }, [type]);
 
   const theme = createMuiTheme({
     palette: {
