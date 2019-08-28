@@ -11,7 +11,7 @@ const Time = ({ className }) => {
 
   return (
     <Widget className={className}>
-      <Typography variant="h5">{formatTime(now)}</Typography>
+      <Typography variant="h4" gutterBottom>{formatTime(now)}</Typography>
       <Typography>{now.format('LL')}</Typography>
     </Widget>
   );
