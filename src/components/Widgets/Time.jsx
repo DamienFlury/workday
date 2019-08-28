@@ -2,14 +2,17 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import Widget from './Widget';
 import useNow from '../../hooks/use-now';
+import useFormatter from '../../hooks/use-formatter';
 
 const Time = ({ className }) => {
   const now = useNow(1000);
 
+  const { formatTime } = useFormatter();
+
   return (
     <Widget className={className}>
-      <Typography variant="h5">{now.format('HH:mm')}</Typography>
-      <Typography>{now.format('DD. MMMM YYYY')}</Typography>
+      <Typography variant="h5">{formatTime(now)}</Typography>
+      <Typography>{now.format('LL')}</Typography>
     </Widget>
   );
 };
