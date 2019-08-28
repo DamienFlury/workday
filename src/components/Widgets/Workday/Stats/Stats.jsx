@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import { Typography, Box } from '@material-ui/core';
 import styled from 'styled-components';
-import { calculatePercentage } from './time-helpers';
+import { calculatePercentage } from '../../../../utils/time-helpers';
 import Infos from './Infos';
 import WorkProgress from './WorkProgress';
-import useNow from '../../hooks/use-now';
+import useNow from '../../../../hooks/use-now';
+import useFormatter from '../../../../hooks/use-formatter';
 
 const BottomText = styled.div`
   display: inline-block;
@@ -23,15 +24,17 @@ const Stats = ({
   const percentage = useMemo(() => calculatePercentage(end - start, now - start),
     [start, now, end]);
 
+  const { formatTime } = useFormatter();
+
   return (
     <div>
       <Box display="flex">
-        <Typography style={{ flex: 1 }}>{start.format('HH:mm')}</Typography>
-        <Typography>{end.format('HH:mm')}</Typography>
+        <Typography style={{ flex: 1 }}>{formatTime(start)}</Typography>
+        <Typography>{formatTime(end)}</Typography>
       </Box>
       <WorkProgress startTime={start} endTime={end} lunchStartTime={lunchStart} lunchEndTime={lunchEnd} currentTime={now} />
       <BottomText marginLeft={`${percentage}%`}>
-        <Typography>{now.format('HH:mm')}</Typography>
+        <Typography>{formatTime(now)}</Typography>
       </BottomText>
       <Infos startTime={start} endTime={end} currentTime={now} lunchStartTime={lunchStart} lunchEndTime={lunchEnd} />
     </div>

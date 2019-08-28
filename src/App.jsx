@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import {
   MuiThemeProvider, createMuiTheme, CssBaseline,
@@ -16,10 +16,21 @@ function App() {
   const [showSettings, setShowSettings] = useState(false);
 
   const type = useSelector(state => state.settings.theme.type);
+  const [themeType, setThemeType] = useState(type);
+
+  useEffect(() => {
+    if (type === 'default' && window && window.matchMedia) {
+      const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+      setThemeType(prefersDarkTheme.matches ? 'dark' : 'light');
+      prefersDarkTheme.onchange = () => {
+        setThemeType(prefersDarkTheme.matches ? 'dark' : 'light');
+      };
+    }
+  }, [type]);
 
   const theme = createMuiTheme({
     palette: {
-      type: type === 'default' ? window && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' : type,
+      type: themeType === 'default' ? 'dark' : themeType,
       primary: blue,
     },
   });
