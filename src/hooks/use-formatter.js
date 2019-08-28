@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 const useFormatter = () => {
   const timeFormat = useSelector(state => state.settings.timeFormat);
 
-  console.log(timeFormat);
-
   const formatTime = (date) => {
     switch (timeFormat) {
       case 'ampm':
