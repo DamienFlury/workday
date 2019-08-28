@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinearProgress, Box } from '@material-ui/core';
-import { calculatePercentage } from './time-helpers';
+import { calculatePercentage } from '../../../../utils/time-helpers';
 
 
 const WorkProgress = ({

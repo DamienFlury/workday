@@ -9,10 +9,10 @@ import {
 } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import { useSelector } from 'react-redux';
-import Widget from './Widget';
-import Stats from '../stats/Stats';
+import Widget from '../Widget';
+import Stats from './Stats/Stats';
 
-const Gohome = ({ className }) => {
+const Workday = ({ className }) => {
   const [startTime, setStartTime] = useState(moment(localStorage.getItem('startTime') || '09:00', 'HH:mm'));
   const [lunchStart, setLunchStart] = useState(moment(localStorage.getItem('lunchStart') || '12:00', 'HH:mm'));
   const [lunchEnd, setLunchEnd] = useState(moment(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm'));
@@ -84,4 +84,4 @@ const Gohome = ({ className }) => {
   );
 };
 
-export default Gohome;
+export default Workday;

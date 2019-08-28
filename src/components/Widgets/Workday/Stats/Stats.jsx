@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import { Typography, Box } from '@material-ui/core';
 import styled from 'styled-components';
-import { calculatePercentage } from './time-helpers';
+import { calculatePercentage } from '../../../../utils/time-helpers';
 import Infos from './Infos';
 import WorkProgress from './WorkProgress';
-import useNow from '../../hooks/use-now';
-import useFormatter from '../../hooks/use-formatter';
+import useNow from '../../../../hooks/use-now';
+import useFormatter from '../../../../hooks/use-formatter';
 
 const BottomText = styled.div`
   display: inline-block;

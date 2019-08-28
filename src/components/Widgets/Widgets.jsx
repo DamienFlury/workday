@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Gohome from './Gohome';
+import Workday from './Workday/Workday';
 import Weather from './Weather';
 import Quote from './Quote';
 import Time from './Time';
@@ -22,7 +22,7 @@ const Grid = styled.div`
   }
 `;
 
-const StyledGohome = styled(Gohome)`
+const StyledGohome = styled(Workday)`
   grid-area: gohome;
 `;
 const StyledTime = styled(Time)`

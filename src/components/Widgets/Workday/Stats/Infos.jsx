@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import moment from 'moment';
 import {
   calculatePercentage, humanizeWithMinutes,
-} from './time-helpers';
+} from '../../../../utils/time-helpers';
 
 moment.relativeTimeThreshold('h', 60);
 

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Widget from './Widget';
 import useNow from '../../hooks/use-now';
-import { humanizeWithMinutes } from '../stats/time-helpers';
+import { humanizeWithMinutes } from '../../utils/time-helpers';
 
 const StyledButton = styled(Button)`
   margin-top: 20px;
