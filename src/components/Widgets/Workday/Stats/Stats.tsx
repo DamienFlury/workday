@@ -6,8 +6,9 @@ import Infos from './Infos';
 import WorkProgress from './WorkProgress';
 import useNow from '../../../../hooks/use-now';
 import useFormatter from '../../../../hooks/use-formatter';
+import moment, { Moment } from 'moment';
 
-const BottomText = styled.div`
+const BottomText = styled.div<{ marginLeft: string}>`
   display: inline-block;
   width: auto;
   margin-left: ${props => props.marginLeft};
@@ -16,12 +17,19 @@ const BottomText = styled.div`
   margin-bottom: 20px;
 `;
 
-const Stats = ({
+interface IProps {
+  start: Moment,
+  end: Moment,
+  lunchStart: Moment,
+  lunchEnd: Moment,
+}
+
+const Stats: React.FC<IProps> = ({
   start, end, lunchStart, lunchEnd,
 }) => {
   const now = useNow(1000);
 
-  const percentage = useMemo(() => calculatePercentage(end - start, now - start),
+  const percentage = useMemo(() => calculatePercentage(end.diff(start), now.diff(start)),
     [start, now, end]);
 
   const { formatTime } = useFormatter();

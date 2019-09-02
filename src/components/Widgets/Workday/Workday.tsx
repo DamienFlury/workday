@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Box, Typography,
 } from '@material-ui/core';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import {
   KeyboardTimePicker,
   MuiPickersUtilsProvider,
@@ -11,15 +11,20 @@ import MomentUtils from '@date-io/moment';
 import { useSelector } from 'react-redux';
 import Widget from '../Widget';
 import Stats from './Stats/Stats';
+import { StoreState } from '../../../store/store';
 
-const Workday = ({ className }) => {
-  const [startTime, setStartTime] = useState(moment(localStorage.getItem('startTime') || '09:00', 'HH:mm'));
-  const [lunchStart, setLunchStart] = useState(moment(localStorage.getItem('lunchStart') || '12:00', 'HH:mm'));
-  const [lunchEnd, setLunchEnd] = useState(moment(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm'));
-  const [endTime, setEndTime] = useState(moment(localStorage.getItem('endTime') || '17:00', 'HH:mm'));
+interface IProps {
+  className?: string,
+}
+
+const Workday: React.FC<IProps> = ({ className }) => {
+  const [startTime, setStartTime] = useState<Moment>(moment(localStorage.getItem('startTime') || '09:00', 'HH:mm'));
+  const [lunchStart, setLunchStart] = useState<Moment>(moment(localStorage.getItem('lunchStart') || '12:00', 'HH:mm'));
+  const [lunchEnd, setLunchEnd] = useState<Moment>(moment(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm'));
+  const [endTime, setEndTime] = useState<Moment>(moment(localStorage.getItem('endTime') || '17:00', 'HH:mm'));
 
 
-  const timeFormat = useSelector(state => state.settings.timeFormat);
+  const timeFormat = useSelector((state: StoreState) => state.settings.timeFormat);
 
   const ampm = timeFormat === 'ampm' ? true : timeFormat === '24h' ? false : undefined;
 
@@ -46,7 +51,7 @@ const Workday = ({ className }) => {
             ampm={ampm}
             label="Start"
             value={startTime}
-            onChange={setStartTime}
+            onChange={t => setStartTime(t || moment())}
           />
         </Box>
         <Box margin="20px">
@@ -55,7 +60,7 @@ const Workday = ({ className }) => {
             label="Lunch Start"
             inputProps={{ step: 300 }}
             value={lunchStart}
-            onChange={setLunchStart}
+            onChange={t => setLunchStart(t || moment())}
           />
         </Box>
         <Box margin="20px">
@@ -64,7 +69,7 @@ const Workday = ({ className }) => {
             label="Lunch End"
             inputProps={{ step: 300 }}
             value={lunchEnd}
-            onChange={setLunchEnd}
+            onChange={t => setLunchEnd(t || moment())}
           />
         </Box>
         <Box margin="20px">
@@ -73,7 +78,7 @@ const Workday = ({ className }) => {
             label="End"
             inputProps={{ step: 300 }}
             value={endTime}
-            onChange={setEndTime}
+            onChange={t => setEndTime(t || moment())}
           />
         </Box>
       </MuiPickersUtilsProvider>

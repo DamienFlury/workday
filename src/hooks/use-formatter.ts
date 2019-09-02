@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
+import { Moment } from 'moment';
+import { StoreState } from '../store/store';
 
 const useFormatter = () => {
-  const timeFormat = useSelector(state => state.settings.timeFormat);
+  const timeFormat: string = useSelector((state: StoreState) => state.settings.timeFormat);
 
-  const formatTime = (date) => {
+  const formatTime = (date: Moment) => {
     switch (timeFormat) {
       case 'ampm':
         return date.format('h:mm A');
