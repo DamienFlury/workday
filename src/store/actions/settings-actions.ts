@@ -1,5 +1,4 @@
 import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
 
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 

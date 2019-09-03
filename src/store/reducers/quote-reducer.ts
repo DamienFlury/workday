@@ -1,4 +1,4 @@
-import { FETCH_QUOTE_PENDING, FETCH_QUOTE_FULFILLED, FETCH_QUOTE_REJECTED, QuoteAction, Quote, QuoteState } from '../actions/quote-actions';
+import { FETCH_QUOTE_PENDING, FETCH_QUOTE_FULFILLED, FETCH_QUOTE_REJECTED, QuoteAction, QuoteState } from '../actions/quote-actions';
 
 
 const initialState: QuoteState  = { status: 'initial', data: { quote: 'lol', author: 'xD'} };

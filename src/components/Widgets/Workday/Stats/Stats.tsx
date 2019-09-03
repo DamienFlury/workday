@@ -6,7 +6,7 @@ import Infos from './Infos';
 import WorkProgress from './WorkProgress';
 import useNow from '../../../../hooks/use-now';
 import useFormatter from '../../../../hooks/use-formatter';
-import moment, { Moment } from 'moment';
+import { Moment } from 'moment';
 
 const BottomText = styled.div<{ marginLeft: string}>`
   display: inline-block;

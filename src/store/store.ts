@@ -33,29 +33,33 @@ if (navigator.permissions) {
     if (permissionStatus.state === 'granted') {
       navigator.geolocation.getCurrentPosition((pos) => {
         const { latitude, longitude } = pos.coords;
-        store.dispatch(fetchWeather(latitude, longitude));
+        store.dispatch<any>(fetchWeather(latitude, longitude));
       });
     } else {
       const { latitude, longitude } = sanFrancisco;
-      store.dispatch(fetchWeather(latitude, longitude));
+      store.dispatch<any>(fetchWeather(latitude, longitude));
     }
     // eslint-disable-next-line no-param-reassign
     permissionStatus.onchange = (status) => {
-      store.dispatch({ type: CHANGE_PERMISSION, permission: status.target.state });
-      if (status.target.state === 'granted') {
+      if(!status || !status.target) {
+        return;
+      }
+      
+      store.dispatch({ type: CHANGE_PERMISSION, permission: (status.target as any).state });
+      if ((status.target as any).state === 'granted') {
         navigator.geolocation.getCurrentPosition((pos) => {
           const { latitude, longitude } = pos.coords;
-          store.dispatch(fetchWeather(latitude, longitude));
+          store.dispatch<any>(fetchWeather(latitude, longitude));
         });
       } else {
         const { latitude, longitude } = sanFrancisco;
-        store.dispatch(fetchWeather(latitude, longitude));
+        store.dispatch<any>(fetchWeather(latitude, longitude));
       }
     };
   });
 } else {
   const { latitude, longitude } = sanFrancisco;
-  store.dispatch(fetchWeather(latitude, longitude));
+  store.dispatch<any>(fetchWeather(latitude, longitude));
 }
 
 export default store;

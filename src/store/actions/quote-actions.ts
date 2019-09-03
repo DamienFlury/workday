@@ -1,4 +1,3 @@
-import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
 export const FETCH_QUOTE_PENDING = 'FETCH_QUOTE_PENDING';

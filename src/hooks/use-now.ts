@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 
 const useNow = (updateTime: number) => {
   const [now, setNow] = useState(moment());
