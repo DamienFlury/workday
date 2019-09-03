@@ -5,6 +5,7 @@ import {
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSettings } from '../store/actions/settings-actions';
+import { StoreState } from '../store/store';
 
 const StyledPaper = styled(Paper)`
   padding: 40px;
@@ -19,8 +20,8 @@ const StyledFormControl = styled(FormControl)`
 `;
 
 const Settings = () => {
-  const type = useSelector(state => state.settings.theme.type);
-  const timeFormat = useSelector(state => state.settings.timeFormat);
+  const type = useSelector((state: StoreState) => state.settings.theme.type);
+  const timeFormat = useSelector((state: StoreState) => state.settings.timeFormat);
   const dispatch = useDispatch();
 
   return (
@@ -32,7 +33,7 @@ const Settings = () => {
           <Select
             value={type}
             onChange={(e) => {
-              dispatch(saveSettings({ theme: { type: e.target.value }, timeFormat }));
+              dispatch(saveSettings({ theme: { type: e.target.value as string }, timeFormat }));
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -45,7 +46,7 @@ const Settings = () => {
           <Select
             value={timeFormat}
             onChange={(e) => {
-              dispatch(saveSettings({ theme: { type }, timeFormat: e.target.value }));
+              dispatch(saveSettings({ theme: { type }, timeFormat: e.target.value as string }));
             }}
           >
             <MenuItem value="default">Default</MenuItem>

@@ -5,14 +5,22 @@ import thunk from 'redux-thunk';
 import settings from './reducers/settings-reducer';
 import weather from './reducers/weather-reducer';
 import quote from './reducers/quote-reducer';
-import fetchWeather, { CHANGE_PERMISSION } from './actions/weather-actions';
+import fetchWeather, { CHANGE_PERMISSION, WeatherState } from './actions/weather-actions';
+import { SettingsState } from './actions/settings-actions';
+import { QuoteState } from './actions/quote-actions';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 
+export interface StoreState {
+  quote: QuoteState,
+  settings: SettingsState,
+  weather: WeatherState,
+}
 const rootReducer = combineReducers({
+  quote,
   settings,
   weather,
-  quote,
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
@@ -25,29 +33,33 @@ if (navigator.permissions) {
     if (permissionStatus.state === 'granted') {
       navigator.geolocation.getCurrentPosition((pos) => {
         const { latitude, longitude } = pos.coords;
-        store.dispatch(fetchWeather(latitude, longitude));
+        store.dispatch<any>(fetchWeather(latitude, longitude));
       });
     } else {
       const { latitude, longitude } = sanFrancisco;
-      store.dispatch(fetchWeather(latitude, longitude));
+      store.dispatch<any>(fetchWeather(latitude, longitude));
     }
     // eslint-disable-next-line no-param-reassign
     permissionStatus.onchange = (status) => {
-      store.dispatch({ type: CHANGE_PERMISSION, permission: status.target.state });
-      if (status.target.state === 'granted') {
+      if(!status || !status.target) {
+        return;
+      }
+      
+      store.dispatch({ type: CHANGE_PERMISSION, permission: (status.target as any).state });
+      if ((status.target as any).state === 'granted') {
         navigator.geolocation.getCurrentPosition((pos) => {
           const { latitude, longitude } = pos.coords;
-          store.dispatch(fetchWeather(latitude, longitude));
+          store.dispatch<any>(fetchWeather(latitude, longitude));
         });
       } else {
         const { latitude, longitude } = sanFrancisco;
-        store.dispatch(fetchWeather(latitude, longitude));
+        store.dispatch<any>(fetchWeather(latitude, longitude));
       }
     };
   });
 } else {
   const { latitude, longitude } = sanFrancisco;
-  store.dispatch(fetchWeather(latitude, longitude));
+  store.dispatch<any>(fetchWeather(latitude, longitude));
 }
 
 export default store;
