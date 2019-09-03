@@ -21,7 +21,6 @@ const StyledFormControl = styled(FormControl)`
 
 const Settings = () => {
   const type = useSelector((state: StoreState) => state.settings.theme.type);
-  console.log(type);
   const timeFormat = useSelector((state: StoreState) => state.settings.timeFormat);
   const dispatch = useDispatch();
 

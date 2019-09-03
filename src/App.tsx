@@ -21,18 +21,16 @@ const App: React.FC = () => {
   const type = useSelector((state: StoreState) => state.settings.theme.type as ThemeType);
 
   let themeType = type;
-  
-  useEffect(() => {
-    if (!type && window && window.matchMedia) {
-      console.log('o.O')
-      const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+  if (type === 'default' && window && window.matchMedia) {
+    const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    themeType = (prefersDarkTheme.matches ? 'dark' : 'light');
+    prefersDarkTheme.onchange = () => {
       themeType = (prefersDarkTheme.matches ? 'dark' : 'light');
-      prefersDarkTheme.onchange = () => {
-        themeType = (prefersDarkTheme.matches ? 'dark' : 'light');
-      };
-    }
-  }, [type]);
-  
+    };
+  }
+
+
   const theme = createMuiTheme({
     palette: {
       type: themeType === 'default' ? undefined : themeType,
