@@ -2,6 +2,9 @@ import { ThunkDispatch } from "redux-thunk";
 
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 
+export type ThemeType = 'light' | 'dark' | 'default';
+
+
 export interface SettingsAction {
   type: string,
   settings: SettingsState,
@@ -9,7 +12,7 @@ export interface SettingsAction {
 
 export interface SettingsState {
   theme: {
-    type: string,
+    type: ThemeType,
   },
   timeFormat: string,
 }

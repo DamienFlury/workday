@@ -6,7 +6,7 @@ import { SAVE_SETTINGS, SettingsState, SettingsAction } from '../actions/setting
 
 
 
-const stateFromLocalStorage: SettingsState = JSON.parse(localStorage.getItem('settings') || '');
+const stateFromLocalStorage: SettingsState = JSON.parse(localStorage.getItem('settings') as string);
 
 const initialState: SettingsState = {
   theme: {

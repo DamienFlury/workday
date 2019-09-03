@@ -10,27 +10,32 @@ import { StylesProvider } from '@material-ui/styles';
 import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
+import { StoreState } from './store/store';
+import { ThemeType } from './store/actions/settings-actions';
 
 
-function App() {
+
+const App: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
 
-  const type = useSelector(state => state.settings.theme.type);
-  const [themeType, setThemeType] = useState(type);
+  const type = useSelector((state: StoreState) => state.settings.theme.type as ThemeType);
 
+  let themeType = type;
+  
   useEffect(() => {
-    if (type === 'default' && window && window.matchMedia) {
+    if (!type && window && window.matchMedia) {
+      console.log('o.O')
       const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)');
-      setThemeType(prefersDarkTheme.matches ? 'dark' : 'light');
+      themeType = (prefersDarkTheme.matches ? 'dark' : 'light');
       prefersDarkTheme.onchange = () => {
-        setThemeType(prefersDarkTheme.matches ? 'dark' : 'light');
+        themeType = (prefersDarkTheme.matches ? 'dark' : 'light');
       };
     }
   }, [type]);
-
+  
   const theme = createMuiTheme({
     palette: {
-      type: themeType === 'default' ? 'dark' : themeType,
+      type: themeType === 'default' ? undefined : themeType,
       primary: blue,
     },
   });

@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveSettings } from '../store/actions/settings-actions';
+import { saveSettings, ThemeType } from '../store/actions/settings-actions';
 import { StoreState } from '../store/store';
 
 const StyledPaper = styled(Paper)`
@@ -21,6 +21,7 @@ const StyledFormControl = styled(FormControl)`
 
 const Settings = () => {
   const type = useSelector((state: StoreState) => state.settings.theme.type);
+  console.log(type);
   const timeFormat = useSelector((state: StoreState) => state.settings.timeFormat);
   const dispatch = useDispatch();
 
@@ -33,7 +34,7 @@ const Settings = () => {
           <Select
             value={type}
             onChange={(e) => {
-              dispatch(saveSettings({ theme: { type: e.target.value as string }, timeFormat }));
+              dispatch(saveSettings({ theme: { type: e.target.value as ThemeType }, timeFormat }));
             }}
           >
             <MenuItem value="default">Default</MenuItem>
