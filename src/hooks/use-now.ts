@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 
-const useNow = (updateTime) => {
+const useNow = (updateTime: number) => {
   const [now, setNow] = useState(moment());
   useEffect(() => {
     const timeout = setTimeout(() => {
