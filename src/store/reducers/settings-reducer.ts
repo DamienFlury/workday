@@ -13,6 +13,7 @@ const initialState: SettingsState = {
     type: 'default',
   },
   timeFormat: 'default',
+  background: 'default',
 };
 
 

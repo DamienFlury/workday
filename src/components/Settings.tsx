@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveSettings, ThemeType } from '../store/actions/settings-actions';
+import { saveSettings, ThemeType, BackgroundType } from '../store/actions/settings-actions';
 import { StoreState } from '../store/store';
 
 const StyledPaper = styled(Paper)`
@@ -22,6 +22,7 @@ const StyledFormControl = styled(FormControl)`
 const Settings = () => {
   const type = useSelector((state: StoreState) => state.settings.theme.type);
   const timeFormat = useSelector((state: StoreState) => state.settings.timeFormat);
+  const background = useSelector((state: StoreState) => state.settings.background);
   const dispatch = useDispatch();
 
   return (
@@ -33,7 +34,7 @@ const Settings = () => {
           <Select
             value={type}
             onChange={(e) => {
-              dispatch(saveSettings({ theme: { type: e.target.value as ThemeType }, timeFormat }));
+              dispatch(saveSettings({ theme: { type: e.target.value as ThemeType }, timeFormat, background }));
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -46,12 +47,26 @@ const Settings = () => {
           <Select
             value={timeFormat}
             onChange={(e) => {
-              dispatch(saveSettings({ theme: { type }, timeFormat: e.target.value as string }));
+              dispatch(saveSettings({ theme: { type }, timeFormat: e.target.value as string, background }));
             }}
           >
             <MenuItem value="default">Default</MenuItem>
             <MenuItem value="24h">24h</MenuItem>
             <MenuItem value="ampm">AM/PM</MenuItem>
+          </Select>
+        </StyledFormControl>
+        <StyledFormControl>
+          <InputLabel>Background</InputLabel>
+          <Select
+            value={background}
+            onChange={(e) => {
+              dispatch(saveSettings({ theme: { type }, timeFormat, background: e.target.value as BackgroundType }));
+            }}
+          >
+            <MenuItem value="default">Default</MenuItem>
+            <MenuItem value="image">Random Image</MenuItem>
+            <MenuItem value="light">Light</MenuItem>
+            <MenuItem value="dark">Dark</MenuItem>
           </Select>
         </StyledFormControl>
       </Wrapper>
