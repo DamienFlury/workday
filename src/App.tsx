@@ -14,28 +14,30 @@ import Settings from './components/Settings';
 import { StoreState } from './store/store';
 import { ThemeType, BackgroundType } from './store/actions/settings-actions';
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   min-height: 100vh;
 `;
 
-const ImageWrapper = styled(Wrapper)`
+const ImageWrapper = styled(StyledWrapper)`
   background-image: url(https://picsum.photos/1024/1024);
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
 `;
-interface BackgroundWrapperProps {
+
+interface IBackgroundWrapperProps {
   backgroundColor: string
 };
-const BackgroundWrapper = styled(Wrapper)`
-  background-color: ${(props: BackgroundWrapperProps) => props.backgroundColor};
+
+const BackgroundWrapper = styled(StyledWrapper)`
+  background-color: ${(props: IBackgroundWrapperProps) => props.backgroundColor};
 `;
 
-interface IBackgroundProps {
+interface IWrapperProps {
   type: BackgroundType
 }
 
-const Background: React.FC<IBackgroundProps> = ({type, children}) => {
+const Wrapper: React.FC<IWrapperProps> = ({type, children}) => {
   switch(type) {
     case 'dark':
       return <BackgroundWrapper backgroundColor="#2F2F2F">{children}</BackgroundWrapper>;
@@ -44,7 +46,7 @@ const Background: React.FC<IBackgroundProps> = ({type, children}) => {
     case 'image':
       return <ImageWrapper>{children}</ImageWrapper>;
     default:
-      return <Wrapper>{children}</Wrapper>;
+      return <StyledWrapper>{children}</StyledWrapper>;
   }
 }
 
@@ -79,12 +81,12 @@ const App: React.FC = () => {
     <StylesProvider injectFirst>
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
-          <Background type={background}>
+          <Wrapper type={background}>
             <CssBaseline />
             <NavBar onClick={() => setShowSettings(prev => !prev)} />
             {showSettings ? <Settings />
               : <Widgets />}
-          </Background>
+          </Wrapper>
         </ThemeProvider>
       </MuiThemeProvider>
     </StylesProvider>
