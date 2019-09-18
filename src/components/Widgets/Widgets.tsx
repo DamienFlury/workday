@@ -35,7 +35,7 @@ const StyledQuote = styled(Quote)`
   grid-area: quote;
 `;
 
-const Widgets = () => (
+const Widgets: React.FC = () => (
   <Grid>
     <StyledWorkday />
     <StyledTime />

@@ -1,14 +1,16 @@
 import React from 'react';
 import {
-  Paper, Typography, Select, MenuItem, FormControl, InputLabel,
+  Typography, Select, MenuItem, FormControl, InputLabel,
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveSettings, ThemeType, BackgroundType } from '../store/actions/settings-actions';
+import {
+  saveSettings, ThemeType, BackgroundType,
+} from '../store/actions/settings-actions';
 import { StoreState } from '../store/store';
+import Widget from './Widgets/Widget';
 
-const StyledPaper = styled(Paper)`
-  padding: 40px;
+const StyledPaper = styled(Widget)`
   margin: 20px;
 `;
 const Wrapper = styled.div`

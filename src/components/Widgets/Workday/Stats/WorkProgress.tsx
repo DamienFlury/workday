@@ -1,7 +1,7 @@
 import React from 'react';
 import { LinearProgress, Box } from '@material-ui/core';
-import { calculatePercentage } from '../../../../utils/time-helpers';
 import { Moment } from 'moment';
+import { calculatePercentage } from '../../../../utils/time-helpers';
 
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IProps {
   currentTime: Moment,
   lunchStartTime: Moment,
   lunchEndTime: Moment,
-};
+}
 
 const WorkProgress: React.FC<IProps> = ({
   startTime,
