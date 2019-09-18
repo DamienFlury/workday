@@ -18,6 +18,7 @@ interface IProps {
 
 const Weather: React.FC<IProps> = ({ className }) => {
   const now = useNow(10000);
+  
   const weather = useSelector((state: StoreState) => state.weather.data);
   const status = useSelector((state: StoreState) => state.weather.status);
   const permission = useSelector((state: StoreState) => state.weather.permission);
