@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Workday from './Workday/Workday';
 import Weather from './Weather';
 import Quote from './Quote';
 import Time from './Time';
+import Workday from './Workday/Workday';
 
 const Grid = styled.div`
   display: grid;
