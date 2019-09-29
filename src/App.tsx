@@ -13,6 +13,8 @@ import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
 import { StoreState } from './store/store';
 import { ThemeType, BackgroundType } from './store/actions/settings-actions';
+import WeatherProvider from './providers/WeatherProvider';
+import QuoteProvider from './providers/QuoteProvider';
 
 const StyledWrapper = styled.div`
   min-height: 100vh;
@@ -37,8 +39,8 @@ interface IWrapperProps {
   type: BackgroundType
 }
 
-const Wrapper: React.FC<IWrapperProps> = ({type, children}) => {
-  switch(type) {
+const Wrapper: React.FC<IWrapperProps> = ({ type, children }) => {
+  switch (type) {
     case 'dark':
       return <BackgroundWrapper backgroundColor="#2F2F2F">{children}</BackgroundWrapper>;
     case 'light':
@@ -78,18 +80,22 @@ const App: React.FC = () => {
   });
 
   return (
-    <StylesProvider injectFirst>
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <Wrapper type={background}>
-            <CssBaseline />
-            <NavBar onClick={() => setShowSettings(prev => !prev)} />
-            {showSettings ? <Settings />
-              : <Widgets />}
-          </Wrapper>
-        </ThemeProvider>
-      </MuiThemeProvider>
-    </StylesProvider>
+    <QuoteProvider>
+      <WeatherProvider>
+        <StylesProvider injectFirst>
+          <MuiThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+              <Wrapper type={background}>
+                <CssBaseline />
+                <NavBar onClick={() => setShowSettings(prev => !prev)} />
+                {showSettings ? <Settings />
+                  : <Widgets />}
+              </Wrapper>
+            </ThemeProvider>
+          </MuiThemeProvider>
+        </StylesProvider>
+      </WeatherProvider>
+    </QuoteProvider>
   );
 }
 

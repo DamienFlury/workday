@@ -23,6 +23,7 @@ const Weather: React.FC<IProps> = ({ className }) => {
   const status = useSelector((state: StoreState) => state.weather.status);
   const permission = useSelector((state: StoreState) => state.weather.permission);
 
+
   return (
     <Widget className={className}>
       {weather && (
