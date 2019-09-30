@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import {
   MuiThemeProvider, createMuiTheme, CssBaseline,
 } from '@material-ui/core';
@@ -14,41 +13,17 @@ import Settings from './components/Settings';
 import { StoreState } from './store/store';
 import { ThemeType, BackgroundType } from './store/actions/settings-actions';
 
+interface StyledWrapperProps {
+  backgroundColor?: string;
+}
+
 const StyledWrapper = styled.div`
   min-height: 100vh;
-`;
-
-const ImageWrapper = styled(StyledWrapper)`
   background-image: url(https://picsum.photos/1024/1024);
+  background: ${props => props.theme.background};
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
 `;
-
-interface IBackgroundWrapperProps {
-  backgroundColor: string
-}
-
-const BackgroundWrapper = styled(StyledWrapper)`
-  background-color: ${(props: IBackgroundWrapperProps) => props.backgroundColor};
-`;
-
-interface IWrapperProps {
-  type: BackgroundType
-}
-
-const Wrapper: React.FC<IWrapperProps> = ({ type, children }) => {
-  switch (type) {
-    case 'dark':
-      return <BackgroundWrapper backgroundColor="#2F2F2F">{children}</BackgroundWrapper>;
-    case 'light':
-      return <BackgroundWrapper backgroundColor="#ffffff">{children}</BackgroundWrapper>;
-    case 'image':
-      return <ImageWrapper>{children}</ImageWrapper>;
-    default:
-      return <StyledWrapper>{children}</StyledWrapper>;
-  }
-};
 
 
 const App: React.FC = () => {
@@ -69,26 +44,27 @@ const App: React.FC = () => {
   }
 
 
-  const theme = createMuiTheme({
+  const muiTheme = createMuiTheme({
     palette: {
       type: themeType === 'default' ? undefined : themeType,
       primary: blue,
-      background: {
-        default: 'black',
-      },
     },
   });
 
+  const theme = {
+    background: null,
+  };
+
   return (
     <StylesProvider injectFirst>
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={muiTheme}>
         <ThemeProvider theme={theme}>
-          <Wrapper type={background}>
+          <StyledWrapper>
             <CssBaseline />
             <NavBar onClick={() => setShowSettings(prev => !prev)} />
             {showSettings ? <Settings />
               : <Widgets />}
-          </Wrapper>
+          </StyledWrapper>
         </ThemeProvider>
       </MuiThemeProvider>
     </StylesProvider>
