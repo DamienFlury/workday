@@ -4,7 +4,7 @@ export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 
 export type ThemeType = 'light' | 'dark' | 'default';
 export type BackgroundType = ThemeType | 'image';
-export type ForegroundType = ThemeType | 'transparent'
+export type ForegroundType = 'default' | 'transparent'
 
 
 export interface SettingsAction {

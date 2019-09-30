@@ -11,7 +11,7 @@ import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
 import { StoreState } from './store/store';
-import { ThemeType, BackgroundType } from './store/actions/settings-actions';
+import { ThemeType, BackgroundType, ForegroundType } from './store/actions/settings-actions';
 
 interface StyledWrapperProps {
   backgroundColor?: string;
@@ -44,6 +44,7 @@ const App: React.FC = () => {
   const type = useSelector((state: StoreState) => state.settings.theme.type as ThemeType);
 
   const background = useSelector((state: StoreState) => state.settings.background);
+  const foreground = useSelector((state: StoreState) => state.settings.foreground);
 
   let themeType = type;
 
@@ -65,6 +66,7 @@ const App: React.FC = () => {
 
   const theme = {
     background: getBackgroundColor(background),
+    foreground,
   };
 
   return (

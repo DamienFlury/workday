@@ -89,9 +89,7 @@ const Settings = () => {
             }}
           >
             <MenuItem value="default">Default</MenuItem>
-            <MenuItem value="image">Transparent</MenuItem>
-            <MenuItem value="light">Light</MenuItem>
-            <MenuItem value="dark">Dark</MenuItem>
+            <MenuItem value="transparent">Transparent</MenuItem>
           </Select>
         </StyledFormControl>
       </Wrapper>
