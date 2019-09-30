@@ -9,8 +9,8 @@ import fetchWeather, { CHANGE_PERMISSION, WeatherState } from './actions/weather
 import { SettingsState } from './actions/settings-actions';
 import { QuoteState } from './actions/quote-actions';
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const composeEnhancers = compose;
+
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export interface StoreState {
   quote: QuoteState,
@@ -41,10 +41,10 @@ if (navigator.permissions) {
     }
     // eslint-disable-next-line no-param-reassign
     permissionStatus.onchange = (status) => {
-      if(!status || !status.target) {
+      if (!status || !status.target) {
         return;
       }
-      
+
       store.dispatch({ type: CHANGE_PERMISSION, permission: (status.target as any).state });
       if ((status.target as any).state === 'granted') {
         navigator.geolocation.getCurrentPosition((pos) => {

@@ -4,7 +4,8 @@ module.exports = {
     es6: true,
     jest: true,
   },
-  extends: 'airbnb',
+  parser: '@typescript-eslint/parser',
+  extends: [ 'airbnb' ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -22,6 +23,15 @@ module.exports = {
   rules: {
     'max-len': 'off',
     'react/prop-types': 'off',
-    'no-nested-ternary': 'off'
+    'no-nested-ternary': 'off',
+    'react/jsx-filename-extension': ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    'no-unused-vars': 'off',
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js','.jsx','.ts','.tsx']
+      }
+    },
+  }
 };

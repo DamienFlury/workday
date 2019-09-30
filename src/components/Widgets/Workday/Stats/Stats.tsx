@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { Typography, Box } from '@material-ui/core';
 import styled from 'styled-components';
+import { Moment } from 'moment';
 import { calculatePercentage } from '../../../../utils/time-helpers';
 import Infos from './Infos';
 import WorkProgress from './WorkProgress';
 import useNow from '../../../../hooks/use-now';
 import useFormatter from '../../../../hooks/use-formatter';
-import { Moment } from 'moment';
 
 const BottomText = styled.div<{ marginLeft: string}>`
   display: inline-block;

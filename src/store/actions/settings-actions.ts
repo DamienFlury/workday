@@ -1,9 +1,10 @@
-import { ThunkDispatch } from "redux-thunk";
+import { ThunkDispatch } from 'redux-thunk';
 
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 
 export type ThemeType = 'light' | 'dark' | 'default';
-export type BackgroundType = 'light' | 'dark' | 'image' | 'default';
+export type BackgroundType = ThemeType | 'image';
+export type ForegroundType = 'default' | 'transparent'
 
 
 export interface SettingsAction {
@@ -17,7 +18,8 @@ export interface SettingsState {
   },
   timeFormat: string,
   background: BackgroundType,
-};
+  foreground: ForegroundType
+}
 
 export const saveSettings = (settings: SettingsState) => (dispatch: ThunkDispatch<{}, {}, SettingsAction>) => {
   dispatch({ type: SAVE_SETTINGS, settings });
