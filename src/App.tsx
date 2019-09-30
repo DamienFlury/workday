@@ -19,12 +19,23 @@ interface StyledWrapperProps {
 
 const StyledWrapper = styled.div`
   min-height: 100vh;
-  background-image: url(https://picsum.photos/1024/1024);
+  background-image: ${props => (props.theme.background === 'image' ? 'url(https://picsum.photos/1024/1024)' : null)};
   background: ${props => props.theme.background};
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 1px;
 `;
+
+const getBackgroundColor = (type: BackgroundType) => {
+  switch (type) {
+    case 'dark':
+      return '#303030';
+    case 'light':
+      return '#FAFAFA';
+    default:
+      return type;
+  }
+};
 
 
 const App: React.FC = () => {
@@ -53,7 +64,7 @@ const App: React.FC = () => {
   });
 
   const theme = {
-    background: null,
+    background: getBackgroundColor(background),
   };
 
   return (

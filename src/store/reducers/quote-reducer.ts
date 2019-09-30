@@ -1,7 +1,9 @@
-import { FETCH_QUOTE_PENDING, FETCH_QUOTE_FULFILLED, FETCH_QUOTE_REJECTED, QuoteAction, QuoteState } from '../actions/quote-actions';
+import {
+  FETCH_QUOTE_PENDING, FETCH_QUOTE_FULFILLED, FETCH_QUOTE_REJECTED, QuoteAction, QuoteState,
+} from '../actions/quote-actions';
 
 
-const initialState: QuoteState  = { status: 'initial', data: { quote: 'lol', author: 'xD'} };
+const initialState: QuoteState = { status: 'initial', data: { quote: 'lol', author: 'xD' } };
 
 const quote = (state = initialState, action: QuoteAction): QuoteState => {
   switch (action.type) {
