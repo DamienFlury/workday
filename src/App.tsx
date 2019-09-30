@@ -23,6 +23,7 @@ const StyledWrapper = styled.div`
   background: ${props => props.theme.background};
   background-repeat: no-repeat;
   background-size: cover;
+  padding-bottom: 1px;
 `;
 
 
