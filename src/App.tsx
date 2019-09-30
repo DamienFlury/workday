@@ -11,11 +11,8 @@ import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
 import { StoreState } from './store/store';
-import { ThemeType, BackgroundType, ForegroundType } from './store/actions/settings-actions';
+import { ThemeType, BackgroundType } from './store/actions/settings-actions';
 
-interface StyledWrapperProps {
-  backgroundColor?: string;
-}
 
 const StyledWrapper = styled.div`
   min-height: 100vh;
