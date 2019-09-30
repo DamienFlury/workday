@@ -67,6 +67,7 @@ const App: React.FC = () => {
   const theme = {
     background: getBackgroundColor(background),
     foreground,
+    type: themeType === 'default' ? undefined : themeType,
   };
 
   return (
