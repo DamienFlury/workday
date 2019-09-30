@@ -4,10 +4,10 @@ import {
   MuiThemeProvider, createMuiTheme, CssBaseline,
 } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { StylesProvider } from '@material-ui/styles';
-import styled from 'styled-components';
+
 import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
@@ -27,7 +27,7 @@ const ImageWrapper = styled(StyledWrapper)`
 
 interface IBackgroundWrapperProps {
   backgroundColor: string
-};
+}
 
 const BackgroundWrapper = styled(StyledWrapper)`
   background-color: ${(props: IBackgroundWrapperProps) => props.backgroundColor};
@@ -37,8 +37,8 @@ interface IWrapperProps {
   type: BackgroundType
 }
 
-const Wrapper: React.FC<IWrapperProps> = ({type, children}) => {
-  switch(type) {
+const Wrapper: React.FC<IWrapperProps> = ({ type, children }) => {
+  switch (type) {
     case 'dark':
       return <BackgroundWrapper backgroundColor="#2F2F2F">{children}</BackgroundWrapper>;
     case 'light':
@@ -48,8 +48,7 @@ const Wrapper: React.FC<IWrapperProps> = ({type, children}) => {
     default:
       return <StyledWrapper>{children}</StyledWrapper>;
   }
-}
-
+};
 
 
 const App: React.FC = () => {
@@ -74,6 +73,9 @@ const App: React.FC = () => {
     palette: {
       type: themeType === 'default' ? undefined : themeType,
       primary: blue,
+      background: {
+        default: 'black',
+      },
     },
   });
 
@@ -91,6 +93,6 @@ const App: React.FC = () => {
       </MuiThemeProvider>
     </StylesProvider>
   );
-}
+};
 
 export default App;

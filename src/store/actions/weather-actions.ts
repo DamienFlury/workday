@@ -1,5 +1,5 @@
-import { ThunkDispatch, ThunkAction } from "redux-thunk";
-import { AnyAction } from "redux";
+import { ThunkDispatch, ThunkAction } from 'redux-thunk';
+import { AnyAction } from 'redux';
 
 export const FETCH_WEATHER_PENDING = 'FETCH_WEATHER_PENDING';
 export const FETCH_WEATHER_FULFILLED = 'FETCH_WEATHER_FULFILLED';
