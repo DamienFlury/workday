@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Typography, Button } from '@material-ui/core';
 import moment from 'moment';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import Widget from './Widget';
 import useNow from '../../hooks/use-now';
 import { humanizeWithMinutes } from '../../utils/time-helpers';
 import { StoreState } from '../../store/store';
+import { WeatherContext } from '../../providers/WeatherProvider';
 
 const StyledButton = styled(Button)`
   margin-top: 20px;
@@ -19,52 +20,51 @@ interface IProps {
 const Weather: React.FC<IProps> = ({ className }) => {
   const now = useNow(10000);
 
-  const weather = useSelector((state: StoreState) => state.weather.data);
-  const status = useSelector((state: StoreState) => state.weather.status);
-  const permission = useSelector((state: StoreState) => state.weather.permission);
+
+  const [{ data, status, permission }] = useContext(WeatherContext);
 
 
   return (
     <Widget className={className}>
-      {weather && (
+      {data && (
       <>
         <Typography variant="h4" gutterBottom>
         Weather
           {' '}
-          {weather.name && `in ${weather.name}`}
+          {data.name && `in ${data.name}`}
         </Typography>
         {status === 'success' && (
         <div>
           <Typography>
 Temperature:
             {' '}
-            {weather.main.temp}
+            {data.main.temp}
             {' '}
 &#176;C
           </Typography>
           <Typography>
 Description:
             {' '}
-            {weather.weather[0].description}
+            {data.weather[0].description}
           </Typography>
           <Typography>
 Windspeed:
             {' '}
-            {weather.wind.speed}
+            {data.wind.speed}
             {' '}
 m/s
           </Typography>
           <Typography>
             Sunrise was
             {' '}
-            {humanizeWithMinutes(moment.duration(now.diff(moment(weather.sys.sunrise, 'X'))))}
+            {humanizeWithMinutes(moment.duration(now.diff(moment(data.sys.sunrise, 'X'))))}
             {' '}
 ago.
           </Typography>
           <Typography>
             Sunset is in
             {' '}
-            {humanizeWithMinutes(moment.duration(moment(weather.sys.sunset, 'X').diff(now)))}
+            {humanizeWithMinutes(moment.duration(moment(data.sys.sunset, 'X').diff(now)))}
 .
           </Typography>
           {permission === 'granted'

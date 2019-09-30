@@ -3,7 +3,6 @@ import {
 } from '../actions/weather-actions';
 
 
-
 const initialState: WeatherState = { status: 'initial', permission: 'prompt' };
 
 const weather = (state = initialState, action: WeatherAction): WeatherState => {
