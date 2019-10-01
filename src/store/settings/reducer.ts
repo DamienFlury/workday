@@ -1,8 +1,4 @@
-import { SAVE_SETTINGS, SettingsState, SettingsAction } from '../actions/settings-actions';
-
-// prefersDarkTheme.onchange = () => {
-//   setType(prefersDarkTheme.matches ? 'dark' : 'light');
-// };
+import { SAVE_SETTINGS, SettingsState, SettingsAction } from './types';
 
 
 const stateFromLocalStorage: SettingsState = JSON.parse(localStorage.getItem('settings') as string);

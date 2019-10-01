@@ -1,6 +1,6 @@
 import {
   FETCH_WEATHER_PENDING, FETCH_WEATHER_FULFILLED, FETCH_WEATHER_REJECTED, CHANGE_PERMISSION, WeatherState, WeatherAction,
-} from '../actions/weather-actions';
+} from './types';
 
 
 const initialState: WeatherState = { status: 'initial', permission: 'prompt' };

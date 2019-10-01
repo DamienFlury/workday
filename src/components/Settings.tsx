@@ -5,10 +5,11 @@ import {
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  saveSettings, ThemeType, BackgroundType, ForegroundType,
-} from '../store/actions/settings-actions';
+  ThemeType, BackgroundType, ForegroundType,
+} from '../store/settings/types';
 import { StoreState } from '../store/store';
 import Widget from './Widgets/Widget';
+import { saveSettings } from '../store/settings/actions';
 
 const StyledPaper = styled(Widget)`
   margin: 20px;
