@@ -2,12 +2,13 @@ import {
   createStore, combineReducers, applyMiddleware, compose,
 } from 'redux';
 import thunk from 'redux-thunk';
-import settings from './reducers/settings-reducer';
-import weather from './reducers/weather-reducer';
-import quote from './reducers/quote-reducer';
-import fetchWeather, { CHANGE_PERMISSION, WeatherState } from './actions/weather-actions';
-import { SettingsState } from './actions/settings-actions';
-import { QuoteState } from './actions/quote-actions';
+import { QuoteState } from './quote/types';
+import { SettingsState } from './settings/types';
+import { WeatherState, CHANGE_PERMISSION } from './weather/types';
+import { fetchWeather } from './weather/actions';
+import quote from './quote/reducer';
+import settings from './settings/reducer';
+import weather from './weather/reducer';
 
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

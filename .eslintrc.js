@@ -26,6 +26,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     'react/jsx-filename-extension': ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     'no-unused-vars': 'off',
+    'import/prefer-default-export': 'off',
   },
   settings: {
     'import/resolver': {

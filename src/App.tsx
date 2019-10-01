@@ -11,7 +11,7 @@ import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
 import { StoreState } from './store/store';
-import { ThemeType, BackgroundType } from './store/actions/settings-actions';
+import { ThemeType, BackgroundType } from './store/settings/types';
 
 
 const StyledWrapper = styled.div`

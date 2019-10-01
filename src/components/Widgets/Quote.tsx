@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import Widget from './Widget';
-import { fetchQuote } from '../../store/actions/quote-actions';
 import { StoreState } from '../../store/store';
+import { fetchQuote } from '../../store/quote/actions';
 
 const StyledText = styled.span`
   display: block;
