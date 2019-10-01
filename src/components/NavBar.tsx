@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 
 interface IProps {
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  readonly onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 }
 
 const NavBar: React.FC<IProps> = ({ onClick }) => (

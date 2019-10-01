@@ -5,7 +5,7 @@ import useNow from '../../hooks/use-now';
 import useFormatter from '../../hooks/use-formatter';
 
 interface IProps {
-  className?: string
+  readonly className?: string
 }
 
 const Time : React.FC<IProps> = ({ className }) => {

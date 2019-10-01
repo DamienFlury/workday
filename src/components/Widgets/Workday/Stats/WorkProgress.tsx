@@ -5,11 +5,11 @@ import { calculatePercentage } from '../../../../utils/time-helpers';
 
 
 interface IProps {
-  startTime: Moment,
-  endTime: Moment,
-  currentTime: Moment,
-  lunchStartTime: Moment,
-  lunchEndTime: Moment,
+  readonly startTime: Moment,
+  readonly endTime: Moment,
+  readonly currentTime: Moment,
+  readonly lunchStartTime: Moment,
+  readonly lunchEndTime: Moment,
 }
 
 const WorkProgress: React.FC<IProps> = ({

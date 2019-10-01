@@ -13,7 +13,7 @@ const StyledButton = styled(Button)`
 `;
 
 interface IProps {
-  className?: string,
+  readonly className?: string,
 }
 
 const Weather: React.FC<IProps> = ({ className }) => {

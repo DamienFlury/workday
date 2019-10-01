@@ -3,18 +3,18 @@ export const FETCH_QUOTE_FULFILLED = 'FETCH_QUOTE_FULFILLED';
 export const FETCH_QUOTE_REJECTED = 'FETCH_QUOTE_REJECTED';
 
 export interface Quote {
-  quote: string;
-  author: string;
+  readonly quote: string;
+  readonly author: string;
 }
 
 export interface QuoteAction {
-  type: string,
-  quote?: Quote,
-  error?: string,
+  readonly type: string,
+  readonly quote?: Quote,
+  readonly error?: string,
 }
 
 export interface QuoteState {
-  data?: Quote,
-  status: string,
-  error?: string
+  readonly data?: Quote,
+  readonly status: string,
+  readonly error?: string
 }

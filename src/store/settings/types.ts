@@ -6,15 +6,15 @@ export type ForegroundType = 'default' | 'transparent'
 
 
 export interface SettingsAction {
-  type: string,
-  settings: SettingsState,
+  readonly type: string,
+  readonly settings: SettingsState,
 }
 
 export interface SettingsState {
-  theme: {
-    type: ThemeType,
+  readonly theme: {
+    readonly type: ThemeType,
   },
-  timeFormat: string,
-  background: BackgroundType,
-  foreground: ForegroundType
+  readonly timeFormat: string,
+  readonly background: BackgroundType,
+  readonly foreground: ForegroundType
 }

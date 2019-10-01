@@ -13,7 +13,7 @@ const StyledText = styled.span`
   `;
 
 interface IProps {
-  className?: string,
+  readonly className?: string,
 }
 
 const Quote: React.FC<IProps> = ({ className }) => {
