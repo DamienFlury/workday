@@ -21,16 +21,34 @@ export interface Weather {
 }
 
 export interface WeatherState {
-  readonly status: string,
+  readonly status: 'pending' | 'success' | 'error' | 'initial',
   readonly data?: Weather,
   readonly permission?: string,
   readonly error?: string,
 }
 
 
-export interface WeatherAction {
-  readonly type: string,
-  readonly weather?: Weather,
-  readonly error?: string,
-  readonly permission?: string,
+interface FetchWeatherPendingAction {
+  readonly type: typeof FETCH_WEATHER_PENDING,
 }
+
+interface FetchWeatherFulfilledAction {
+  readonly type: typeof FETCH_WEATHER_FULFILLED,
+  readonly weather: Weather,
+}
+
+interface FetchWeatherRejectedAction {
+  readonly type: typeof FETCH_WEATHER_REJECTED,
+  readonly error: string,
+}
+
+interface ChangePermissionAction {
+  readonly type: typeof CHANGE_PERMISSION,
+  readonly permission: string,
+}
+
+
+export type WeatherAction = FetchWeatherPendingAction
+  | FetchWeatherFulfilledAction
+  | FetchWeatherRejectedAction
+  | ChangePermissionAction
