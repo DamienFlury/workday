@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Gohome from './Gohome';
 import Weather from './Weather';
 import Quote from './Quote';
 import Time from './Time';
+import Workday from './Workday/Workday';
 
 const Grid = styled.div`
   display: grid;
@@ -12,18 +12,18 @@ const Grid = styled.div`
   grid-template-columns: 2fr 1fr;
   grid-template-areas:
   "time time"
-  "gohome gohome"
+  "workday workday"
   "weather weather"
   "quote quote";
   @media(min-width: 1024px) {
-    grid-template-areas: "gohome time"
-    "gohome weather"
-    "gohome quote";
+    grid-template-areas: "workday time"
+    "workday weather"
+    "workday quote";
   }
 `;
 
-const StyledGohome = styled(Gohome)`
-  grid-area: gohome;
+const StyledWorkday = styled(Workday)`
+  grid-area: workday;
 `;
 const StyledTime = styled(Time)`
   grid-area: time;
@@ -35,9 +35,9 @@ const StyledQuote = styled(Quote)`
   grid-area: quote;
 `;
 
-const Widgets = () => (
+const Widgets: React.FC = () => (
   <Grid>
-    <StyledGohome />
+    <StyledWorkday />
     <StyledTime />
     <StyledWeather />
     <StyledQuote />

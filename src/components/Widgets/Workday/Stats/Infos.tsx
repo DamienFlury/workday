@@ -1,20 +1,25 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import moment from 'moment';
-import {
-  calculatePercentage, humanizeWithMinutes,
-} from './time-helpers';
+import moment, { Moment } from 'moment';
+import { calculatePercentage, humanizeWithMinutes } from '../../../../utils/time-helpers';
 
-moment.relativeTimeThreshold('h', 60);
 
-const Infos = ({
+interface IProps {
+  startTime: Moment,
+  currentTime: Moment,
+  endTime: Moment,
+  lunchStartTime: Moment,
+  lunchEndTime: Moment,
+}
+
+const Infos: React.FC<IProps> = ({
   startTime, currentTime, endTime, lunchStartTime, lunchEndTime,
 }) => (
   <>
     <Typography>
 Progress (workday):
       {' '}
-      {calculatePercentage(endTime - startTime, currentTime - startTime).toFixed(2)}
+      {calculatePercentage(endTime.diff(startTime), currentTime.diff(startTime)).toFixed(2)}
 %
     </Typography>
     {/* <Typography>
@@ -24,18 +29,20 @@ Progress (workday):
 %
     </Typography> */}
     <Typography>
-You started working
-      {' '}
-      {humanizeWithMinutes(moment.duration(currentTime - startTime))}
-      {' '}
-ago.
+      {currentTime < startTime
+        ? `You will start working in ${humanizeWithMinutes(moment.duration(currentTime.diff(startTime)))}`
+        : `You started working ${humanizeWithMinutes(moment.duration(currentTime.diff(startTime)))} ago`}
     </Typography>
+    {currentTime < endTime
+    && (
     <Typography>
 You can leave in
       {' '}
-      {humanizeWithMinutes(moment.duration(endTime - currentTime))}
+      {humanizeWithMinutes(moment.duration(endTime.diff(currentTime)))}
 .
     </Typography>
+    )
+      }
     <Typography variant="h6">
       {currentTime > lunchStartTime && currentTime < lunchEndTime
         ? 'Lunch Time 😄' : currentTime > endTime ? 'Time to go home 👋' : 'Working 💼'}

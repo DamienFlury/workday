@@ -2,30 +2,37 @@ import React from 'react';
 import { Typography, Button } from '@material-ui/core';
 import moment from 'moment';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Widget from './Widget';
-import useWeather from '../../hooks/use-weather';
 import useNow from '../../hooks/use-now';
-import { humanizeWithMinutes } from '../stats/time-helpers';
+import { humanizeWithMinutes } from '../../utils/time-helpers';
+import { StoreState } from '../../store/store';
 
 const StyledButton = styled(Button)`
-  margin-top: 20px !important;
+  margin-top: 20px;
 `;
 
-const Weather = ({ className }) => {
+interface IProps {
+  className?: string,
+}
+
+const Weather: React.FC<IProps> = ({ className }) => {
   const now = useNow(10000);
-  const {
-    weather, isLoading, permissionState,
-  } = useWeather();
+
+  const weather = useSelector((state: StoreState) => state.weather.data);
+  const status = useSelector((state: StoreState) => state.weather.status);
+  const permission = useSelector((state: StoreState) => state.weather.permission);
 
   return (
     <Widget className={className}>
+      {weather && (
       <>
         <Typography variant="h4" gutterBottom>
         Weather
           {' '}
           {weather.name && `in ${weather.name}`}
         </Typography>
-        {isLoading || (
+        {status === 'success' && (
         <div>
           <Typography>
 Temperature:
@@ -49,20 +56,31 @@ m/s
           <Typography>
             Sunrise was
             {' '}
-            {humanizeWithMinutes(moment.duration(now - moment(weather.sys.sunrise, 'X')))}
+            {humanizeWithMinutes(moment.duration(now.diff(moment(weather.sys.sunrise, 'X'))))}
             {' '}
 ago.
           </Typography>
           <Typography>
             Sunset is in
             {' '}
-            {humanizeWithMinutes(moment.duration(moment(weather.sys.sunset, 'X') - now))}
+            {humanizeWithMinutes(moment.duration(moment(weather.sys.sunset, 'X').diff(now)))}
 .
           </Typography>
-          {permissionState === 'prompt' && <StyledButton onClick={() => { navigator.geolocation.getCurrentPosition(() => {}); }} variant="contained">Use my location</StyledButton>}
+          {permission === 'granted'
+          || (
+          <StyledButton
+            onClick={() => navigator.geolocation.getCurrentPosition(() => {})}
+            variant="contained"
+          >
+Use my location
+
+          </StyledButton>
+          )
+          }
         </div>
         )}
       </>
+      )}
     </Widget>
   );
 };
