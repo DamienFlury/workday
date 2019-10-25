@@ -3,7 +3,7 @@
   "name": "Workday",
   "manifest_version": 2,
   "description": "An extension to track your workday",
-  "version": "1.0.0",
+  "version": "2.1.1",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
