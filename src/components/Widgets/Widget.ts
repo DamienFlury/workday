@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Widget = styled(Paper)`
   padding: 40px;
   /* background-color: ${props => (props.theme.foreground === 'transparent' ? props.theme.type === 'dark' ? 'rgba(0, 0, 0, .5)' : 'rgba(255, 255, 255, .5)' : null)}; */
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
   position: relative;
   z-index: 1;
   background: ${props => (props.theme.foreground === 'transparent' ? 'inherit' : 'null')};
