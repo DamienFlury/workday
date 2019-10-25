@@ -20,6 +20,7 @@ const Grid = styled.div`
     "workday weather"
     "workday quote";
   }
+  background: inherit;
 `;
 
 const StyledWorkday = styled(Workday)`
