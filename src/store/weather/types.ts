@@ -4,33 +4,51 @@ export const FETCH_WEATHER_REJECTED = 'FETCH_WEATHER_REJECTED';
 export const CHANGE_PERMISSION = 'CHANGE_PERMISSION';
 
 export interface Weather {
-  name: string,
-  main: {
-    temp: number,
+  readonly name: string,
+  readonly main: {
+    readonly temp: number,
   },
-  weather: [{
-    description: string
+  readonly weather: [{
+    readonly description: string
   }],
   wind: {
-    speed: number,
+    readonly speed: number,
   },
   sys: {
-    sunrise: number,
-    sunset: number,
+    readonly sunrise: number,
+    readonly sunset: number,
   }
 }
 
 export interface WeatherState {
-  status: string,
-  data?: Weather,
-  permission?: string,
-  error?: string,
+  readonly status: 'pending' | 'success' | 'error' | 'initial',
+  readonly data?: Weather,
+  readonly permission?: string,
+  readonly error?: string,
 }
 
 
-export interface WeatherAction {
-  type: string,
-  weather?: Weather,
-  error?: string,
-  permission?: string,
+interface FetchWeatherPendingAction {
+  readonly type: typeof FETCH_WEATHER_PENDING,
 }
+
+interface FetchWeatherFulfilledAction {
+  readonly type: typeof FETCH_WEATHER_FULFILLED,
+  readonly weather: Weather,
+}
+
+interface FetchWeatherRejectedAction {
+  readonly type: typeof FETCH_WEATHER_REJECTED,
+  readonly error: string,
+}
+
+interface ChangePermissionAction {
+  readonly type: typeof CHANGE_PERMISSION,
+  readonly permission: string,
+}
+
+
+export type WeatherAction = FetchWeatherPendingAction
+  | FetchWeatherFulfilledAction
+  | FetchWeatherRejectedAction
+  | ChangePermissionAction

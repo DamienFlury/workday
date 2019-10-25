@@ -18,10 +18,10 @@ const BottomText = styled.div<{ marginLeft: string}>`
 `;
 
 interface IProps {
-  start: Moment,
-  end: Moment,
-  lunchStart: Moment,
-  lunchEnd: Moment,
+  readonly start: Moment,
+  readonly end: Moment,
+  readonly lunchStart: Moment,
+  readonly lunchEnd: Moment,
 }
 
 const Stats: React.FC<IProps> = ({

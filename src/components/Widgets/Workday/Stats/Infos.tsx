@@ -5,11 +5,11 @@ import { calculatePercentage, humanizeWithMinutes } from '../../../../utils/time
 
 
 interface IProps {
-  startTime: Moment,
-  currentTime: Moment,
-  endTime: Moment,
-  lunchStartTime: Moment,
-  lunchEndTime: Moment,
+  readonly startTime: Moment,
+  readonly currentTime: Moment,
+  readonly endTime: Moment,
+  readonly lunchStartTime: Moment,
+  readonly lunchEndTime: Moment,
 }
 
 const Infos: React.FC<IProps> = ({

@@ -14,9 +14,9 @@ import weather from './weather/reducer';
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export interface StoreState {
-  quote: QuoteState,
-  settings: SettingsState,
-  weather: WeatherState,
+  readonly quote: QuoteState,
+  readonly settings: SettingsState,
+  readonly weather: WeatherState,
 }
 const rootReducer = combineReducers({
   quote,

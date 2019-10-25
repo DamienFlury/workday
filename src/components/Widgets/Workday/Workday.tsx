@@ -14,7 +14,7 @@ import Stats from './Stats/Stats';
 import { StoreState } from '../../../store/store';
 
 interface IProps {
-  className?: string,
+  readonly className?: string,
 }
 
 const Workday: React.FC<IProps> = ({ className }) => {
