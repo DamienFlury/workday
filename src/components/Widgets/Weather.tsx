@@ -3,6 +3,8 @@ import { Typography, Button } from '@material-ui/core';
 import moment from 'moment';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { differenceInSeconds } from 'date-fns/esm';
+import { fromUnixTime } from 'date-fns';
 import Widget from './Widget';
 import useNow from '../../hooks/use-now';
 import { humanizeWithMinutes } from '../../utils/time-helpers';
@@ -26,47 +28,47 @@ const Weather: React.FC<IProps> = ({ className }) => {
   return (
     <Widget className={className}>
       {weather && (
-      <>
-        <Typography variant="h4" gutterBottom>
+        <>
+          <Typography variant="h4" gutterBottom>
         Weather
-          {' '}
-          {weather.name && `in ${weather.name}`}
-        </Typography>
-        {status === 'success' && (
-        <div>
-          <Typography>
+            {' '}
+            {weather.name && `in ${weather.name}`}
+          </Typography>
+          {status === 'success' && (
+          <div>
+            <Typography>
 Temperature:
-            {' '}
-            {weather.main.temp}
-            {' '}
+              {' '}
+              {weather.main.temp}
+              {' '}
 &#176;C
-          </Typography>
-          <Typography>
+            </Typography>
+            <Typography>
 Description:
-            {' '}
-            {weather.weather[0].description}
-          </Typography>
-          <Typography>
+              {' '}
+              {weather.weather[0].description}
+            </Typography>
+            <Typography>
 Windspeed:
-            {' '}
-            {weather.wind.speed}
-            {' '}
+              {' '}
+              {weather.wind.speed}
+              {' '}
 m/s
-          </Typography>
-          <Typography>
+            </Typography>
+            <Typography>
             Sunrise was
-            {' '}
-            {humanizeWithMinutes(moment.duration(now.diff(moment(weather.sys.sunrise, 'X'))))}
-            {' '}
+              {' '}
+              {differenceInSeconds(now, fromUnixTime(weather.sys.sunrise))}
+              {' '}
 ago.
-          </Typography>
-          <Typography>
+            </Typography>
+            <Typography>
             Sunset is in
-            {' '}
-            {humanizeWithMinutes(moment.duration(moment(weather.sys.sunset, 'X').diff(now)))}
+              {' '}
+              {humanizeWithMinutes(moment.duration(moment(weather.sys.sunset, 'X').diff(now)))}
 .
-          </Typography>
-          {permission === 'granted'
+            </Typography>
+            {permission === 'granted'
           || (
           <StyledButton
             onClick={() => navigator.geolocation.getCurrentPosition(() => {})}
@@ -77,9 +79,9 @@ Use my location
           </StyledButton>
           )
           }
-        </div>
-        )}
-      </>
+          </div>
+          )}
+        </>
       )}
     </Widget>
   );

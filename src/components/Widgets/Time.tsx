@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
+import { format } from 'date-fns/esm';
 import Widget from './Widget';
 import useNow from '../../hooks/use-now';
 import useFormatter from '../../hooks/use-formatter';
@@ -16,7 +17,7 @@ const Time : React.FC<IProps> = ({ className }) => {
   return (
     <Widget className={className}>
       <Typography variant="h4" gutterBottom>{formatTime(now)}</Typography>
-      <Typography>{now.format('LL')}</Typography>
+      <Typography>{format(now, 'PPPP')}</Typography>
     </Widget>
   );
 };

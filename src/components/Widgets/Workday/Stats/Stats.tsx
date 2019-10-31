@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Typography, Box } from '@material-ui/core';
 import styled from 'styled-components';
 import { Moment } from 'moment';
+import { differenceInSeconds } from 'date-fns';
 import { calculatePercentage } from '../../../../utils/time-helpers';
 import Infos from './Infos';
 import WorkProgress from './WorkProgress';
@@ -18,10 +19,10 @@ const BottomText = styled.div<{ marginLeft: string}>`
 `;
 
 interface IProps {
-  readonly start: Moment,
-  readonly end: Moment,
-  readonly lunchStart: Moment,
-  readonly lunchEnd: Moment,
+  readonly start: Date,
+  readonly end: Date,
+  readonly lunchStart: Date,
+  readonly lunchEnd: Date,
 }
 
 const Stats: React.FC<IProps> = ({
@@ -29,7 +30,7 @@ const Stats: React.FC<IProps> = ({
 }) => {
   const now = useNow(1000);
 
-  const percentage = useMemo(() => calculatePercentage(end.diff(start), now.diff(start)),
+  const percentage = useMemo(() => calculatePercentage(differenceInSeconds(end, start), differenceInSeconds(now, start)),
     [start, now, end]);
 
   const { formatTime } = useFormatter();
