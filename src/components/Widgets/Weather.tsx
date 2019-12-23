@@ -20,7 +20,7 @@ const Weather: React.FC<IProps> = ({ className }) => {
   const now = useNow(10000);
 
 
-  const [{ data: weather, status, permission }] = useContext(WeatherContext);
+  const weather = useContext(WeatherContext);
 
 
   return (
@@ -32,7 +32,7 @@ const Weather: React.FC<IProps> = ({ className }) => {
             {' '}
             {weather.name && `in ${weather.name}`}
           </Typography>
-          {status === 'success' && (
+          {true && (
           <div>
             <Typography>
 Temperature:
@@ -65,7 +65,7 @@ m/s
               {formatDistanceWithPrefix(now, fromUnixTime(weather.sys.sunset), true)}
 .
             </Typography>
-            {permission === 'granted'
+            {false
           || (
           <StyledButton
             onClick={() => navigator.geolocation.getCurrentPosition(() => {})}
@@ -74,8 +74,7 @@ m/s
 Use my location
 
           </StyledButton>
-          )
-          }
+          )}
           </div>
           )}
         </>
