@@ -1,14 +1,19 @@
 import React, { useReducer, createContext, useEffect } from 'react';
 import {
-  WeatherState, WeatherAction, FETCH_WEATHER_PENDING, FETCH_WEATHER_FULFILLED, FETCH_WEATHER_REJECTED, CHANGE_PERMISSION,
-} from '../store/actions/weather-actions';
+  WeatherState,
+  FETCH_WEATHER_PENDING,
+  CHANGE_PERMISSION,
+  FETCH_WEATHER_FULFILLED,
+  FETCH_WEATHER_REJECTED,
+} from '../store/weather/types';
+
 
 const initialState: [WeatherState, (lat: number, lon: number) => Promise<void>] = [{ status: 'initial', permission: 'prompt' }, async () => {}];
 
 export const WeatherContext = createContext(initialState);
 
 const WeatherProvider: React.FC = ({ children }) => {
-  const [weather, dispatch] = useReducer((state, action) => {
+  const [weather, dispatch] = useReducer((state: any, action: any) => {
     switch (action.type) {
       case FETCH_WEATHER_PENDING:
         return { ...state, status: 'pending' };

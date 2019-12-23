@@ -9,6 +9,7 @@ import ForegroundProvider from './providers/ForegroundProvider';
 import BackgroundProvider from './providers/BackgroundProvider';
 import TimeFormatProvider from './providers/TimeFormatProvider';
 import ThemeTypeProvider from './providers/ThemeTypeProvider';
+import WeatherProvider from './providers/WeatherProvider';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -17,7 +18,9 @@ ReactDOM.render(
         <BackgroundProvider>
           <ForegroundProvider>
             <TimeFormatProvider>
-              <App />
+              <WeatherProvider>
+                <App />
+              </WeatherProvider>
             </TimeFormatProvider>
           </ForegroundProvider>
         </BackgroundProvider>

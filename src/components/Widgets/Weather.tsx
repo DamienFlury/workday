@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { Typography, Button } from '@material-ui/core';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import { fromUnixTime } from 'date-fns';
 import Widget from './Widget';
 import useNow from '../../hooks/use-now';
 // import { humanizeWithMinutes } from '../../utils/time-helpers';
-import { StoreState } from '../../store/store';
 import { formatDistanceWithPrefix } from '../../utils/time-helpers';
+import { WeatherContext } from '../../providers/WeatherProvider';
 
 const StyledButton = styled(Button)`
   margin-top: 20px;
@@ -21,7 +20,7 @@ const Weather: React.FC<IProps> = ({ className }) => {
   const now = useNow(10000);
 
 
-  const [{ data, status, permission }] = useContext(WeatherContext);
+  const [{ data: weather, status, permission }] = useContext(WeatherContext);
 
 
   return (
