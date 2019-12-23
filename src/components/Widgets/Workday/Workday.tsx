@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Box, Typography,
 } from '@material-ui/core';
-import moment, { Moment } from 'moment';
 import {
   KeyboardTimePicker,
   MuiPickersUtilsProvider,

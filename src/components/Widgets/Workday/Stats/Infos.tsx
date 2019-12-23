@@ -1,7 +1,9 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { differenceInSeconds } from 'date-fns';
-import { calculatePercentage, humanizeWithMinutes } from '../../../../utils/time-helpers';
+import {
+  differenceInSeconds,
+} from 'date-fns';
+import { calculatePercentage, formatDistanceWithPrefix } from '../../../../utils/time-helpers';
 
 
 interface IProps {
@@ -33,12 +35,12 @@ Progress (workday):
         ? `You will start working in ${humanizeWithMinutes(moment.duration(currentTime.diff(startTime)))}`
         : `You started working ${humanizeWithMinutes(moment.duration(currentTime.diff(startTime)))} ago`} */}
     </Typography>
-    {currentTime < endTime
+    {true
     && (
     <Typography>
-You can leave in
+You can leave
       {' '}
-      {/* {humanizeWithMinutes(moment.duration(endTime.diff(currentTime)))} */}
+      {formatDistanceWithPrefix(currentTime, endTime)}
 .
     </Typography>
     )

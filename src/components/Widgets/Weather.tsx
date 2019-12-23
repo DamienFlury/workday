@@ -1,14 +1,13 @@
 import React from 'react';
 import { Typography, Button } from '@material-ui/core';
-import moment from 'moment';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { differenceInSeconds } from 'date-fns/esm';
 import { fromUnixTime } from 'date-fns';
 import Widget from './Widget';
 import useNow from '../../hooks/use-now';
-import { humanizeWithMinutes } from '../../utils/time-helpers';
+// import { humanizeWithMinutes } from '../../utils/time-helpers';
 import { StoreState } from '../../store/store';
+import { formatDistanceWithPrefix } from '../../utils/time-helpers';
 
 const StyledButton = styled(Button)`
   margin-top: 20px;
@@ -56,16 +55,15 @@ Windspeed:
 m/s
             </Typography>
             <Typography>
-            Sunrise was
+            Sunrise
               {' '}
-              {differenceInSeconds(now, fromUnixTime(weather.sys.sunrise))}
-              {' '}
-ago.
+              {formatDistanceWithPrefix(now, fromUnixTime(weather.sys.sunrise), true)}
+.
             </Typography>
             <Typography>
-            Sunset is in
+            Sunset
               {' '}
-              {humanizeWithMinutes(moment.duration(moment(weather.sys.sunset, 'X').diff(now)))}
+              {formatDistanceWithPrefix(now, fromUnixTime(weather.sys.sunset), true)}
 .
             </Typography>
             {permission === 'granted'

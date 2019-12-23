@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { Typography, Box } from '@material-ui/core';
 import styled from 'styled-components';
-import { Moment } from 'moment';
 import { differenceInSeconds } from 'date-fns';
 import { calculatePercentage } from '../../../../utils/time-helpers';
 import Infos from './Infos';
