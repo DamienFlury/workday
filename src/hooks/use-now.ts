@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import moment from 'moment';
 
 const useNow = (updateTime: number) => {
-  const [now, setNow] = useState(moment());
+  const [now, setNow] = useState(new Date());
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setNow(moment());
+      setNow(new Date());
     }, updateTime);
     return () => {
       clearTimeout(timeout);
