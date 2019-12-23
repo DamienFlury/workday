@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Typography, Button } from '@material-ui/core';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
@@ -20,9 +20,9 @@ interface IProps {
 const Weather: React.FC<IProps> = ({ className }) => {
   const now = useNow(10000);
 
-  const weather = useSelector((state: StoreState) => state.weather.data);
-  const status = useSelector((state: StoreState) => state.weather.status);
-  const permission = useSelector((state: StoreState) => state.weather.permission);
+
+  const [{ data, status, permission }] = useContext(WeatherContext);
+
 
   return (
     <Widget className={className}>
