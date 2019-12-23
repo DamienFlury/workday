@@ -9,6 +9,7 @@ import {
 import { useSelector } from 'react-redux';
 import { parse, format } from 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import styled from 'styled-components';
 import Widget from '../Widget';
 import Stats from './Stats/Stats';
 import { StoreState } from '../../../store/store';
@@ -16,6 +17,10 @@ import { StoreState } from '../../../store/store';
 interface IProps {
   readonly className?: string,
 }
+
+const ErrorMessage = styled.p`
+  color: #dd0000;
+`;
 
 const Workday: React.FC<IProps> = ({ className }) => {
   const [startTime, setStartTime] = useState(parse(localStorage.getItem('startTime') || '09:00', 'HH:mm', new Date()));
@@ -53,6 +58,7 @@ const Workday: React.FC<IProps> = ({ className }) => {
             value={startTime}
             onChange={t => setStartTime(t || new Date())}
           />
+          {startTime > lunchStart && <ErrorMessage>Start time must be before lunch.</ErrorMessage>}
         </Box>
         <Box margin="20px">
           <KeyboardTimePicker
@@ -62,6 +68,7 @@ const Workday: React.FC<IProps> = ({ className }) => {
             value={lunchStart}
             onChange={t => setLunchStart(t || new Date())}
           />
+          {lunchStart > lunchEnd && <ErrorMessage>Lunch start must be before lunch end.</ErrorMessage>}
         </Box>
         <Box margin="20px">
           <KeyboardTimePicker
@@ -71,6 +78,7 @@ const Workday: React.FC<IProps> = ({ className }) => {
             value={lunchEnd}
             onChange={t => setLunchEnd(t || new Date())}
           />
+          {lunchEnd > endTime && <ErrorMessage>Lunch must be before going home.</ErrorMessage>}
         </Box>
         <Box margin="20px">
           <KeyboardTimePicker
