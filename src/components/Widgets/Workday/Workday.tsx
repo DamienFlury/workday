@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Box, Typography,
 } from '@material-ui/core';
@@ -6,13 +6,12 @@ import {
   KeyboardTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-import { useSelector } from 'react-redux';
 import { parse, format } from 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import styled from 'styled-components';
 import Widget from '../Widget';
 import Stats from './Stats/Stats';
-import { StoreState } from '../../../store/store';
+import { TimeFormatContext } from '../../../providers/TimeFormatProvider';
 
 interface IProps {
   readonly className?: string,
@@ -29,7 +28,7 @@ const Workday: React.FC<IProps> = ({ className }) => {
   const [endTime, setEndTime] = useState(parse(localStorage.getItem('endTime') || '17:00', 'HH:mm', new Date()));
 
 
-  const timeFormat = useSelector((state: StoreState) => state.settings.timeFormat);
+  const { timeFormat } = useContext(TimeFormatContext);
 
   const ampm = timeFormat === 'ampm' ? true : timeFormat === '24h' ? false : undefined;
 

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   MuiThemeProvider, createMuiTheme, CssBaseline,
 } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import styled, { ThemeProvider } from 'styled-components';
-import { useSelector } from 'react-redux';
 import { StylesProvider } from '@material-ui/styles';
 
 import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
-import { StoreState } from './store/store';
-import { ThemeType, BackgroundType } from './store/settings/types';
+import { ThemeTypeContext } from './providers/ThemeTypeProvider';
+import { BackgroundContext, Background } from './providers/BackgroundProvider';
+import { ForegroundContext } from './providers/ForegroundProvider';
 
 
 const StyledWrapper = styled.div`
@@ -24,7 +24,7 @@ const StyledWrapper = styled.div`
   background-attachment: fixed; 
 `;
 
-const getBackgroundColor = (type: BackgroundType) => {
+const getBackgroundColor = (type: Background) => {
   switch (type) {
     case 'dark':
       return '#303030';
@@ -39,10 +39,10 @@ const getBackgroundColor = (type: BackgroundType) => {
 const App: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
 
-  const type = useSelector((state: StoreState) => state.settings.theme.type as ThemeType);
+  const { themeType: type } = useContext(ThemeTypeContext);
+  const { background } = useContext(BackgroundContext);
 
-  const background = useSelector((state: StoreState) => state.settings.background);
-  const foreground = useSelector((state: StoreState) => state.settings.foreground);
+  const { foreground } = useContext(ForegroundContext);
 
   let themeType = type;
 
