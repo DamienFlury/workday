@@ -9,9 +9,8 @@ import { StylesProvider } from '@material-ui/styles';
 import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
-import { BackgroundType } from './store/settings/types';
 import { ThemeTypeContext } from './providers/ThemeTypeProvider';
-import { BackgroundContext } from './providers/BackgroundProvider';
+import { BackgroundContext, Background } from './providers/BackgroundProvider';
 import { ForegroundContext } from './providers/ForegroundProvider';
 
 
@@ -25,7 +24,7 @@ const StyledWrapper = styled.div`
   background-attachment: fixed; 
 `;
 
-const getBackgroundColor = (type: BackgroundType) => {
+const getBackgroundColor = (type: Background) => {
   switch (type) {
     case 'dark':
       return '#303030';
