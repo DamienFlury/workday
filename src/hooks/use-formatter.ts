@@ -1,18 +1,18 @@
 import { useSelector } from 'react-redux';
-import { Moment } from 'moment';
+import { format } from 'date-fns';
 import { StoreState } from '../store/store';
 
 const useFormatter = () => {
   const timeFormat: string = useSelector((state: StoreState) => state.settings.timeFormat);
 
-  const formatTime = (date: Moment) => {
+  const formatTime = (date: Date) => {
     switch (timeFormat) {
       case 'ampm':
-        return date.format('h:mm A');
+        return format(date, 'h:mm A');
       case '24h':
-        return date.format('HH:mm');
+        return format(date, 'HH:mm');
       default:
-        return date.format('LT');
+        return format(date, 'p');
     }
   };
 
