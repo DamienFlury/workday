@@ -33,8 +33,8 @@ export const formatDistanceWithPrefix = (first: Date, second: Date, withPredicat
 
   const distance = formatDistanceCustom(first, second);
   if (future) {
-    return `${withPredicate && 'is '}in ${distance}`;
+    return `${withPredicate ? 'is ' : ''}in ${distance}`;
   }
 
-  return `${withPredicate && 'was '}${distance} ago`;
+  return `${withPredicate ? 'was ' : ''}${distance} ago`;
 };
