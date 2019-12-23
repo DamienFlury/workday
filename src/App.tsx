@@ -72,7 +72,6 @@ const App: React.FC = () => {
     <StylesProvider injectFirst>
       <MuiThemeProvider theme={muiTheme}>
         <ThemeProvider theme={theme}>
-
           <StyledWrapper>
             <CssBaseline />
             <NavBar onClick={() => setShowSettings(prev => !prev)} />
