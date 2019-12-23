@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 import Widget from './Widget';
-import { StoreState } from '../../store/store';
-import { fetchQuote } from '../../store/quote/actions';
+import { QuoteContext } from '../../providers/QuoteProvider';
 
 const StyledText = styled.span`
   display: block;
@@ -17,29 +15,18 @@ interface IProps {
 }
 
 const Quote: React.FC<IProps> = ({ className }) => {
-  const quote: any = useSelector((state: StoreState) => state.quote.data);
-  const status: any = useSelector((state: StoreState) => state.quote.status);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (status === 'initial') {
-      dispatch(fetchQuote());
-    }
-  }, [dispatch, status]);
+  const quote = useContext(QuoteContext);
+
   return (
     <Widget className={className}>
-      {status === 'success' && (
-      <>
-        <StyledText>
-          {quote.quote}
-        </StyledText>
-        <StyledText>
+      <StyledText>
+        {quote.quote}
+      </StyledText>
+      <StyledText>
 -
-          {' '}
-          {quote.author}
-        </StyledText>
-      </>
-      )
-      }
+        {' '}
+        {quote.author}
+      </StyledText>
     </Widget>
   );
 };

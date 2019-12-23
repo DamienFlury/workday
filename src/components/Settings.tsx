@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Typography, Select, MenuItem, FormControl, InputLabel,
 } from '@material-ui/core';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  ThemeType, BackgroundType, ForegroundType,
-} from '../store/settings/types';
-import { StoreState } from '../store/store';
 import Widget from './Widgets/Widget';
-import { saveSettings } from '../store/settings/actions';
+import { ThemeTypeContext, ThemeType } from '../providers/ThemeTypeProvider';
+import { TimeFormatContext, TimeFormat } from '../providers/TimeFormatProvider';
+import { ForegroundContext, Foreground } from '../providers/ForegroundProvider';
+import { BackgroundContext, Background } from '../providers/BackgroundProvider';
 
 const StyledPaper = styled(Widget)`
   margin: 20px;
@@ -23,11 +21,10 @@ const StyledFormControl = styled(FormControl)`
 `;
 
 const Settings = () => {
-  const type = useSelector((state: StoreState) => state.settings.theme.type);
-  const timeFormat = useSelector((state: StoreState) => state.settings.timeFormat);
-  const background = useSelector((state: StoreState) => state.settings.background);
-  const foreground = useSelector((state: StoreState) => state.settings.foreground);
-  const dispatch = useDispatch();
+  const { themeType, setThemeType } = useContext(ThemeTypeContext);
+  const { timeFormat, setTimeFormat } = useContext(TimeFormatContext);
+  const { foreground, setForeground } = useContext(ForegroundContext);
+  const { background, setBackground } = useContext(BackgroundContext);
 
   return (
     <StyledPaper>
@@ -36,11 +33,9 @@ const Settings = () => {
         <StyledFormControl>
           <InputLabel>Theme</InputLabel>
           <Select
-            value={type}
+            value={themeType}
             onChange={(e) => {
-              dispatch(saveSettings({
-                theme: { type: e.target.value as ThemeType }, timeFormat, background, foreground,
-              }));
+              setThemeType(e.target.value as ThemeType);
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -53,9 +48,7 @@ const Settings = () => {
           <Select
             value={timeFormat}
             onChange={(e) => {
-              dispatch(saveSettings({
-                theme: { type }, timeFormat: e.target.value as string, background, foreground,
-              }));
+              setTimeFormat(e.target.value as TimeFormat);
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -68,9 +61,7 @@ const Settings = () => {
           <Select
             value={background}
             onChange={(e) => {
-              dispatch(saveSettings({
-                theme: { type }, timeFormat, background: e.target.value as BackgroundType, foreground,
-              }));
+              setBackground(e.target.value as Background);
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -84,9 +75,7 @@ const Settings = () => {
           <Select
             value={foreground}
             onChange={(e) => {
-              dispatch(saveSettings({
-                theme: { type }, timeFormat, background, foreground: e.target.value as ForegroundType,
-              }));
+              setForeground(e.target.value as Foreground);
             }}
           >
             <MenuItem value="default">Default</MenuItem>
