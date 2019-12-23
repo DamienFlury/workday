@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Typography, Button } from '@material-ui/core';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import { fromUnixTime } from 'date-fns';
 import Widget from './Widget';
 import useNow from '../../hooks/use-now';
 // import { humanizeWithMinutes } from '../../utils/time-helpers';
-import { StoreState } from '../../store/store';
 import { formatDistanceWithPrefix } from '../../utils/time-helpers';
+import { WeatherContext } from '../../providers/WeatherProvider';
 
 const StyledButton = styled(Button)`
   margin-top: 20px;
@@ -20,9 +19,9 @@ interface IProps {
 const Weather: React.FC<IProps> = ({ className }) => {
   const now = useNow(10000);
 
-  const weather = useSelector((state: StoreState) => state.weather.data);
-  const status = useSelector((state: StoreState) => state.weather.status);
-  const permission = useSelector((state: StoreState) => state.weather.permission);
+
+  const weather = useContext(WeatherContext);
+
 
   return (
     <Widget className={className}>
@@ -33,7 +32,7 @@ const Weather: React.FC<IProps> = ({ className }) => {
             {' '}
             {weather.name && `in ${weather.name}`}
           </Typography>
-          {status === 'success' && (
+          {true && (
           <div>
             <Typography>
 Temperature:
@@ -66,7 +65,7 @@ m/s
               {formatDistanceWithPrefix(now, fromUnixTime(weather.sys.sunset), true)}
 .
             </Typography>
-            {permission === 'granted'
+            {false
           || (
           <StyledButton
             onClick={() => navigator.geolocation.getCurrentPosition(() => {})}
@@ -75,8 +74,7 @@ m/s
 Use my location
 
           </StyledButton>
-          )
-          }
+          )}
           </div>
           )}
         </>
