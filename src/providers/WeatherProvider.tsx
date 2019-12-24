@@ -63,18 +63,14 @@ const WeatherProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const fetchWeather = async ({ longitude, latitude }: { longitude: number; latitude: number}): Promise<void> => {
-      try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${
-            latitude
-          }&lon=${longitude}&units=metric&APPID=64bc522c0dff1a806fad66f6e0069206`,
-        );
-        const newWeather = await response.json();
-        if (!newWeather.cod) {
-          setWeather(newWeather);
-        }
-      } catch {
-        console.log('error');
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${
+          latitude
+        }&lon=${longitude}&units=metric&APPID=64bc522c0dff1a806fad66f6e0069206`,
+      );
+      const newWeather = await response.json();
+      if (!newWeather.cod || (newWeather.cod >= 200 && newWeather.cod < 300)) {
+        setWeather(newWeather);
       }
     };
     if (navigator.permissions) {
