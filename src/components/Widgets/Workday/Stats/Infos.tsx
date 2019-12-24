@@ -6,15 +6,15 @@ import {
 import { calculatePercentage, formatDistanceWithPrefix } from '../../../../utils/time-helpers';
 
 
-interface IProps {
-  readonly startTime: Date,
-  readonly currentTime: Date,
-  readonly endTime: Date,
-  readonly lunchStartTime: Date,
-  readonly lunchEndTime: Date,
+type Props = {
+  startTime: Date;
+  currentTime: Date;
+  endTime: Date;
+  lunchStartTime: Date;
+  lunchEndTime: Date;
 }
 
-const Infos: React.FC<IProps> = ({
+const Infos: React.FC<Props> = ({
   startTime, currentTime, endTime, lunchStartTime, lunchEndTime,
 }) => (
   <>

@@ -12,15 +12,15 @@ const StyledButton = styled(Button)`
   margin-top: 20px;
 `;
 
-interface IProps {
-  readonly className?: string,
+type Props = {
+  readonly className?: string;
 }
 
-const Weather: React.FC<IProps> = ({ className }) => {
+const Weather: React.FC<Props> = ({ className }) => {
   const now = useNow(10000);
 
 
-  const weather = useContext(WeatherContext);
+  const { weather, permission } = useContext(WeatherContext);
 
 
   return (
@@ -65,10 +65,12 @@ m/s
               {formatDistanceWithPrefix(now, fromUnixTime(weather.sys.sunset), true)}
 .
             </Typography>
-            {false
+            {permission === 'granted'
           || (
           <StyledButton
-            onClick={() => navigator.geolocation.getCurrentPosition(() => {})}
+            onClick={() => navigator.geolocation.getCurrentPosition(() => {
+              // do nothing, used to request permissions
+            })}
             variant="contained"
           >
 Use my location

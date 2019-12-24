@@ -4,15 +4,15 @@ import { differenceInSeconds } from 'date-fns/esm';
 import { calculatePercentage } from '../../../../utils/time-helpers';
 
 
-interface IProps {
-  readonly startTime: Date,
-  readonly endTime: Date,
-  readonly currentTime: Date,
-  readonly lunchStartTime: Date,
-  readonly lunchEndTime: Date,
+type Props = {
+  startTime: Date;
+  endTime: Date;
+  currentTime: Date;
+  lunchStartTime: Date;
+  lunchEndTime: Date;
 }
 
-const WorkProgress: React.FC<IProps> = ({
+const WorkProgress: React.FC<Props> = ({
   startTime,
   endTime,
   currentTime,
