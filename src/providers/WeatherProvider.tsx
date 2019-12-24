@@ -1,7 +1,6 @@
 import React, {
   createContext, useEffect, useState,
 } from 'react';
-import usePosition from '../hooks/usePosition';
 
 
 type Weather = {
