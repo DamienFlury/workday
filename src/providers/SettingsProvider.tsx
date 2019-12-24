@@ -7,10 +7,10 @@ export type TimeFormat = '24h' | 'ampm' | 'default';
 
 
 export type Settings = {
-  themeType: ThemeType,
-  timeFormat: string,
-  background: BackgroundType,
-  foreground: ForegroundType
+  themeType: ThemeType;
+  timeFormat: string;
+  background: BackgroundType;
+  foreground: ForegroundType;
 }
 
 const SettingsContext = React.createContext<Settings>({

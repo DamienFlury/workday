@@ -5,7 +5,7 @@ module.exports = {
     jest: true,
   },
   parser: '@typescript-eslint/parser',
-  extends: [ 'airbnb' ],
+  extends: [ 'airbnb', 'plugin:@typescript-eslint/recommended' ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    'react-hooks'
   ],
   rules: {
     'max-len': 'off',
@@ -26,8 +27,10 @@ module.exports = {
     'no-nested-ternary': 'off',
     'react/jsx-filename-extension': ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     'no-unused-vars': 'off',
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn",
     'import/prefer-default-export': 'off',
-    "import/extensions": [".js", ".jsx", ".json", ".ts", ".tsx"],
+    'import/extensions': 'off',
   },
   settings: {
     'import/resolver': {

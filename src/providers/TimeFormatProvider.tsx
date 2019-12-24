@@ -3,13 +3,15 @@ import React, { useState } from 'react';
 export type TimeFormat = 'ampm' | '24h' | 'default';
 
 type TimeFormatState = {
-  timeFormat: TimeFormat,
-  setTimeFormat: (format: TimeFormat) => void,
+  timeFormat: TimeFormat;
+  setTimeFormat: (format: TimeFormat) => void;
 }
 
 const initialState: TimeFormatState = {
   timeFormat: 'default',
-  setTimeFormat: () => {},
+  setTimeFormat: () => {
+    // do nothing
+  },
 };
 
 export const TimeFormatContext = React.createContext<TimeFormatState>(initialState);
