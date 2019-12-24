@@ -10,11 +10,11 @@ const StyledText = styled.span`
   margin-bottom: 20px;
   `;
 
-interface IProps {
-  readonly className?: string,
+type Props = {
+  readonly className?: string;
 }
 
-const Quote: React.FC<IProps> = ({ className }) => {
+const Quote: React.FC<Props> = ({ className }) => {
   const quote = useContext(QuoteContext);
 
   return (

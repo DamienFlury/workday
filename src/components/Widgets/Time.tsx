@@ -5,11 +5,11 @@ import Widget from './Widget';
 import useNow from '../../hooks/use-now';
 import useFormatter from '../../hooks/use-formatter';
 
-interface IProps {
-  readonly className?: string
+type Props = {
+  className?: string;
 }
 
-const Time : React.FC<IProps> = ({ className }) => {
+const Time: React.FC<Props> = ({ className }) => {
   const now = useNow(1000);
 
   const { formatTime } = useFormatter();

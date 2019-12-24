@@ -17,14 +17,14 @@ const BottomText = styled.div<{ marginLeft: string}>`
   margin-bottom: 20px;
 `;
 
-interface IProps {
-  readonly start: Date,
-  readonly end: Date,
-  readonly lunchStart: Date,
-  readonly lunchEnd: Date,
+type Props = {
+  start: Date;
+  end: Date;
+  lunchStart: Date;
+  lunchEnd: Date;
 }
 
-const Stats: React.FC<IProps> = ({
+const Stats: React.FC<Props> = ({
   start, end, lunchStart, lunchEnd,
 }) => {
   const now = useNow(1000);

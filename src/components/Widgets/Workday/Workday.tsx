@@ -13,15 +13,15 @@ import Widget from '../Widget';
 import Stats from './Stats/Stats';
 import { TimeFormatContext } from '../../../providers/TimeFormatProvider';
 
-interface IProps {
-  readonly className?: string,
+type Props = {
+  className?: string;
 }
 
 const ErrorMessage = styled.p`
   color: #dd0000;
 `;
 
-const Workday: React.FC<IProps> = ({ className }) => {
+const Workday: React.FC<Props> = ({ className }) => {
   const [startTime, setStartTime] = useState(parse(localStorage.getItem('startTime') || '09:00', 'HH:mm', new Date()));
   const [lunchStart, setLunchStart] = useState(parse(localStorage.getItem('lunchStart') || '12:00', 'HH:mm', new Date()));
   const [lunchEnd, setLunchEnd] = useState(parse(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm', new Date()));

@@ -3,11 +3,11 @@ import {
   AppBar, Toolbar, Typography, Button,
 } from '@material-ui/core';
 
-interface IProps {
-  readonly onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+type Props = {
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-const NavBar: React.FC<IProps> = ({ onClick }) => (
+const NavBar: React.FC<Props> = ({ onClick }) => (
   <AppBar position="sticky">
     <Toolbar>
       <Typography variant="h6" style={{ flex: 1 }}>Go Home</Typography>
