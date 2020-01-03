@@ -1,6 +1,6 @@
 {
   "name": "go-home",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.11",
@@ -18,7 +18,6 @@
     "date-fns": "^2.6.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-native": "^0.60.5",
     "react-scripts": "3.3.0",
     "serialize-javascript": "^2.1.2",
     "styled-components": "^4.3.2",
