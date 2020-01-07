@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export type TimeFormat = 'ampm' | '24h' | 'default';
 
@@ -7,8 +7,13 @@ type TimeFormatState = {
   setTimeFormat: (format: TimeFormat) => void;
 }
 
+const getInitialTimeFormat = () => {
+  const fromLocalStorage = localStorage.getItem('time-format');
+  return fromLocalStorage === '24h' || fromLocalStorage === 'ampm' ? fromLocalStorage : 'default';
+};
+
 const initialState: TimeFormatState = {
-  timeFormat: 'default',
+  timeFormat: getInitialTimeFormat(),
   setTimeFormat: () => {
     // do nothing
   },
@@ -18,6 +23,10 @@ export const TimeFormatContext = React.createContext<TimeFormatState>(initialSta
 
 const TimeFormatProvider: React.FC = ({ children }) => {
   const [timeFormat, setTimeFormat] = useState(initialState.timeFormat);
+
+  useEffect(() => {
+    localStorage.setItem('time-format', timeFormat);
+  }, [timeFormat]);
 
   return (
     <TimeFormatContext.Provider value={{ timeFormat, setTimeFormat }}>

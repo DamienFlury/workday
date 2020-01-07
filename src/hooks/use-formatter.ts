@@ -8,7 +8,7 @@ const useFormatter = () => {
   const formatTime = (date: Date) => {
     switch (timeFormat) {
       case 'ampm':
-        return format(date, 'h:mm A');
+        return format(date, 'h:mm a');
       case '24h':
         return format(date, 'HH:mm');
       default:
