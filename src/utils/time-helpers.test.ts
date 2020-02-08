@@ -1,4 +1,4 @@
-import { formatPercentage, formatDistanceCustom } from './time-helpers';
+import { formatPercentage, formatDistanceCustom, formatDistanceWithPrefix } from './time-helpers';
 
 describe('format percentage works', () => {
   it('calculates 50 of 100 as 50%', () => {
@@ -52,11 +52,42 @@ describe('format distance custom works', () => {
     const result = formatDistanceCustom(second, first);
     expect(result).toBe('3 hours and 25 minutes');
   });
-  it('works with hours and minutes with earlier seconds > later seconds', () => {
+  it('works with hours and minutes with earlier minutes > later minutes', () => {
     const first = new Date(0, 0, 0, 2, 25);
     const second = new Date(0, 0, 0, 5, 14);
 
     const result = formatDistanceCustom(first, second);
     expect(result).toBe('2 hours and 49 minutes');
+  });
+  it('ignores seconds', () => {
+    const first = new Date(0, 0, 0, 1, 32, 10);
+    const second = new Date(0, 0, 0, 4, 44, 59);
+
+    const result = formatDistanceCustom(first, second);
+    expect(result).toBe('3 hours and 12 minutes');
+  });
+});
+
+describe('format distance with prefix works', () => {
+  it('works for future', () => {
+    const first = new Date(0, 0, 0, 2, 23);
+    const second = new Date(0, 0, 0, 3, 33);
+
+    const result = formatDistanceWithPrefix(first, second, true);
+    expect(result).toBe('is in 1 hour and 10 minutes');
+  });
+  it('works for past', () => {
+    const first = new Date(0, 0, 0, 3, 56);
+    const second = new Date(0, 0, 0, 4, 12);
+
+    const result = formatDistanceWithPrefix(second, first, true);
+    expect(result).toBe('was 16 minutes ago');
+  });
+  it('works without predicate', () => {
+    const first = new Date(0, 0, 0, 0, 1);
+    const second = new Date(0, 0, 0, 0, 2);
+
+    const result = formatDistanceWithPrefix(first, second);
+    expect(result).toBe('in 1 minute');
   });
 });

@@ -31,6 +31,7 @@ export const formatDistanceCustom = (first: Date, second: Date) => {
   )}`;
   // return `${Math.abs(duration.hours())} hours and ${Math.abs(duration.minutes())} minutes`;
 };
+
 export const formatDistanceWithPrefix = (
   first: Date,
   second: Date,
