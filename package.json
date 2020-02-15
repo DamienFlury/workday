@@ -22,7 +22,7 @@
     "serialize-javascript": "^2.1.2",
     "styled-components": "^5.0.0",
     "typescript": "^3.7.3",
-    "yarn": "^1.17.3"
+    "yarn": "^1.22.0"
   },
   "scripts": {
     "start": "react-scripts start",
