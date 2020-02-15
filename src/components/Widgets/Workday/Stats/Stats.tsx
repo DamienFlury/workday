@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Typography, Box } from '@material-ui/core';
 import styled from 'styled-components';
 import { differenceInSeconds } from 'date-fns';
-import { calculatePercentage } from '../../../../utils/time-helpers';
+import { formatPercentage } from '../../../../utils/time-helpers';
 import Infos from './Infos';
 import WorkProgress from './WorkProgress';
 import useNow from '../../../../hooks/use-now';
@@ -29,7 +29,7 @@ const Stats: React.FC<Props> = ({
 }) => {
   const now = useNow(1000);
 
-  const percentage = useMemo(() => calculatePercentage(differenceInSeconds(end, start), differenceInSeconds(now, start)),
+  const percentage = useMemo(() => formatPercentage(differenceInSeconds(end, start), differenceInSeconds(now, start)),
     [start, now, end]);
 
   const { formatTime } = useFormatter();

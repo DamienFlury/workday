@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import {
   differenceInSeconds,
 } from 'date-fns';
-import { calculatePercentage, formatDistanceWithPrefix } from '../../../../utils/time-helpers';
+import { formatPercentage, formatDistanceWithPrefix } from '../../../../utils/time-helpers';
 
 
 type Props = {
@@ -19,15 +19,15 @@ const Infos: React.FC<Props> = ({
 }) => (
   <>
     <Typography>
-Progress (workday):
+      Progress (workday):
       {' '}
-      {calculatePercentage(differenceInSeconds(endTime, startTime), differenceInSeconds(currentTime, startTime)).toFixed(2)}
-%
+      {formatPercentage(differenceInSeconds(endTime, startTime), differenceInSeconds(currentTime, startTime)).toFixed(2)}
+      %
     </Typography>
     {/* <Typography>
       Progress (work only):
       {' '}
-      {calculatePercentage(endTime - startTime - (lunchEndTime - lunchStartTime), currentTime - startTime).toFixed(2)}
+      {formatPercentage(endTime - startTime - (lunchEndTime - lunchStartTime), currentTime - startTime).toFixed(2)}
 %
     </Typography> */}
     <Typography>
@@ -38,10 +38,10 @@ Progress (workday):
     {true
     && (
     <Typography>
-You can leave
+      You can leave
       {' '}
       {formatDistanceWithPrefix(currentTime, endTime)}
-.
+      .
     </Typography>
     )
       }
