@@ -1,4 +1,8 @@
-import { formatPercentage, formatDistanceCustom, formatDistanceWithPrefix } from './time-helpers';
+import {
+  formatPercentage,
+  formatDistanceCustom,
+  formatDistanceWithPrefix,
+} from './time-helpers';
 
 describe('format percentage works', () => {
   it('calculates 50 of 100 as 50%', () => {

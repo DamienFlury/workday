@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Box, Typography,
-} from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import {
   KeyboardTimePicker,
   MuiPickersUtilsProvider,
@@ -15,23 +13,30 @@ import { TimeFormatContext } from '../../../providers/TimeFormatProvider';
 
 type Props = {
   className?: string;
-}
+};
 
 const ErrorMessage = styled.p`
   color: #dd0000;
 `;
 
 const Workday: React.FC<Props> = ({ className }) => {
-  const [startTime, setStartTime] = useState(parse(localStorage.getItem('startTime') || '09:00', 'HH:mm', new Date()));
-  const [lunchStart, setLunchStart] = useState(parse(localStorage.getItem('lunchStart') || '12:00', 'HH:mm', new Date()));
-  const [lunchEnd, setLunchEnd] = useState(parse(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm', new Date()));
-  const [endTime, setEndTime] = useState(parse(localStorage.getItem('endTime') || '17:00', 'HH:mm', new Date()));
-
+  const [startTime, setStartTime] = useState(
+    parse(localStorage.getItem('startTime') || '09:00', 'HH:mm', new Date())
+  );
+  const [lunchStart, setLunchStart] = useState(
+    parse(localStorage.getItem('lunchStart') || '12:00', 'HH:mm', new Date())
+  );
+  const [lunchEnd, setLunchEnd] = useState(
+    parse(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm', new Date())
+  );
+  const [endTime, setEndTime] = useState(
+    parse(localStorage.getItem('endTime') || '17:00', 'HH:mm', new Date())
+  );
 
   const { timeFormat } = useContext(TimeFormatContext);
 
-  const ampm = timeFormat === 'ampm' ? true : timeFormat === '24h' ? false : undefined;
-
+  const ampm =
+    timeFormat === 'ampm' ? true : timeFormat === '24h' ? false : undefined;
 
   useEffect(() => {
     localStorage.setItem('startTime', format(startTime, 'HH:mm'));
@@ -48,7 +53,9 @@ const Workday: React.FC<Props> = ({ className }) => {
 
   return (
     <Widget className={className}>
-      <Typography variant="h4" gutterBottom>Workday</Typography>
+      <Typography variant="h4" gutterBottom>
+        Workday
+      </Typography>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Box margin="20px">
           <KeyboardTimePicker
@@ -57,7 +64,9 @@ const Workday: React.FC<Props> = ({ className }) => {
             value={startTime}
             onChange={t => setStartTime(t || new Date())}
           />
-          {startTime > lunchStart && <ErrorMessage>Start time must be before lunch.</ErrorMessage>}
+          {startTime > lunchStart && (
+            <ErrorMessage>Start time must be before lunch.</ErrorMessage>
+          )}
         </Box>
         <Box margin="20px">
           <KeyboardTimePicker
@@ -67,7 +76,9 @@ const Workday: React.FC<Props> = ({ className }) => {
             value={lunchStart}
             onChange={t => setLunchStart(t || new Date())}
           />
-          {lunchStart > lunchEnd && <ErrorMessage>Lunch start must be before lunch end.</ErrorMessage>}
+          {lunchStart > lunchEnd && (
+            <ErrorMessage>Lunch start must be before lunch end.</ErrorMessage>
+          )}
         </Box>
         <Box margin="20px">
           <KeyboardTimePicker
@@ -77,7 +88,9 @@ const Workday: React.FC<Props> = ({ className }) => {
             value={lunchEnd}
             onChange={t => setLunchEnd(t || new Date())}
           />
-          {lunchEnd > endTime && <ErrorMessage>Lunch must be before going home.</ErrorMessage>}
+          {lunchEnd > endTime && (
+            <ErrorMessage>Lunch must be before going home.</ErrorMessage>
+          )}
         </Box>
         <Box margin="20px">
           <KeyboardTimePicker
@@ -90,7 +103,12 @@ const Workday: React.FC<Props> = ({ className }) => {
         </Box>
       </MuiPickersUtilsProvider>
       <Box marginTop="50px">
-        <Stats start={startTime} end={endTime} lunchStart={lunchStart} lunchEnd={lunchEnd} />
+        <Stats
+          start={startTime}
+          end={endTime}
+          lunchStart={lunchStart}
+          lunchEnd={lunchEnd}
+        />
       </Box>
     </Widget>
   );

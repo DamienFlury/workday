@@ -19,5 +19,4 @@ const useFormatter = () => {
   return { formatTime };
 };
 
-
 export default useFormatter;

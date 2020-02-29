@@ -8,25 +8,19 @@ const StyledText = styled.span`
   font-family: Indie Flower;
   font-size: 1.5rem;
   margin-bottom: 20px;
-  `;
+`;
 
 type Props = {
   readonly className?: string;
-}
+};
 
 const Quote: React.FC<Props> = ({ className }) => {
   const quote = useContext(QuoteContext);
 
   return (
     <Widget className={className}>
-      <StyledText>
-        {quote.quote}
-      </StyledText>
-      <StyledText>
--
-        {' '}
-        {quote.author}
-      </StyledText>
+      <StyledText>{quote.quote}</StyledText>
+      <StyledText>- {quote.author}</StyledText>
     </Widget>
   );
 };

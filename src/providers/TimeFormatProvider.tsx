@@ -5,11 +5,13 @@ export type TimeFormat = 'ampm' | '24h' | 'default';
 type TimeFormatState = {
   timeFormat: TimeFormat;
   setTimeFormat: (format: TimeFormat) => void;
-}
+};
 
 const getInitialTimeFormat = () => {
   const fromLocalStorage = localStorage.getItem('time-format');
-  return fromLocalStorage === '24h' || fromLocalStorage === 'ampm' ? fromLocalStorage : 'default';
+  return fromLocalStorage === '24h' || fromLocalStorage === 'ampm'
+    ? fromLocalStorage
+    : 'default';
 };
 
 const initialState: TimeFormatState = {
@@ -19,7 +21,9 @@ const initialState: TimeFormatState = {
   },
 };
 
-export const TimeFormatContext = React.createContext<TimeFormatState>(initialState);
+export const TimeFormatContext = React.createContext<TimeFormatState>(
+  initialState
+);
 
 const TimeFormatProvider: React.FC = ({ children }) => {
   const [timeFormat, setTimeFormat] = useState(initialState.timeFormat);
