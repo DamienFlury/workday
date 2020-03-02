@@ -4,7 +4,7 @@ import {
   KeyboardTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-import { parse, format } from 'date-fns';
+import { parse, format, isValid } from 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import styled from 'styled-components';
 import Widget from '../Widget';
@@ -20,23 +20,54 @@ const ErrorMessage = styled.p`
 `;
 
 const Workday: React.FC<Props> = ({ className }) => {
-  const [startTime, setStartTime] = useState(
+  const [startTimeFieldValue, setStartTimeFieldValue] = useState<null | Date>(
     parse(localStorage.getItem('startTime') || '09:00', 'HH:mm', new Date())
   );
-  const [lunchStart, setLunchStart] = useState(
+  const [lunchStartFieldValue, setLunchStartFieldValue] = useState<null | Date>(
     parse(localStorage.getItem('lunchStart') || '12:00', 'HH:mm', new Date())
   );
-  const [lunchEnd, setLunchEnd] = useState(
+  const [lunchEndFieldValue, setLunchEndFieldValue] = useState<null | Date>(
     parse(localStorage.getItem('lunchEnd') || '13:00', 'HH:mm', new Date())
   );
-  const [endTime, setEndTime] = useState(
+  const [endTimeFieldValue, setEndTimeFieldValue] = useState<null | Date>(
     parse(localStorage.getItem('endTime') || '17:00', 'HH:mm', new Date())
   );
+
+  const [startTime, setStartTime] = useState(startTimeFieldValue ?? new Date());
+  const [lunchStart, setLunchStart] = useState(
+    lunchStartFieldValue ?? new Date()
+  );
+  const [lunchEnd, setLunchEnd] = useState(lunchEndFieldValue ?? new Date());
+  const [endTime, setEndTime] = useState(endTimeFieldValue ?? new Date());
 
   const { timeFormat } = useContext(TimeFormatContext);
 
   const ampm =
     timeFormat === 'ampm' ? true : timeFormat === '24h' ? false : undefined;
+
+  useEffect(() => {
+    if (isValid(startTimeFieldValue)) {
+      setStartTime(startTimeFieldValue ?? new Date());
+    }
+  }, [startTimeFieldValue]);
+
+  useEffect(() => {
+    if (isValid(lunchStartFieldValue)) {
+      setLunchStart(lunchStartFieldValue ?? new Date());
+    }
+  }, [lunchStartFieldValue]);
+
+  useEffect(() => {
+    if (isValid(lunchEndFieldValue)) {
+      setLunchEnd(lunchEndFieldValue ?? new Date());
+    }
+  }, [lunchEndFieldValue]);
+
+  useEffect(() => {
+    if (isValid(endTimeFieldValue)) {
+      setEndTime(endTimeFieldValue ?? new Date());
+    }
+  }, [endTimeFieldValue]);
 
   useEffect(() => {
     localStorage.setItem('startTime', format(startTime, 'HH:mm'));
@@ -61,8 +92,8 @@ const Workday: React.FC<Props> = ({ className }) => {
           <KeyboardTimePicker
             ampm={ampm}
             label="Start"
-            value={startTime}
-            onChange={t => setStartTime(t || new Date())}
+            value={startTimeFieldValue}
+            onChange={setStartTimeFieldValue}
           />
           {startTime > lunchStart && (
             <ErrorMessage>Start time must be before lunch.</ErrorMessage>
@@ -73,8 +104,8 @@ const Workday: React.FC<Props> = ({ className }) => {
             ampm={ampm}
             label="Lunch Start"
             inputProps={{ step: 300 }}
-            value={lunchStart}
-            onChange={t => setLunchStart(t || new Date())}
+            value={lunchStartFieldValue}
+            onChange={setLunchStartFieldValue}
           />
           {lunchStart > lunchEnd && (
             <ErrorMessage>Lunch start must be before lunch end.</ErrorMessage>
@@ -85,8 +116,8 @@ const Workday: React.FC<Props> = ({ className }) => {
             ampm={ampm}
             label="Lunch End"
             inputProps={{ step: 300 }}
-            value={lunchEnd}
-            onChange={t => setLunchEnd(t || new Date())}
+            value={lunchEndFieldValue}
+            onChange={setLunchEndFieldValue}
           />
           {lunchEnd > endTime && (
             <ErrorMessage>Lunch must be before going home.</ErrorMessage>
@@ -97,8 +128,8 @@ const Workday: React.FC<Props> = ({ className }) => {
             ampm={ampm}
             label="End"
             inputProps={{ step: 300 }}
-            value={endTime}
-            onChange={t => setEndTime(t || new Date())}
+            value={endTimeFieldValue}
+            onChange={setEndTimeFieldValue}
           />
         </Box>
       </MuiPickersUtilsProvider>
