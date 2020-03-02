@@ -1,17 +1,19 @@
 import React from 'react';
-import {
-  AppBar, Toolbar, Typography, Button,
-} from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
 type Props = {
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-}
+};
 
 const NavBar: React.FC<Props> = ({ onClick }) => (
   <AppBar position="sticky">
     <Toolbar>
-      <Typography variant="h6" style={{ flex: 1 }}>Go Home</Typography>
-      <Button variant="contained" onClick={onClick}>Settings</Button>
+      <Typography variant="h6" style={{ flex: 1 }}>
+        Go Home
+      </Typography>
+      <Button variant="contained" onClick={onClick}>
+        Settings
+      </Button>
     </Toolbar>
   </AppBar>
 );

@@ -11,14 +11,15 @@ const Grid = styled.div`
   grid-gap: 20px;
   grid-template-columns: 2fr 1fr;
   grid-template-areas:
-  "time time"
-  "workday workday"
-  "weather weather"
-  "quote quote";
-  @media(min-width: 1024px) {
-    grid-template-areas: "workday time"
-    "workday weather"
-    "workday quote";
+    'time time'
+    'workday workday'
+    'weather weather'
+    'quote quote';
+  @media (min-width: 1024px) {
+    grid-template-areas:
+      'workday time'
+      'workday weather'
+      'workday quote';
   }
   background: inherit;
 `;

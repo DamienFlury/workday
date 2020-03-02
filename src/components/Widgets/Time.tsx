@@ -7,7 +7,7 @@ import useFormatter from '../../hooks/use-formatter';
 
 type Props = {
   className?: string;
-}
+};
 
 const Time: React.FC<Props> = ({ className }) => {
   const now = useNow(1000);
@@ -16,7 +16,9 @@ const Time: React.FC<Props> = ({ className }) => {
 
   return (
     <Widget className={className}>
-      <Typography variant="h4" gutterBottom>{formatTime(now)}</Typography>
+      <Typography variant="h4" gutterBottom>
+        {formatTime(now)}
+      </Typography>
       <Typography>{format(now, 'PPPP')}</Typography>
     </Widget>
   );

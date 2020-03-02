@@ -1,10 +1,10 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
+import { differenceInSeconds } from 'date-fns';
 import {
-  differenceInSeconds,
-} from 'date-fns';
-import { formatPercentage, formatDistanceWithPrefix } from '../../../../utils/time-helpers';
-
+  formatPercentage,
+  formatDistanceWithPrefix,
+} from '../../../../utils/time-helpers';
 
 type Props = {
   startTime: Date;
@@ -12,16 +12,22 @@ type Props = {
   endTime: Date;
   lunchStartTime: Date;
   lunchEndTime: Date;
-}
+};
 
 const Infos: React.FC<Props> = ({
-  startTime, currentTime, endTime, lunchStartTime, lunchEndTime,
+  startTime,
+  currentTime,
+  endTime,
+  lunchStartTime,
+  lunchEndTime,
 }) => (
   <>
     <Typography>
-      Progress (workday):
-      {' '}
-      {formatPercentage(differenceInSeconds(endTime, startTime), differenceInSeconds(currentTime, startTime)).toFixed(2)}
+      Progress (workday):{' '}
+      {formatPercentage(
+        differenceInSeconds(endTime, startTime),
+        differenceInSeconds(currentTime, startTime)
+      ).toFixed(2)}
       %
     </Typography>
     {/* <Typography>
@@ -35,19 +41,17 @@ const Infos: React.FC<Props> = ({
         ? `You will start working in ${humanizeWithMinutes(moment.duration(currentTime.diff(startTime)))}`
         : `You started working ${humanizeWithMinutes(moment.duration(currentTime.diff(startTime)))} ago`} */}
     </Typography>
-    {true
-    && (
-    <Typography>
-      You can leave
-      {' '}
-      {formatDistanceWithPrefix(currentTime, endTime)}
-      .
-    </Typography>
-    )
-      }
+    {true && (
+      <Typography>
+        You can leave {formatDistanceWithPrefix(currentTime, endTime)}.
+      </Typography>
+    )}
     <Typography variant="h6">
       {currentTime > lunchStartTime && currentTime < lunchEndTime
-        ? 'Lunch Time 😄' : currentTime > endTime ? 'Time to go home 👋' : 'Working 💼'}
+        ? 'Lunch Time 😄'
+        : currentTime > endTime
+        ? 'Time to go home 👋'
+        : 'Working 💼'}
     </Typography>
   </>
 );

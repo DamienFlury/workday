@@ -1,6 +1,10 @@
 import React, { useContext } from 'react';
 import {
-  Typography, Select, MenuItem, FormControl, InputLabel,
+  Typography,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from '@material-ui/core';
 import styled from 'styled-components';
 import Widget from './Widgets/Widget';
@@ -34,7 +38,7 @@ const Settings = () => {
           <InputLabel>Theme</InputLabel>
           <Select
             value={themeType}
-            onChange={(e) => {
+            onChange={e => {
               setThemeType(e.target.value as ThemeType);
             }}
           >
@@ -47,7 +51,7 @@ const Settings = () => {
           <InputLabel>Time format</InputLabel>
           <Select
             value={timeFormat}
-            onChange={(e) => {
+            onChange={e => {
               setTimeFormat(e.target.value as TimeFormat);
             }}
           >
@@ -60,7 +64,7 @@ const Settings = () => {
           <InputLabel>Background</InputLabel>
           <Select
             value={background}
-            onChange={(e) => {
+            onChange={e => {
               setBackground(e.target.value as Background);
             }}
           >
@@ -74,7 +78,7 @@ const Settings = () => {
           <InputLabel>Foreground</InputLabel>
           <Select
             value={foreground}
-            onChange={(e) => {
+            onChange={e => {
               setForeground(e.target.value as Foreground);
             }}
           >

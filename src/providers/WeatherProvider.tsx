@@ -1,16 +1,15 @@
-import React, {
-  createContext, useEffect, useState,
-} from 'react';
-
+import React, { createContext, useEffect, useState } from 'react';
 
 type Weather = {
   name: string;
   main: {
     temp: number;
   };
-  weather: [{
-    description: string;
-  }];
+  weather: [
+    {
+      description: string;
+    }
+  ];
   wind: {
     speed: number;
   };
@@ -23,7 +22,7 @@ type Weather = {
 type WeatherState = {
   weather: Weather;
   permission: string;
-}
+};
 
 const initialState: WeatherState = {
   weather: {
@@ -31,9 +30,11 @@ const initialState: WeatherState = {
     main: {
       temp: 0,
     },
-    weather: [{
-      description: '',
-    }],
+    weather: [
+      {
+        description: '',
+      },
+    ],
     wind: {
       speed: 0,
     },
@@ -53,20 +54,26 @@ const WeatherProvider: React.FC = ({ children }) => {
 
   const [permission, setPermission] = useState('prompt');
 
-  navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
-    setPermission(permissionStatus.state);
-    // eslint-disable-next-line no-param-reassign
-    permissionStatus.onchange = (status) => {
-      setPermission((status as any).state);
-    };
-  });
+  navigator.permissions
+    .query({ name: 'geolocation' })
+    .then(permissionStatus => {
+      setPermission(permissionStatus.state);
+      // eslint-disable-next-line no-param-reassign
+      permissionStatus.onchange = status => {
+        setPermission((status as any).state);
+      };
+    });
 
   useEffect(() => {
-    const fetchWeather = async ({ longitude, latitude }: { longitude: number; latitude: number}): Promise<void> => {
+    const fetchWeather = async ({
+      longitude,
+      latitude,
+    }: {
+      longitude: number;
+      latitude: number;
+    }): Promise<void> => {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${
-          latitude
-        }&lon=${longitude}&units=metric&APPID=64bc522c0dff1a806fad66f6e0069206`,
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=64bc522c0dff1a806fad66f6e0069206`
       );
       const newWeather = await response.json();
       if (!newWeather.cod || (newWeather.cod >= 200 && newWeather.cod < 300)) {
@@ -74,28 +81,30 @@ const WeatherProvider: React.FC = ({ children }) => {
       }
     };
     if (navigator.permissions) {
-      navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
-        if (permissionStatus.state === 'granted') {
-          navigator.geolocation.getCurrentPosition((pos) => {
-            fetchWeather(pos.coords);
-          });
-        } else {
-          fetchWeather(sanFrancisco);
-        }
-        // eslint-disable-next-line no-param-reassign
-        permissionStatus.onchange = (status) => {
-          if (!status || !status.target) {
-            return;
-          }
-          if ((status.target as any).state === 'granted') {
-            navigator.geolocation.getCurrentPosition((pos) => {
+      navigator.permissions
+        .query({ name: 'geolocation' })
+        .then(permissionStatus => {
+          if (permissionStatus.state === 'granted') {
+            navigator.geolocation.getCurrentPosition(pos => {
               fetchWeather(pos.coords);
             });
           } else {
             fetchWeather(sanFrancisco);
           }
-        };
-      });
+          // eslint-disable-next-line no-param-reassign
+          permissionStatus.onchange = status => {
+            if (!status || !status.target) {
+              return;
+            }
+            if ((status.target as any).state === 'granted') {
+              navigator.geolocation.getCurrentPosition(pos => {
+                fetchWeather(pos.coords);
+              });
+            } else {
+              fetchWeather(sanFrancisco);
+            }
+          };
+        });
     } else {
       fetchWeather(sanFrancisco);
     }

@@ -14,70 +14,58 @@ const StyledButton = styled(Button)`
 
 type Props = {
   readonly className?: string;
-}
+};
 
 const Weather: React.FC<Props> = ({ className }) => {
   const now = useNow(10000);
 
-
   const { weather, permission } = useContext(WeatherContext);
-
 
   return (
     <Widget className={className}>
       {weather && (
         <>
           <Typography variant="h4" gutterBottom>
-        Weather
-            {' '}
-            {weather.name && `in ${weather.name}`}
+            Weather {weather.name && `in ${weather.name}`}
           </Typography>
           {true && (
-          <div>
-            <Typography>
-Temperature:
-              {' '}
-              {weather.main.temp}
-              {' '}
-&#176;C
-            </Typography>
-            <Typography>
-Description:
-              {' '}
-              {weather.weather[0].description}
-            </Typography>
-            <Typography>
-Windspeed:
-              {' '}
-              {weather.wind.speed}
-              {' '}
-m/s
-            </Typography>
-            <Typography>
-            Sunrise
-              {' '}
-              {formatDistanceWithPrefix(now, fromUnixTime(weather.sys.sunrise), true)}
-.
-            </Typography>
-            <Typography>
-            Sunset
-              {' '}
-              {formatDistanceWithPrefix(now, fromUnixTime(weather.sys.sunset), true)}
-.
-            </Typography>
-            {permission === 'granted'
-          || (
-          <StyledButton
-            onClick={() => navigator.geolocation.getCurrentPosition(() => {
-              // do nothing, used to request permissions
-            })}
-            variant="contained"
-          >
-Use my location
-
-          </StyledButton>
-          )}
-          </div>
+            <div>
+              <Typography>Temperature: {weather.main.temp} &#176;C</Typography>
+              <Typography>
+                Description: {weather.weather[0].description}
+              </Typography>
+              <Typography>Windspeed: {weather.wind.speed} m/s</Typography>
+              <Typography>
+                Sunrise{' '}
+                {formatDistanceWithPrefix(
+                  now,
+                  fromUnixTime(weather.sys.sunrise),
+                  true
+                )}
+                .
+              </Typography>
+              <Typography>
+                Sunset{' '}
+                {formatDistanceWithPrefix(
+                  now,
+                  fromUnixTime(weather.sys.sunset),
+                  true
+                )}
+                .
+              </Typography>
+              {permission === 'granted' || (
+                <StyledButton
+                  onClick={() =>
+                    navigator.geolocation.getCurrentPosition(() => {
+                      // do nothing, used to request permissions
+                    })
+                  }
+                  variant="contained"
+                >
+                  Use my location
+                </StyledButton>
+              )}
+            </div>
           )}
         </>
       )}

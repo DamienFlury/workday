@@ -10,9 +10,9 @@ type BackgroundState = {
 const getInitialBackground = () => {
   const fromLocalStorage = localStorage.getItem('background');
 
-  return fromLocalStorage === 'dark'
-    || fromLocalStorage === 'light'
-    || fromLocalStorage === 'image'
+  return fromLocalStorage === 'dark' ||
+    fromLocalStorage === 'light' ||
+    fromLocalStorage === 'image'
     ? fromLocalStorage
     : 'default';
 };

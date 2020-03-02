@@ -1,13 +1,16 @@
 export const calculatePercentage = (
   fullTimeSpan: number,
-  partialTimeSpan: number,
+  partialTimeSpan: number
 ) => (partialTimeSpan / fullTimeSpan) * 100;
 
-const delimit = (lower: number, upper: number) => (value: number) => (value < lower ? lower : value > upper ? upper : value);
+const delimit = (lower: number, upper: number) => (value: number) =>
+  value < lower ? lower : value > upper ? upper : value;
 
-export const formatPercentage = (full: number, partial: number) => delimit(0, 100)(calculatePercentage(full, partial));
+export const formatPercentage = (full: number, partial: number) =>
+  delimit(0, 100)(calculatePercentage(full, partial));
 
-const getMinutesString = (minutes: number) => (minutes === 1 ? 'minute' : 'minutes');
+const getMinutesString = (minutes: number) =>
+  minutes === 1 ? 'minute' : 'minutes';
 const getHoursString = (hours: number) => (hours === 1 ? 'hour' : 'hours');
 
 export const formatDistanceCustom = (first: Date, second: Date) => {
@@ -27,7 +30,7 @@ export const formatDistanceCustom = (first: Date, second: Date) => {
     return `${hours} ${getHoursString(hours)}`;
   }
   return `${hours} ${getHoursString(hours)} and ${minutes} ${getMinutesString(
-    minutes,
+    minutes
   )}`;
   // return `${Math.abs(duration.hours())} hours and ${Math.abs(duration.minutes())} minutes`;
 };
@@ -35,7 +38,7 @@ export const formatDistanceCustom = (first: Date, second: Date) => {
 export const formatDistanceWithPrefix = (
   first: Date,
   second: Date,
-  withPredicate = false,
+  withPredicate = false
 ) => {
   const future = second > first;
 

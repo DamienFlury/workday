@@ -3,10 +3,16 @@ import styled from 'styled-components';
 
 const Widget = styled(Paper)`
   padding: 40px;
-  /* background-color: ${props => (props.theme.foreground === 'transparent' ? props.theme.type === 'dark' ? 'rgba(0, 0, 0, .5)' : 'rgba(255, 255, 255, .5)' : null)}; */
+  /* background-color: ${props =>
+    props.theme.foreground === 'transparent'
+      ? props.theme.type === 'dark'
+        ? 'rgba(0, 0, 0, .5)'
+        : 'rgba(255, 255, 255, .5)'
+      : null}; */
   position: relative;
   z-index: 1;
-  background: ${props => (props.theme.foreground === 'transparent' ? 'inherit' : 'null')};
+  background: ${props =>
+    props.theme.foreground === 'transparent' ? 'inherit' : 'null'};
   overflow: hidden;
 
   &::before {
@@ -18,9 +24,12 @@ const Widget = styled(Paper)`
     left: 0;
     right: 0;
     bottom: 0;
-    box-shadow: ${props => (props.theme.foreground === 'transparent' ? props.theme.type === 'dark'
-    ? 'inset 0 0 2000px rgba(0, 0, 0, 0.9)' : 'inset 0 0 2000px rgba(255, 255, 255, 0.9)'
-    : null)};
+    box-shadow: ${props =>
+      props.theme.foreground === 'transparent'
+        ? props.theme.type === 'dark'
+          ? 'inset 0 0 2000px rgba(0, 0, 0, 0.9)'
+          : 'inset 0 0 2000px rgba(255, 255, 255, 0.9)'
+        : null};
     filter: blur(20px);
     margin: -20px;
   }
