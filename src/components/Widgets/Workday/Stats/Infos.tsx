@@ -41,11 +41,9 @@ const Infos: React.FC<Props> = ({
         ? `You will start working in ${humanizeWithMinutes(moment.duration(currentTime.diff(startTime)))}`
         : `You started working ${humanizeWithMinutes(moment.duration(currentTime.diff(startTime)))} ago`} */}
     </Typography>
-    {true && (
-      <Typography>
-        You can leave {formatDistanceWithPrefix(currentTime, endTime)}.
-      </Typography>
-    )}
+    <Typography>
+      You can leave {formatDistanceWithPrefix(currentTime, endTime)}.
+    </Typography>
     <Typography variant="h6">
       {currentTime > lunchStartTime && currentTime < lunchEndTime
         ? 'Lunch Time 😄'
