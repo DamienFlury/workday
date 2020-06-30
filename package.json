@@ -1,6 +1,6 @@
 {
-  "name": "go-home",
-  "version": "2.4.0",
+  "name": "workday",
+  "version": "2.5.0",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "1.x",

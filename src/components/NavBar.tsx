@@ -9,7 +9,7 @@ const NavBar: React.FC<Props> = ({ onClick }) => (
   <AppBar position="sticky">
     <Toolbar>
       <Typography variant="h6" style={{ flex: 1 }}>
-        Go Home
+        Workday
       </Typography>
       <Button variant="contained" onClick={onClick}>
         Settings
