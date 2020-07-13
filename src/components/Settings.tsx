@@ -7,11 +7,14 @@ import {
   InputLabel,
 } from '@material-ui/core';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import Widget from './Widgets/Widget';
 import { ThemeTypeContext, ThemeType } from '../providers/ThemeTypeProvider';
-import { TimeFormatContext, TimeFormat } from '../providers/TimeFormatProvider';
 import { ForegroundContext, Foreground } from '../providers/ForegroundProvider';
 import { BackgroundContext, Background } from '../providers/BackgroundProvider';
+import { StoreState } from '../store';
+import { TimeFormat } from '../store/time-format/time-format-types';
+import { setTimeFormat } from '../store/time-format/time-format-actions';
 
 const StyledPaper = styled(Widget)`
   margin: 20px;
@@ -26,7 +29,10 @@ const StyledFormControl = styled(FormControl)`
 
 const Settings = () => {
   const { themeType, setThemeType } = useContext(ThemeTypeContext);
-  const { timeFormat, setTimeFormat } = useContext(TimeFormatContext);
+  const timeFormat = useSelector(
+    (state: StoreState) => state.timeFormat.format
+  );
+  const dispatch = useDispatch();
   const { foreground, setForeground } = useContext(ForegroundContext);
   const { background, setBackground } = useContext(BackgroundContext);
 
@@ -38,7 +44,7 @@ const Settings = () => {
           <InputLabel>Theme</InputLabel>
           <Select
             value={themeType}
-            onChange={e => {
+            onChange={(e) => {
               setThemeType(e.target.value as ThemeType);
             }}
           >
@@ -51,8 +57,8 @@ const Settings = () => {
           <InputLabel>Time format</InputLabel>
           <Select
             value={timeFormat}
-            onChange={e => {
-              setTimeFormat(e.target.value as TimeFormat);
+            onChange={(e) => {
+              dispatch(setTimeFormat(e.target.value as TimeFormat));
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -64,7 +70,7 @@ const Settings = () => {
           <InputLabel>Background</InputLabel>
           <Select
             value={background}
-            onChange={e => {
+            onChange={(e) => {
               setBackground(e.target.value as Background);
             }}
           >
@@ -78,7 +84,7 @@ const Settings = () => {
           <InputLabel>Foreground</InputLabel>
           <Select
             value={foreground}
-            onChange={e => {
+            onChange={(e) => {
               setForeground(e.target.value as Foreground);
             }}
           >

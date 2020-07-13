@@ -7,9 +7,10 @@ import {
 import { parse, format, isValid } from 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Widget from '../Widget';
 import Stats from './Stats/Stats';
-import { TimeFormatContext } from '../../../providers/TimeFormatProvider';
+import { StoreState } from '../../../store';
 
 type Props = {
   className?: string;
@@ -40,7 +41,9 @@ const Workday: React.FC<Props> = ({ className }) => {
   const [lunchEnd, setLunchEnd] = useState(lunchEndFieldValue ?? new Date());
   const [endTime, setEndTime] = useState(endTimeFieldValue ?? new Date());
 
-  const { timeFormat } = useContext(TimeFormatContext);
+  const timeFormat = useSelector(
+    (state: StoreState) => state.timeFormat.format
+  );
 
   const ampm =
     timeFormat === 'ampm' ? true : timeFormat === '24h' ? false : undefined;

@@ -1,9 +1,12 @@
 import { format } from 'date-fns';
 import { useContext } from 'react';
-import { TimeFormatContext } from '../providers/TimeFormatProvider';
+import { useSelector } from 'react-redux';
+import { StoreState } from '../store';
 
 const useFormatter = () => {
-  const { timeFormat } = useContext(TimeFormatContext);
+  const timeFormat = useSelector(
+    (state: StoreState) => state.timeFormat.format
+  );
 
   const formatTime = (date: Date) => {
     switch (timeFormat) {
