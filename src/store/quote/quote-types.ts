@@ -15,6 +15,7 @@ type FetchQuoteFulfilledAction = {
 
 type FetchQuoteRejectedAction = {
   type: 'FETCH_QUOTE_REJECTED';
+  error: any;
 };
 
 export type QuoteAction =
