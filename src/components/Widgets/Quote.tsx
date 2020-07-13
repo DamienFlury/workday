@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import Widget from './Widget';
-import { QuoteContext } from '../../providers/QuoteProvider';
+import { StoreState } from '../../store';
+import { fetchQuote } from '../../store/quote/quote-actions';
 
 const StyledText = styled.span`
   display: block;
@@ -15,7 +17,14 @@ type Props = {
 };
 
 const Quote: React.FC<Props> = ({ className }) => {
-  const quote = useContext(QuoteContext);
+  const { quote, status } = useSelector((state: StoreState) => state.quote);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchQuote());
+    }
+  }, [dispatch, status]);
 
   return (
     <Widget className={className}>

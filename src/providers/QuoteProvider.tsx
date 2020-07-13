@@ -10,7 +10,7 @@ const initialState: Quote = {
   author: 'Dr. Seuss',
 };
 
-export const QuoteContext = React.createContext(initialState);
+const QuoteContext = React.createContext(initialState);
 
 const QuoteProvider: React.FC = ({ children }) => {
   const [quote, setQuote] = useState<Quote>(initialState);
