@@ -8,12 +8,13 @@ import { blue } from '@material-ui/core/colors';
 import styled, { ThemeProvider } from 'styled-components';
 import { StylesProvider } from '@material-ui/styles';
 
+import { useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
-import { ThemeTypeContext } from './providers/ThemeTypeProvider';
 import { BackgroundContext, Background } from './providers/BackgroundProvider';
 import { ForegroundContext } from './providers/ForegroundProvider';
+import { StoreState } from './store';
 
 const StyledWrapper = styled.div`
   min-height: 100vh;
@@ -42,11 +43,11 @@ const getBackgroundColor = (type: Background) => {
 const App: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
 
-  const { themeType: type } = useContext(ThemeTypeContext);
   const { background } = useContext(BackgroundContext);
 
   const { foreground } = useContext(ForegroundContext);
 
+  const type = useSelector((state: StoreState) => state.theme.type);
   let themeType = type;
 
   if (type === 'default' && window && window.matchMedia) {

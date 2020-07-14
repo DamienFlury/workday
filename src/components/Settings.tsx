@@ -9,12 +9,13 @@ import {
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import Widget from './Widgets/Widget';
-import { ThemeTypeContext, ThemeType } from '../providers/ThemeTypeProvider';
 import { ForegroundContext, Foreground } from '../providers/ForegroundProvider';
 import { BackgroundContext, Background } from '../providers/BackgroundProvider';
 import { StoreState } from '../store';
 import { TimeFormat } from '../store/time-format/time-format-types';
 import { setTimeFormat } from '../store/time-format/time-format-actions';
+import { setThemeType } from '../store/theme/theme-actions';
+import { ThemeType } from '../store/theme/theme-types';
 
 const StyledPaper = styled(Widget)`
   margin: 20px;
@@ -28,7 +29,7 @@ const StyledFormControl = styled(FormControl)`
 `;
 
 const Settings = () => {
-  const { themeType, setThemeType } = useContext(ThemeTypeContext);
+  const themeType = useSelector((state: StoreState) => state.theme.type);
   const timeFormat = useSelector(
     (state: StoreState) => state.timeFormat.format
   );
@@ -45,7 +46,7 @@ const Settings = () => {
           <Select
             value={themeType}
             onChange={(e) => {
-              setThemeType(e.target.value as ThemeType);
+              dispatch(setThemeType(e.target.value as ThemeType));
             }}
           >
             <MenuItem value="default">Default</MenuItem>
