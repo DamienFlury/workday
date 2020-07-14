@@ -12,9 +12,8 @@ import { useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 import Widgets from './components/Widgets/Widgets';
 import Settings from './components/Settings';
-import { BackgroundContext, Background } from './providers/BackgroundProvider';
-import { ForegroundContext } from './providers/ForegroundProvider';
 import { StoreState } from './store';
+import { Background } from './store/background/background-types';
 
 const StyledWrapper = styled.div`
   min-height: 100vh;
@@ -43,9 +42,13 @@ const getBackgroundColor = (type: Background) => {
 const App: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
 
-  const { background } = useContext(BackgroundContext);
+  const background = useSelector(
+    (state: StoreState) => state.background.background
+  );
 
-  const { foreground } = useContext(ForegroundContext);
+  const foreground = useSelector(
+    (state: StoreState) => state.foreground.foreground
+  );
 
   const type = useSelector((state: StoreState) => state.theme.type);
   let themeType = type;

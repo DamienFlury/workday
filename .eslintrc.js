@@ -38,7 +38,8 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'import/prefer-default-export': 'off',
     'import/extensions': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off'
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   settings: {
     'import/resolver': {

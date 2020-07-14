@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Typography,
   Select,
@@ -9,13 +9,15 @@ import {
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import Widget from './Widgets/Widget';
-import { ForegroundContext, Foreground } from '../providers/ForegroundProvider';
-import { BackgroundContext, Background } from '../providers/BackgroundProvider';
 import { StoreState } from '../store';
 import { TimeFormat } from '../store/time-format/time-format-types';
 import { setTimeFormat } from '../store/time-format/time-format-actions';
 import { setThemeType } from '../store/theme/theme-actions';
 import { ThemeType } from '../store/theme/theme-types';
+import { Background } from '../store/background/background-types';
+import { setBackground } from '../store/background/background-actions';
+import { setForeground } from '../store/foreground/foreground-actions';
+import { Foreground } from '../store/foreground/foreground-types';
 
 const StyledPaper = styled(Widget)`
   margin: 20px;
@@ -34,8 +36,12 @@ const Settings = () => {
     (state: StoreState) => state.timeFormat.format
   );
   const dispatch = useDispatch();
-  const { foreground, setForeground } = useContext(ForegroundContext);
-  const { background, setBackground } = useContext(BackgroundContext);
+  const foreground = useSelector(
+    (state: StoreState) => state.foreground.foreground
+  );
+  const background = useSelector(
+    (state: StoreState) => state.background.background
+  );
 
   return (
     <StyledPaper>
@@ -72,7 +78,7 @@ const Settings = () => {
           <Select
             value={background}
             onChange={(e) => {
-              setBackground(e.target.value as Background);
+              dispatch(setBackground(e.target.value as Background));
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -86,7 +92,7 @@ const Settings = () => {
           <Select
             value={foreground}
             onChange={(e) => {
-              setForeground(e.target.value as Foreground);
+              dispatch(setForeground(e.target.value as Foreground));
             }}
           >
             <MenuItem value="default">Default</MenuItem>
