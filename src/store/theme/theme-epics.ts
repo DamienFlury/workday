@@ -1,5 +1,6 @@
 import { Epic, ofType } from 'redux-observable';
-import { mergeMap, ignoreElements } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 import { ThemeAction } from './theme-types';
 
 export const themeTypeEpic: Epic<ThemeAction> = (action$) =>
@@ -7,7 +8,6 @@ export const themeTypeEpic: Epic<ThemeAction> = (action$) =>
     ofType('SET_THEME_TYPE'),
     mergeMap((action) => {
       localStorage.setItem('theme-type', action.payload.type);
-      return action$;
-    }),
-    ignoreElements()
+      return EMPTY;
+    })
   );

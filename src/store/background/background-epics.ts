@@ -1,5 +1,6 @@
 import { Epic, ofType } from 'redux-observable';
-import { mergeMap, ignoreElements } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 import { BackgroundAction } from './background-types';
 
 export const backgroundEpic: Epic<BackgroundAction> = (action$) =>
@@ -7,7 +8,6 @@ export const backgroundEpic: Epic<BackgroundAction> = (action$) =>
     ofType('SET_BACKGROUND'),
     mergeMap((action) => {
       localStorage.setItem('background', action.payload.background);
-      return action$;
-    }),
-    ignoreElements()
+      return EMPTY;
+    })
   );

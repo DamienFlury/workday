@@ -1,5 +1,6 @@
 import { Epic, ofType } from 'redux-observable';
-import { mergeMap, ignoreElements } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 import { ForegroundAction } from './foreground-types';
 
 export const foregroundEpic: Epic<ForegroundAction> = (action$) =>
@@ -7,7 +8,6 @@ export const foregroundEpic: Epic<ForegroundAction> = (action$) =>
     ofType('SET_FOREGROUND'),
     mergeMap((action) => {
       localStorage.setItem('foreground', action.payload.foreground);
-      return action$;
-    }),
-    ignoreElements()
+      return EMPTY;
+    })
   );
