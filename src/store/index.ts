@@ -1,28 +1,17 @@
-import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
-import { timeFormatReducer } from './time-format/time-format-reducers';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { timeFormatEpic } from './time-format/time-format-epics';
-import { quoteReducer } from './quote/quote-reducers';
-import { quoteEpic } from './quote/quote-epics';
-import { themeReducer } from './theme/theme-reducers';
 import { TimeFormat } from './time-format/time-format-types';
 import { ThemeType } from './theme/theme-types';
 import { themeTypeEpic } from './theme/theme-epics';
-import { backgroundReducer } from './background/background-reducers';
 import { backgroundEpic } from './background/background-epics';
 import { Background } from './background/background-types';
-import { foregroundReducer } from './foreground/foreground-reducers';
 import { foregroundEpic } from './foreground/foreground-epics';
-
-const rootReducer = combineReducers({
-  timeFormat: timeFormatReducer,
-  quote: quoteReducer,
-  theme: themeReducer,
-  background: backgroundReducer,
-  foreground: foregroundReducer,
-});
-
-export type StoreState = ReturnType<typeof rootReducer>;
+import timeFormatSlice from './time-format/time-format-slices';
+import { themeSlice } from './theme/theme-slices';
+import { backgroundSlice } from './background/background-slices';
+import { foregroundSlice } from './foreground/foreground-slice';
+import { quoteSlice } from './quote/quote-slices';
 
 const getInitialTimeFormat = (): TimeFormat => {
   const fromLocalStorage = localStorage.getItem('time-format');
@@ -57,38 +46,38 @@ const epicMiddleware = createEpicMiddleware();
 
 const rootEpic = combineEpics(
   timeFormatEpic,
-  quoteEpic,
   themeTypeEpic,
   backgroundEpic,
   foregroundEpic
 );
 
-const composeEnhancers =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const configureStore = () => {
-  const store = createStore(
-    rootReducer,
-    {
-      timeFormat: {
-        format: getInitialTimeFormat(),
-      },
-      theme: {
-        type: getInitialTheme(),
-      },
-      background: {
-        background: getInitialBackground(),
-      },
-      foreground: {
-        foreground: getInitialForeground(),
-      },
+const store = configureStore({
+  reducer: {
+    timeFormat: timeFormatSlice.reducer,
+    quote: quoteSlice.reducer,
+    theme: themeSlice.reducer,
+    background: backgroundSlice.reducer,
+    foreground: foregroundSlice.reducer,
+  },
+  preloadedState: {
+    timeFormat: {
+      format: getInitialTimeFormat(),
     },
-    composeEnhancers(applyMiddleware(epicMiddleware))
-  );
+    theme: {
+      type: getInitialTheme(),
+    },
+    background: {
+      background: getInitialBackground(),
+    },
+    foreground: {
+      foreground: getInitialForeground(),
+    },
+  },
+  middleware: getDefaultMiddleware().concat(epicMiddleware),
+});
 
-  epicMiddleware.run(rootEpic as any);
+epicMiddleware.run(rootEpic as any);
 
-  return store;
-};
+export type StoreState = ReturnType<typeof store.getState>;
 
-export default configureStore;
+export default store;

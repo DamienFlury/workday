@@ -56,10 +56,10 @@ const WeatherProvider: React.FC = ({ children }) => {
 
   navigator.permissions
     .query({ name: 'geolocation' })
-    .then(permissionStatus => {
+    .then((permissionStatus) => {
       setPermission(permissionStatus.state);
       // eslint-disable-next-line no-param-reassign
-      permissionStatus.onchange = status => {
+      permissionStatus.onchange = (status) => {
         setPermission((status as any).state);
       };
     });
@@ -83,21 +83,21 @@ const WeatherProvider: React.FC = ({ children }) => {
     if (navigator.permissions) {
       navigator.permissions
         .query({ name: 'geolocation' })
-        .then(permissionStatus => {
+        .then((permissionStatus) => {
           if (permissionStatus.state === 'granted') {
-            navigator.geolocation.getCurrentPosition(pos => {
+            navigator.geolocation.getCurrentPosition((pos) => {
               fetchWeather(pos.coords);
             });
           } else {
             fetchWeather(sanFrancisco);
           }
           // eslint-disable-next-line no-param-reassign
-          permissionStatus.onchange = status => {
+          permissionStatus.onchange = (status) => {
             if (!status || !status.target) {
               return;
             }
             if ((status.target as any).state === 'granted') {
-              navigator.geolocation.getCurrentPosition(pos => {
+              navigator.geolocation.getCurrentPosition((pos) => {
                 fetchWeather(pos.coords);
               });
             } else {

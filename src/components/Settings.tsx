@@ -11,13 +11,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import Widget from './Widgets/Widget';
 import { StoreState } from '../store';
 import { TimeFormat } from '../store/time-format/time-format-types';
-import { setTimeFormat } from '../store/time-format/time-format-actions';
-import { setThemeType } from '../store/theme/theme-actions';
 import { ThemeType } from '../store/theme/theme-types';
 import { Background } from '../store/background/background-types';
-import { setBackground } from '../store/background/background-actions';
-import { setForeground } from '../store/foreground/foreground-actions';
 import { Foreground } from '../store/foreground/foreground-types';
+import { themeSlice } from '../store/theme/theme-slices';
+import timeFormatSlice from '../store/time-format/time-format-slices';
+import { backgroundSlice } from '../store/background/background-slices';
+import { foregroundSlice } from '../store/foreground/foreground-slice';
 
 const StyledPaper = styled(Widget)`
   margin: 20px;
@@ -52,7 +52,7 @@ const Settings = () => {
           <Select
             value={themeType}
             onChange={(e) => {
-              dispatch(setThemeType(e.target.value as ThemeType));
+              dispatch(themeSlice.actions.set(e.target.value as ThemeType));
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -65,7 +65,9 @@ const Settings = () => {
           <Select
             value={timeFormat}
             onChange={(e) => {
-              dispatch(setTimeFormat(e.target.value as TimeFormat));
+              dispatch(
+                timeFormatSlice.actions.set(e.target.value as TimeFormat)
+              );
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -78,7 +80,9 @@ const Settings = () => {
           <Select
             value={background}
             onChange={(e) => {
-              dispatch(setBackground(e.target.value as Background));
+              dispatch(
+                backgroundSlice.actions.set(e.target.value as Background)
+              );
             }}
           >
             <MenuItem value="default">Default</MenuItem>
@@ -92,7 +96,9 @@ const Settings = () => {
           <Select
             value={foreground}
             onChange={(e) => {
-              dispatch(setForeground(e.target.value as Foreground));
+              dispatch(
+                foregroundSlice.actions.set(e.target.value as Foreground)
+              );
             }}
           >
             <MenuItem value="default">Default</MenuItem>

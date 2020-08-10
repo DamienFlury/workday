@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import Widget from './Widget';
 import { StoreState } from '../../store';
-import { fetchQuote } from '../../store/quote/quote-actions';
+import { fetchQuote } from '../../store/quote/quote-slices';
 
 const StyledText = styled.span`
   display: block;
